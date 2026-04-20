@@ -1,29 +1,70 @@
-# Scripts and configs
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# OS
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 临时文件和旧工具脚本
 *.py
+!fetch_articles.py
+article_lists.json
 convert_txt_to_md.py
 download_images.py
+fetch_article.py
 fetch_blogs.py
 process_blogs.py
+build_indexes.py
 translate_and_organize.py
+translate_articles.py
 
-# Raw data (keep structure, ignore content)
-anthropic/articles/*raw*
+# 旧结构（扁平的 raw/translated/images 目录）
 anthropic/raw/
+anthropic/translated/
+anthropic/images/
+anthropic/articles/
 anthropic/categories/
-
+anthropic/SUMMARY.md
 openai/raw/
+openai/translated/
+openai/images/
 openai/categories/
-openai/batch_save*.py
+openai/SUMMARY.md
+openai/batch_*.py
 openai/fetch_article.py
 openai/fetch_articles.py
 openai/save_article.py
 openai/update_raw.py
-
 claudeai-dev/raw/
+claudeai-dev/translated/
+claudeai-dev/images/
 claudeai-dev/categories/
-claudeai-dev/*-raw.html
-
-# Misc
-__pycache__/
-.DS_Store
-.env
+claudeai-dev/SUMMARY.md

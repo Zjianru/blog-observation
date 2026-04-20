@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en" dir="ltr" class="blog-wrapper blog-post-page plugin-blog plugin-id-default" data-has-hydrated="false">
+<head>
+<meta charset="UTF-8">
+<meta name="generator" content="Docusaurus v3.8.1">
+<title data-rh="true">Claude Managed Agents: What Just Launched | Claude AI Dev</title><meta data-rh="true" name="viewport" content="width=device-width,initial-scale=1"><meta data-rh="true" name="twitter:card" content="summary_large_image"><meta data-rh="true" property="og:image" content="https://claudeai.dev/img/docusaurus-social-card.jpg"><meta data-rh="true" name="twitter:image" content="https://claudeai.dev/img/docusaurus-social-card.jpg"><meta data-rh="true" property="og:url" content="https://claudeai.dev/blog/claude-managed-agents-what-just-launched"><meta data-rh="true" property="og:locale" content="en"><meta data-rh="true" property="og:locale:alternate" content="zh_Hans"><meta data-rh="true" property="og:locale:alternate" content="vi"><meta data-rh="true" property="og:locale:alternate" content="de"><meta data-rh="true" property="og:locale:alternate" content="fr"><meta data-rh="true" property="og:locale:alternate" content="es"><meta data-rh="true" property="og:locale:alternate" content="ja"><meta data-rh="true" name="docusaurus_locale" content="en"><meta data-rh="true" name="docusaurus_tag" content="default"><meta data-rh="true" name="docsearch:language" content="en"><meta data-rh="true" name="docsearch:docusaurus_tag" content="default"><meta data-rh="true" property="og:title" content="Claude Managed Agents: What Just Launched | Claude AI Dev"><meta data-rh="true" name="description" content="Anthropic launched Claude Managed Agents in public beta on April 8, 2026. Here is what shipped, how it works, and what it means for developers."><meta data-rh="true" property="og:description" content="Anthropic launched Claude Managed Agents in public beta on April 8, 2026. Here is what shipped, how it works, and what it means for developers."><meta data-rh="true" property="og:type" content="article"><meta data-rh="true" property="article:published_time" content="2026-04-09T00:00:00.000Z"><meta data-rh="true" property="article:author" content="https://claude.com/product/claude-code"><meta data-rh="true" property="article:tag" content="Claude,AI Agent,Automation,Development"><link data-rh="true" rel="icon" href="/img/favicon.ico"><link data-rh="true" rel="canonical" href="https://claudeai.dev/blog/claude-managed-agents-what-just-launched"><link data-rh="true" rel="alternate" href="https://claudeai.dev/blog/claude-managed-agents-what-just-launched" hreflang="en"><link data-rh="true" rel="alternate" href="https://claudeai.dev/zh-Hans/blog/claude-managed-agents-what-just-launched" hreflang="zh-Hans"><link data-rh="true" rel="alternate" href="https://claudeai.dev/vi/blog/claude-managed-agents-what-just-launched" hreflang="vi"><link data-rh="true" rel="alternate" href="https://claudeai.dev/de/blog/claude-managed-agents-what-just-launched" hreflang="de"><link data-rh="true" rel="alternate" href="https://claudeai.dev/fr/blog/claude-managed-agents-what-just-launched" hreflang="fr"><link data-rh="true" rel="alternate" href="https://claudeai.dev/es/blog/claude-managed-agents-what-just-launched" hreflang="es"><link data-rh="true" rel="alternate" href="https://claudeai.dev/ja/blog/claude-managed-agents-what-just-launched" hreflang="ja"><link data-rh="true" rel="alternate" href="https://claudeai.dev/blog/claude-managed-agents-what-just-launched" hreflang="x-default"><script data-rh="true" type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","@id":"https://claudeai.dev/blog/claude-managed-agents-what-just-launched","mainEntityOfPage":"https://claudeai.dev/blog/claude-managed-agents-what-just-launched","url":"https://claudeai.dev/blog/claude-managed-agents-what-just-launched","headline":"Claude Managed Agents: What Just Launched","name":"Claude Managed Agents: What Just Launched","description":"Anthropic launched Claude Managed Agents in public beta on April 8, 2026. Here is what shipped, how it works, and what it means for developers.","datePublished":"2026-04-09T00:00:00.000Z","author":{"@type":"Person","name":"Claude Dev","description":"Claude Dev","url":"https://claude.com/product/claude-code","image":"https://img.logokit.com/claude.ai?token=pk_fre2415d08c47b8f76de96"},"keywords":[],"isPartOf":{"@type":"Blog","@id":"https://claudeai.dev/blog","name":"Claude AI Blog: Tips, Releases and Tutorials"}}</script><link rel="alternate" type="application/rss+xml" href="/blog/rss.xml" title="Claude AI Dev RSS Feed">
+<link rel="alternate" type="application/atom+xml" href="/blog/atom.xml" title="Claude AI Dev Atom Feed">
+
+<link rel="preconnect" href="https://www.google-analytics.com">
+<link rel="preconnect" href="https://www.googletagmanager.com">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-FT2347DYV3"></script>
+<script>function gtag(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],gtag("js",new Date),gtag("config","G-FT2347DYV3",{anonymize_ip:!0})</script><link rel="stylesheet" href="/assets/css/styles.21735acf.css">
+<script src="/assets/js/runtime~main.5f33521a.js" defer="defer"></script>
+<script src="/assets/js/main.40cafa88.js" defer="defer"></script>
+</head>
+<body class="navigation-with-keyboard">
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;"><defs>
+<symbol id="theme-svg-external-link" viewBox="0 0 24 24"><path fill="currentColor" d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></symbol>
+</defs></svg>
+<script>!function(){var t="light";var e=function(){try{return new URLSearchParams(window.location.search).get("docusaurus-theme")}catch(t){}}()||function(){try{return window.localStorage.getItem("theme")}catch(t){}}();document.documentElement.setAttribute("data-theme",e||t),document.documentElement.setAttribute("data-theme-choice",e||t)}(),function(){try{const c=new URLSearchParams(window.location.search).entries();for(var[t,e]of c)if(t.startsWith("docusaurus-data-")){var a=t.replace("docusaurus-data-","data-");document.documentElement.setAttribute(a,e)}}catch(t){}}()</script><div id="__docusaurus"><div role="region" aria-label="Skip to main content"><a class="skipToContent_SRTG" href="#__docusaurus_skipToContent_fallback">Skip to main content</a></div><nav aria-label="Main" class="theme-layout-navbar navbar navbar--fixed-top"><div class="navbar__inner"><div class="theme-layout-navbar-left navbar__items"><button aria-label="Toggle navigation bar" aria-expanded="false" class="navbar__toggle clean-btn" type="button"><svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path stroke="currentColor" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2" d="M4 7h22M4 15h22M4 23h22"></path></svg></button><a class="navbar__brand" href="/"><div class="navbar__logo"><img src="/img/logo.svg" alt="Claude AI Develop Guide" class="themedComponent_on_k themedComponent--light_fuWK"><img src="/img/logo.svg" alt="Claude AI Develop Guide" class="themedComponent_on_k themedComponent--dark_eUnd"></div><b class="navbar__title text--truncate">Claude AI Develop Guide</b></a><a class="navbar__item navbar__link" href="/docs/intro">Docs</a><a aria-current="page" class="navbar__item navbar__link navbar__link--active" href="/blog">Blog</a><div class="navbar__item dropdown dropdown--hoverable"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link">Resources</a><ul class="dropdown__menu"><li><a class="dropdown__link" href="/docs/resources/mcps">MCPs &amp; Extensions</a></li><li><a class="dropdown__link" href="/docs/resources/faqs">FAQs</a></li><li><a class="dropdown__link" href="/docs/resources/changelog">Changelog</a></li></ul></div></div><div class="theme-layout-navbar-right navbar__items navbar__items--right"><div class="navbar__item dropdown dropdown--hoverable dropdown--right"><a href="#" aria-haspopup="true" aria-expanded="false" role="button" class="navbar__link"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" class="iconLanguage_lsI3"><path fill="currentColor" d="M12.87 15.07l-2.54-2.51.03-.03c1.74-1.94 2.98-4.17 3.71-6.53H17V4h-7V2H8v2H1v1.99h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z"></path></svg>English</a><ul class="dropdown__menu"><li><a href="/blog/claude-managed-agents-what-just-launched" target="_self" rel="noopener noreferrer" class="dropdown__link dropdown__link--active" lang="en">English</a></li><li><a href="/zh-Hans/blog/claude-managed-agents-what-just-launched" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="zh-Hans">简体中文</a></li><li><a href="/vi/blog/claude-managed-agents-what-just-launched" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="vi">Tiếng Việt</a></li><li><a href="/de/blog/claude-managed-agents-what-just-launched" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="de">Deutsch</a></li><li><a href="/fr/blog/claude-managed-agents-what-just-launched" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="fr">Français</a></li><li><a href="/es/blog/claude-managed-agents-what-just-launched" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="es">Español</a></li><li><a href="/ja/blog/claude-managed-agents-what-just-launched" target="_self" rel="noopener noreferrer" class="dropdown__link" lang="ja">日本語</a></li></ul></div><div class="toggle_K7JE colorModeToggle_Nk6l"><button class="clean-btn toggleButton_pRNO toggleButtonDisabled_JKR4" type="button" disabled="" title="system mode" aria-label="Switch between dark and light mode (currently system mode)"><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g0Ou lightToggleIcon_zTRY"><path fill="currentColor" d="M12,9c1.65,0,3,1.35,3,3s-1.35,3-3,3s-3-1.35-3-3S10.35,9,12,9 M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5 S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1 s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0 c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95 c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41 L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41 s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06 c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g0Ou darkToggleIcon_J5UV"><path fill="currentColor" d="M9.37,5.51C9.19,6.15,9.1,6.82,9.1,7.5c0,4.08,3.32,7.4,7.4,7.4c0.68,0,1.35-0.09,1.99-0.27C17.45,17.19,14.93,19,12,19 c-3.86,0-7-3.14-7-7C5,9.07,6.81,6.55,9.37,5.51z M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36 c-0.98,1.37-2.58,2.26-4.4,2.26c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg><svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" class="toggleIcon_g0Ou systemToggleIcon_Wrm9"><path fill="currentColor" d="m12 21c4.971 0 9-4.029 9-9s-4.029-9-9-9-9 4.029-9 9 4.029 9 9 9zm4.95-13.95c1.313 1.313 2.05 3.093 2.05 4.95s-0.738 3.637-2.05 4.95c-1.313 1.313-3.093 2.05-4.95 2.05v-14c1.857 0 3.637 0.737 4.95 2.05z"></path></svg></button></div><div class="navbarSearchContainer_qHqU"></div></div></div><div role="presentation" class="navbar-sidebar__backdrop"></div></nav><div id="__docusaurus_skipToContent_fallback" class="theme-layout-main main-wrapper mainWrapper_hiCe"><div class="container margin-vert--lg"><div class="row"><aside class="col col--3"><nav class="sidebar_MiZ_ thin-scrollbar" aria-label="Blog recent posts navigation"><div class="sidebarItemTitle_htgg margin-bottom--md">Recent posts</div><div role="group"><h3 class="yearGroupHeading_FQwH">2026</h3><ul class="sidebarItemList_ygTs clean-list"><li class="sidebarItem_bAJQ"><a aria-current="page" class="sidebarItemLink_y8Ez sidebarItemLinkActive_Kzer" href="/blog/claude-managed-agents-what-just-launched">Claude Managed Agents: What Just Launched</a></li><li class="sidebarItem_bAJQ"><a class="sidebarItemLink_y8Ez" href="/blog/conway-timeline-how-anthropic-is-building-always-on-agents">Conway Timeline: How Anthropic Is Building Always-On Agents</a></li><li class="sidebarItem_bAJQ"><a class="sidebarItemLink_y8Ez" href="/blog/what-actually-leaked-around-claude-code">What Actually Leaked From Claude Code This Time?</a></li><li class="sidebarItem_bAJQ"><a class="sidebarItemLink_y8Ez" href="/blog/did-claude-ship-auto-fix-in-the-cloud">Did Claude Ship Auto-Fix in the Cloud Yet?</a></li><li class="sidebarItem_bAJQ"><a class="sidebarItemLink_y8Ez" href="/blog/claudes-march-2026-shipping-sprint">Claude&#x27;s March 2026 Sprint: What Matters</a></li></ul></div></nav></aside><main class="col col--7"><article class=""><header><h1 class="title_o5S8">Claude Managed Agents: What Just Launched</h1><div class="container_zUPf margin-vert--md"><time datetime="2026-04-09T00:00:00.000Z">April 9, 2026</time> · <!-- -->9 min read</div><div class="margin-top--md margin-bottom--sm row"><div class="col col--12 authorCol_QZKv"><div class="avatar margin-bottom--sm"><a class="avatar__photo-link" href="/blog/authors/claudedev"><img class="avatar__photo authorImage_JB9z" src="https://img.logokit.com/claude.ai?token=pk_fre2415d08c47b8f76de96" alt="Claude Dev"></a><div class="avatar__intro authorDetails_qdmo"><div class="avatar__name"><a href="/blog/authors/claudedev"><span class="authorName_qPcr">Claude Dev</span></a></div><small class="authorTitle_ishN" title="Claude Dev">Claude Dev</small><div class="authorSocials_lL_B"><a href="https://x.com/anthropicai" target="_blank" rel="noopener noreferrer" class="authorSocialLink_A1n5" title="X"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="none" viewBox="0 0 1200 1227" style="--dark:#000;--light:#fff" class="authorSocialLink_A1n5 xSvg_T9yG"><path d="M714.163 519.284 1160.89 0h-105.86L667.137 450.887 357.328 0H0l468.492 681.821L0 1226.37h105.866l409.625-476.152 327.181 476.152H1200L714.137 519.284h.026ZM569.165 687.828l-47.468-67.894-377.686-540.24h162.604l304.797 435.991 47.468 67.894 396.2 566.721H892.476L569.165 687.854v-.026Z"></path></svg></a><a href="https://github.com/anthropicai" target="_blank" rel="noopener noreferrer" class="authorSocialLink_A1n5" title="GitHub"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 256 250" preserveAspectRatio="xMidYMid" style="--dark:#000;--light:#fff" class="authorSocialLink_A1n5 githubSvg_Ypz9"><path d="M128.001 0C57.317 0 0 57.307 0 128.001c0 56.554 36.676 104.535 87.535 121.46 6.397 1.185 8.746-2.777 8.746-6.158 0-3.052-.12-13.135-.174-23.83-35.61 7.742-43.124-15.103-43.124-15.103-5.823-14.795-14.213-18.73-14.213-18.73-11.613-7.944.876-7.78.876-7.78 12.853.902 19.621 13.19 19.621 13.19 11.417 19.568 29.945 13.911 37.249 10.64 1.149-8.272 4.466-13.92 8.127-17.116-28.431-3.236-58.318-14.212-58.318-63.258 0-13.975 5-25.394 13.188-34.358-1.329-3.224-5.71-16.242 1.24-33.874 0 0 10.749-3.44 35.21 13.121 10.21-2.836 21.16-4.258 32.038-4.307 10.878.049 21.837 1.47 32.066 4.307 24.431-16.56 35.165-13.12 35.165-13.12 6.967 17.63 2.584 30.65 1.255 33.873 8.207 8.964 13.173 20.383 13.173 34.358 0 49.163-29.944 59.988-58.447 63.157 4.591 3.972 8.682 11.762 8.682 23.704 0 17.126-.148 30.91-.148 35.126 0 3.407 2.304 7.398 8.792 6.14C219.37 232.5 256 184.537 256 128.002 256 57.307 198.691 0 128.001 0Zm-80.06 182.34c-.282.636-1.283.827-2.194.39-.929-.417-1.45-1.284-1.15-1.922.276-.655 1.279-.838 2.205-.399.93.418 1.46 1.293 1.139 1.931Zm6.296 5.618c-.61.566-1.804.303-2.614-.591-.837-.892-.994-2.086-.375-2.66.63-.566 1.787-.301 2.626.591.838.903 1 2.088.363 2.66Zm4.32 7.188c-.785.545-2.067.034-2.86-1.104-.784-1.138-.784-2.503.017-3.05.795-.547 2.058-.055 2.861 1.075.782 1.157.782 2.522-.019 3.08Zm7.304 8.325c-.701.774-2.196.566-3.29-.49-1.119-1.032-1.43-2.496-.726-3.27.71-.776 2.213-.558 3.315.49 1.11 1.03 1.45 2.505.701 3.27Zm9.442 2.81c-.31 1.003-1.75 1.459-3.199 1.033-1.448-.439-2.395-1.613-2.103-2.626.301-1.01 1.747-1.484 3.207-1.028 1.446.436 2.396 1.602 2.095 2.622Zm10.744 1.193c.036 1.055-1.193 1.93-2.715 1.95-1.53.034-2.769-.82-2.786-1.86 0-1.065 1.202-1.932 2.733-1.958 1.522-.03 2.768.818 2.768 1.868Zm10.555-.405c.182 1.03-.875 2.088-2.387 2.37-1.485.271-2.861-.365-3.05-1.386-.184-1.056.893-2.114 2.376-2.387 1.514-.263 2.868.356 3.061 1.403Z"></path></svg></a><a href="https://www.reddit.com/r/ClaudeAI/" target="_blank" rel="noopener noreferrer" class="authorSocialLink_A1n5" title="reddit"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="authorSocialLink_A1n5"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0"></path><path d="M3.6 9h16.8"></path><path d="M3.6 15h16.8"></path><path d="M11.5 3a17 17 0 0 0 0 18"></path><path d="M12.5 3a17 17 0 0 1 0 18"></path></svg></a></div></div></div></div></div></header><div id="__blog-post-container" class="markdown"><p>If you build with Claude, the important thing about <strong>Claude Managed Agents</strong> is not that Anthropic shipped “another agent feature.”</p>
+<p>It is that Anthropic just moved one layer up the stack.</p>
+<p>Instead of only selling model access and tool primitives, Anthropic is now selling a <strong>managed runtime for long-running agents</strong>: agent definition, cloud environment, sessions, event streaming, built-in tools, and the operational harness that keeps the whole thing alive.</p>
+<p>That changes the developer conversation from:</p>
+<ul>
+<li>“How do I wire an agent loop together?”</li>
+<li>“How do I make it resumable, observable, and secure?”</li>
+</ul>
+<p>to:</p>
+<ul>
+<li>“What should my agent actually do?”</li>
+<li>“Where do I want control, and where am I happy to let Anthropic own the infrastructure?”</li>
+</ul>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="short-answer">Short Answer<a href="#short-answer" class="hash-link" aria-label="Direct link to Short Answer" title="Direct link to Short Answer">​</a></h2>
+<p>As of <strong>April 8, 2026</strong>, Anthropic has launched <strong>Claude Managed Agents</strong> in <strong>public beta</strong> on the Claude Platform.</p>
+<p>From the official docs and release notes, the product gives developers:</p>
+<ul>
+<li>a pre-built agent harness</li>
+<li>managed cloud environments</li>
+<li>long-running sessions</li>
+<li>event persistence and SSE streaming</li>
+<li>built-in tools like bash, file operations, web search, and web fetch</li>
+<li>MCP connectivity</li>
+</ul>
+<p>From our perspective, this is best understood as <strong>Anthropic&#x27;s managed agent runtime</strong>, not a magical one-prompt agent builder.</p>
+<p>It is aimed squarely at teams that want to ship production agents without building their own orchestration layer, sandbox lifecycle, state store, permissions system, and observability stack.</p>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="the-last-2-days-clean-timeline">The Last 2 Days: Clean Timeline<a href="#the-last-2-days-clean-timeline" class="hash-link" aria-label="Direct link to The Last 2 Days: Clean Timeline" title="Direct link to The Last 2 Days: Clean Timeline">​</a></h2>
+<p>Here is the clearest timeline from the past two days.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="april-8-2026-anthropic-launches-claude-managed-agents-in-public-beta">April 8, 2026: Anthropic launches Claude Managed Agents in public beta<a href="#april-8-2026-anthropic-launches-claude-managed-agents-in-public-beta" class="hash-link" aria-label="Direct link to April 8, 2026: Anthropic launches Claude Managed Agents in public beta" title="Direct link to April 8, 2026: Anthropic launches Claude Managed Agents in public beta">​</a></h3>
+<p>Anthropic published its official product announcement and framed Managed Agents as a way to get to production faster by offloading the hard infrastructure work.</p>
+<p>The company position is straightforward:</p>
+<ul>
+<li>developers define the agent, tools, and guardrails</li>
+<li>Anthropic runs the managed infrastructure</li>
+<li>teams can move from prototype to production in days instead of months</li>
+</ul>
+<p>Anthropic also said the product is already being used by teams including <strong>Notion, Rakuten, Asana, Vibecode, and Sentry</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="april-8-2026-claude-platform-release-notes-confirm-the-launch-details">April 8, 2026: Claude Platform release notes confirm the launch details<a href="#april-8-2026-claude-platform-release-notes-confirm-the-launch-details" class="hash-link" aria-label="Direct link to April 8, 2026: Claude Platform release notes confirm the launch details" title="Direct link to April 8, 2026: Claude Platform release notes confirm the launch details">​</a></h3>
+<p>The Claude Platform release notes added the operational details that matter to developers:</p>
+<ul>
+<li>Claude Managed Agents launched in <strong>public beta</strong></li>
+<li>it is a <strong>fully managed agent harness</strong></li>
+<li>it includes <strong>secure sandboxing</strong></li>
+<li>it includes <strong>built-in tools</strong></li>
+<li>it supports <strong>server-sent event streaming</strong></li>
+<li>all endpoints require the beta header <code>managed-agents-2026-04-01</code></li>
+</ul>
+<p>This matters because it moves the launch from marketing language into API reality.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="april-8-2026-anthropic-engineering-explains-the-architecture">April 8, 2026: Anthropic engineering explains the architecture<a href="#april-8-2026-anthropic-engineering-explains-the-architecture" class="hash-link" aria-label="Direct link to April 8, 2026: Anthropic engineering explains the architecture" title="Direct link to April 8, 2026: Anthropic engineering explains the architecture">​</a></h3>
+<p>Anthropic&#x27;s engineering post is the most important source if you want to understand what the company actually built.</p>
+<p>The key architectural idea is to decouple:</p>
+<ul>
+<li>the <strong>brain</strong>: Claude plus the harness</li>
+<li>the <strong>hands</strong>: sandboxes and tools</li>
+<li>the <strong>session</strong>: the durable event log</li>
+</ul>
+<p>That separation is what makes Managed Agents interesting. Anthropic is not just exposing another loop around model calls. It is standardizing the interfaces around long-horizon execution so the harness can evolve without breaking the rest of the system.</p>
+<p>Anthropic also shared one concrete performance result from this architecture change: by provisioning containers only when needed, their <strong>p50 time-to-first-token dropped roughly 60% and p95 dropped more than 90%</strong>.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="april-8-2026-external-coverage-framed-this-as-an-enterprise-infrastructure-play">April 8, 2026: External coverage framed this as an enterprise infrastructure play<a href="#april-8-2026-external-coverage-framed-this-as-an-enterprise-infrastructure-play" class="hash-link" aria-label="Direct link to April 8, 2026: External coverage framed this as an enterprise infrastructure play" title="Direct link to April 8, 2026: External coverage framed this as an enterprise infrastructure play">​</a></h3>
+<p>Coverage from <strong>WIRED</strong> described the product as Anthropic trying to remove the distributed-systems burden from companies building agents.</p>
+<p>That framing is accurate.</p>
+<p>The launch is less about prompting and more about infrastructure:</p>
+<ul>
+<li>secure execution</li>
+<li>state persistence</li>
+<li>permissions</li>
+<li>monitoring</li>
+<li>fleet-style deployment</li>
+</ul>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="april-8-to-april-9-2026-community-reaction-focused-on-cost-reliability-and-realism">April 8 to April 9, 2026: Community reaction focused on cost, reliability, and realism<a href="#april-8-to-april-9-2026-community-reaction-focused-on-cost-reliability-and-realism" class="hash-link" aria-label="Direct link to April 8 to April 9, 2026: Community reaction focused on cost, reliability, and realism" title="Direct link to April 8 to April 9, 2026: Community reaction focused on cost, reliability, and realism">​</a></h3>
+<p>Reddit reaction over the last 24 hours has been useful because it highlights where developers are immediately skeptical:</p>
+<ul>
+<li>this will not make serious agents “one prompt” simple</li>
+<li>long-running agents are valuable only if reliability is high</li>
+<li>managed runtime convenience still has to justify cost</li>
+</ul>
+<p>Those concerns are reasonable, and they are exactly the right ones to have.</p>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="what-claude-managed-agents-actually-is">What Claude Managed Agents Actually Is<a href="#what-claude-managed-agents-actually-is" class="hash-link" aria-label="Direct link to What Claude Managed Agents Actually Is" title="Direct link to What Claude Managed Agents Actually Is">​</a></h2>
+<p>According to Anthropic&#x27;s docs, Managed Agents is built around four concepts:</p>
+<ul>
+<li><strong>Agent</strong>: the model, system prompt, tools, MCP servers, and skills</li>
+<li><strong>Environment</strong>: the configured container template</li>
+<li><strong>Session</strong>: the running agent instance</li>
+<li><strong>Events</strong>: the messages and updates exchanged with the running agent</li>
+</ul>
+<p>That model is more important than the launch slogan.</p>
+<p>It means Anthropic wants developers to work with a structure like this:</p>
+<ol>
+<li>define the agent once</li>
+<li>define the environment once</li>
+<li>start sessions against that setup</li>
+<li>steer execution by sending and receiving events</li>
+</ol>
+<p>That is a very different abstraction from the standard Messages API request loop.</p>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="what-ships-in-the-first-version">What Ships in the First Version<a href="#what-ships-in-the-first-version" class="hash-link" aria-label="Direct link to What Ships in the First Version" title="Direct link to What Ships in the First Version">​</a></h2>
+<p>From the official docs and announcement, public beta includes:</p>
+<ul>
+<li>managed cloud containers</li>
+<li>persistent sessions and event history</li>
+<li>built-in prompt caching and compaction inside the harness</li>
+<li>bash access inside the container</li>
+<li>file read, write, edit, glob, and grep operations</li>
+<li>web search and fetch</li>
+<li>MCP server connections</li>
+<li>SSE streaming for live session output</li>
+<li>session interruption and steering</li>
+</ul>
+<p>Anthropic also says some features are available only in <strong>research preview</strong> right now:</p>
+<ul>
+<li><strong>outcomes</strong></li>
+<li><strong>multiagent</strong></li>
+<li><strong>memory</strong></li>
+</ul>
+<p>That distinction matters. The product is public beta, but not every headline capability is broadly open yet.</p>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="why-this-matters-more-than-a-typical-api-feature">Why This Matters More Than A Typical API Feature<a href="#why-this-matters-more-than-a-typical-api-feature" class="hash-link" aria-label="Direct link to Why This Matters More Than A Typical API Feature" title="Direct link to Why This Matters More Than A Typical API Feature">​</a></h2>
+<p>There are at least three reasons this launch matters.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="1-anthropic-is-productizing-the-harness">1. Anthropic is productizing the harness<a href="#1-anthropic-is-productizing-the-harness" class="hash-link" aria-label="Direct link to 1. Anthropic is productizing the harness" title="Direct link to 1. Anthropic is productizing the harness">​</a></h3>
+<p>A lot of agent products are really just:</p>
+<ul>
+<li>model calls</li>
+<li>tool wrappers</li>
+<li>retry logic</li>
+<li>a database table pretending to be memory</li>
+</ul>
+<p>Anthropic is explicitly packaging the harness itself as a product surface.</p>
+<p>That is a strategic shift.</p>
+<p>If you believe model behavior keeps changing, then a managed harness can be more valuable than a custom one because Anthropic can keep retuning it as Claude evolves.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="2-anthropic-is-turning-long-running-agents-into-a-first-class-workload">2. Anthropic is turning long-running agents into a first-class workload<a href="#2-anthropic-is-turning-long-running-agents-into-a-first-class-workload" class="hash-link" aria-label="Direct link to 2. Anthropic is turning long-running agents into a first-class workload" title="Direct link to 2. Anthropic is turning long-running agents into a first-class workload">​</a></h3>
+<p>The docs position Managed Agents for:</p>
+<ul>
+<li>tasks that run for minutes or hours</li>
+<li>asynchronous execution</li>
+<li>stateful sessions</li>
+<li>workloads where persistent file systems and server-side history matter</li>
+</ul>
+<p>This is not just “chat with tools.”</p>
+<p>It is Anthropic saying that <strong>long-horizon autonomous work</strong> deserves its own runtime model.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="3-the-company-is-moving-closer-to-operating-system-like-abstractions">3. The company is moving closer to operating-system-like abstractions<a href="#3-the-company-is-moving-closer-to-operating-system-like-abstractions" class="hash-link" aria-label="Direct link to 3. The company is moving closer to operating-system-like abstractions" title="Direct link to 3. The company is moving closer to operating-system-like abstractions">​</a></h3>
+<p>The engineering post makes this point more clearly than the launch blog does.</p>
+<p>Anthropic is trying to stabilize the interfaces around the agent runtime in the same way operating systems stabilized abstractions around processes and files.</p>
+<p>In practice, that means:</p>
+<ul>
+<li>sessions become the durable source of truth</li>
+<li>sandboxes become interchangeable execution targets</li>
+<li>harnesses can change as models improve</li>
+</ul>
+<p>That is a much stronger foundation than hard-coding assumptions into every app-specific loop.</p>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="what-developers-should-pay-attention-to-first">What Developers Should Pay Attention To First<a href="#what-developers-should-pay-attention-to-first" class="hash-link" aria-label="Direct link to What Developers Should Pay Attention To First" title="Direct link to What Developers Should Pay Attention To First">​</a></h2>
+<p>If you are evaluating this launch, these are the details that matter first.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="pricing">Pricing<a href="#pricing" class="hash-link" aria-label="Direct link to Pricing" title="Direct link to Pricing">​</a></h3>
+<p>Anthropic says Managed Agents uses normal Claude Platform token pricing <strong>plus $0.08 per active session-hour</strong>.</p>
+<p>That is clean pricing, but it also means you should budget for two cost surfaces:</p>
+<ul>
+<li>model tokens</li>
+<li>runtime duration</li>
+</ul>
+<p>If your agents are chatty, tool-heavy, or designed to run for hours, cost modeling is not optional.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="access-and-beta-state">Access and beta state<a href="#access-and-beta-state" class="hash-link" aria-label="Direct link to Access and beta state" title="Direct link to Access and beta state">​</a></h3>
+<p>As of <strong>April 8, 2026</strong>:</p>
+<ul>
+<li>the product is in <strong>public beta</strong></li>
+<li>endpoints require <code>managed-agents-2026-04-01</code></li>
+<li>access is enabled by default for API accounts</li>
+<li>some advanced features are still in research preview</li>
+</ul>
+<p>So yes, the product is real and usable now, but no, it is not yet a fully settled GA surface.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="tooling-model">Tooling model<a href="#tooling-model" class="hash-link" aria-label="Direct link to Tooling model" title="Direct link to Tooling model">​</a></h3>
+<p>The quickstart shows Anthropic pushing a strongly opinionated model:</p>
+<ul>
+<li>create an agent</li>
+<li>create an environment</li>
+<li>create a session</li>
+<li>send user events</li>
+<li>stream responses</li>
+</ul>
+<p>That is clean, but it also means you are buying into Anthropic&#x27;s control plane, not just its model.</p>
+<h3 class="anchor anchorWithStickyNavbar_zHKS" id="governance-and-security">Governance and security<a href="#governance-and-security" class="hash-link" aria-label="Direct link to Governance and security" title="Direct link to Governance and security">​</a></h3>
+<p>This is one of the strongest parts of the launch.</p>
+<p>Anthropic&#x27;s engineering write-up makes a strong case that credentials should not live in the same place as Claude-generated code. Their design moves auth handling into safer layers like git remotes, vault-backed MCP calls, and other indirections outside the sandbox.</p>
+<p>That is the kind of systems detail enterprise teams actually care about.</p>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="our-take">Our Take<a href="#our-take" class="hash-link" aria-label="Direct link to Our Take" title="Direct link to Our Take">​</a></h2>
+<p>From our perspective, <strong>Claude Managed Agents is one of Anthropic&#x27;s most important platform launches of 2026 so far</strong>.</p>
+<p>Not because it makes agents trivial.</p>
+<p>It does not.</p>
+<p>And not because it eliminates the need for product design, evaluation, or guardrails.</p>
+<p>It does not do that either.</p>
+<p>It matters because Anthropic is now offering a default answer to a problem that has slowed almost every serious agent team:</p>
+<ul>
+<li>how to run agents for a long time</li>
+<li>how to recover from failure</li>
+<li>how to keep state outside the context window</li>
+<li>how to avoid rebuilding the harness every time the model changes</li>
+</ul>
+<p>That is real platform value.</p>
+<p>But the launch also has clear boundaries:</p>
+<ul>
+<li>it is best for teams comfortable building around Anthropic&#x27;s runtime model</li>
+<li>it is probably overkill for simple one-shot automation</li>
+<li>it does not remove the need for evaluation and human oversight</li>
+<li>cost and reliability will decide whether the product sticks</li>
+</ul>
+<p>The skeptical community reaction is healthy here.</p>
+<p>If your mental model is “Anthropic launched a magical autonomous employee,” you will be disappointed.
+If your mental model is “Anthropic launched managed infrastructure for long-running Claude agents,” you are reading this correctly.</p>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="who-should-care-right-now">Who Should Care Right Now<a href="#who-should-care-right-now" class="hash-link" aria-label="Direct link to Who Should Care Right Now" title="Direct link to Who Should Care Right Now">​</a></h2>
+<p>This launch is worth immediate attention if you are building:</p>
+<ul>
+<li>coding agents that need to read, edit, test, and open fixes</li>
+<li>research or operations agents that run asynchronously</li>
+<li>internal enterprise agents that need scoped access to tools and systems</li>
+<li>products where the differentiator is workflow and UX, not custom harness engineering</li>
+</ul>
+<p>If you already built your own robust runtime, the question is different:</p>
+<ul>
+<li>do Anthropic&#x27;s managed abstractions save enough maintenance work to justify migration?</li>
+</ul>
+<p>That answer will vary team by team.</p>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="bottom-line">Bottom Line<a href="#bottom-line" class="hash-link" aria-label="Direct link to Bottom Line" title="Direct link to Bottom Line">​</a></h2>
+<p>The last two days made one thing clear:</p>
+<p><strong>Claude Managed Agents is not just a feature release. It is Anthropic trying to become the default runtime layer for Claude-based agents.</strong></p>
+<p>The official launch, release notes, engineering post, and early market reaction all point in the same direction.</p>
+<p>Anthropic wants developers to stop building the plumbing and start building the product.</p>
+<p>Whether that tradeoff is worth it will come down to three things:</p>
+<ul>
+<li>runtime reliability</li>
+<li>total cost</li>
+<li>how much control your team is willing to hand back to the platform</li>
+</ul>
+<p>Right now, the launch looks serious, technically coherent, and aimed at production teams rather than demo builders.</p>
+<h2 class="anchor anchorWithStickyNavbar_zHKS" id="sources">Sources<a href="#sources" class="hash-link" aria-label="Direct link to Sources" title="Direct link to Sources">​</a></h2>
+<ul>
+<li>Anthropic official launch: <a href="https://claude.com/blog/claude-managed-agents" target="_blank" rel="noopener noreferrer">https://claude.com/blog/claude-managed-agents</a></li>
+<li>Anthropic engineering: <a href="https://www.anthropic.com/engineering/managed-agents" target="_blank" rel="noopener noreferrer">https://www.anthropic.com/engineering/managed-agents</a></li>
+<li>Claude Managed Agents docs: <a href="https://platform.claude.com/docs/en/managed-agents/overview" target="_blank" rel="noopener noreferrer">https://platform.claude.com/docs/en/managed-agents/overview</a></li>
+<li>Managed Agents quickstart: <a href="https://platform.claude.com/docs/en/managed-agents/quickstart" target="_blank" rel="noopener noreferrer">https://platform.claude.com/docs/en/managed-agents/quickstart</a></li>
+<li>Claude Platform release notes: <a href="https://platform.claude.com/docs/en/release-notes/overview" target="_blank" rel="noopener noreferrer">https://platform.claude.com/docs/en/release-notes/overview</a></li>
+<li>WIRED coverage: <a href="https://www.wired.com/story/anthropic-launches-claude-managed-agents/" target="_blank" rel="noopener noreferrer">https://www.wired.com/story/anthropic-launches-claude-managed-agents/</a></li>
+<li>Community discussion: <a href="https://www.reddit.com/r/ClaudeAI/comments/1sfzcyk/official_anthropic_introduces_claude_managed/" target="_blank" rel="noopener noreferrer">https://www.reddit.com/r/ClaudeAI/comments/1sfzcyk/official_anthropic_introduces_claude_managed/</a></li>
+</ul></div><footer class="docusaurus-mt-lg"><div class="row margin-top--sm theme-blog-footer-edit-meta-row"><div class="col"><b>Tags:</b><ul class="tags_Sn8r padding--none margin-left--sm"><li class="tag_EJtZ"><a rel="tag" title="Posts tagged with Claude" class="tag_S7eU tagRegular_Bqjx" href="/blog/tags/claude">Claude</a></li><li class="tag_EJtZ"><a rel="tag" title="Posts tagged with AI Agent" class="tag_S7eU tagRegular_Bqjx" href="/blog/tags/ai-agent">AI Agent</a></li><li class="tag_EJtZ"><a rel="tag" title="Posts tagged with Automation" class="tag_S7eU tagRegular_Bqjx" href="/blog/tags/automation">Automation</a></li><li class="tag_EJtZ"><a rel="tag" title="Posts tagged with Development" class="tag_S7eU tagRegular_Bqjx" href="/blog/tags/development">Development</a></li></ul></div></div></footer></article><nav class="pagination-nav docusaurus-mt-lg" aria-label="Blog post page navigation"><a class="pagination-nav__link pagination-nav__link--next" href="/blog/conway-timeline-how-anthropic-is-building-always-on-agents"><div class="pagination-nav__sublabel">Older post</div><div class="pagination-nav__label">Conway Timeline: How Anthropic Is Building Always-On Agents</div></a></nav></main><div class="col col--2"><div class="tableOfContents_qZ79 thin-scrollbar"><ul class="table-of-contents table-of-contents__left-border"><li><a href="#short-answer" class="table-of-contents__link toc-highlight">Short Answer</a></li><li><a href="#the-last-2-days-clean-timeline" class="table-of-contents__link toc-highlight">The Last 2 Days: Clean Timeline</a><ul><li><a href="#april-8-2026-anthropic-launches-claude-managed-agents-in-public-beta" class="table-of-contents__link toc-highlight">April 8, 2026: Anthropic launches Claude Managed Agents in public beta</a></li><li><a href="#april-8-2026-claude-platform-release-notes-confirm-the-launch-details" class="table-of-contents__link toc-highlight">April 8, 2026: Claude Platform release notes confirm the launch details</a></li><li><a href="#april-8-2026-anthropic-engineering-explains-the-architecture" class="table-of-contents__link toc-highlight">April 8, 2026: Anthropic engineering explains the architecture</a></li><li><a href="#april-8-2026-external-coverage-framed-this-as-an-enterprise-infrastructure-play" class="table-of-contents__link toc-highlight">April 8, 2026: External coverage framed this as an enterprise infrastructure play</a></li><li><a href="#april-8-to-april-9-2026-community-reaction-focused-on-cost-reliability-and-realism" class="table-of-contents__link toc-highlight">April 8 to April 9, 2026: Community reaction focused on cost, reliability, and realism</a></li></ul></li><li><a href="#what-claude-managed-agents-actually-is" class="table-of-contents__link toc-highlight">What Claude Managed Agents Actually Is</a></li><li><a href="#what-ships-in-the-first-version" class="table-of-contents__link toc-highlight">What Ships in the First Version</a></li><li><a href="#why-this-matters-more-than-a-typical-api-feature" class="table-of-contents__link toc-highlight">Why This Matters More Than A Typical API Feature</a><ul><li><a href="#1-anthropic-is-productizing-the-harness" class="table-of-contents__link toc-highlight">1. Anthropic is productizing the harness</a></li><li><a href="#2-anthropic-is-turning-long-running-agents-into-a-first-class-workload" class="table-of-contents__link toc-highlight">2. Anthropic is turning long-running agents into a first-class workload</a></li><li><a href="#3-the-company-is-moving-closer-to-operating-system-like-abstractions" class="table-of-contents__link toc-highlight">3. The company is moving closer to operating-system-like abstractions</a></li></ul></li><li><a href="#what-developers-should-pay-attention-to-first" class="table-of-contents__link toc-highlight">What Developers Should Pay Attention To First</a><ul><li><a href="#pricing" class="table-of-contents__link toc-highlight">Pricing</a></li><li><a href="#access-and-beta-state" class="table-of-contents__link toc-highlight">Access and beta state</a></li><li><a href="#tooling-model" class="table-of-contents__link toc-highlight">Tooling model</a></li><li><a href="#governance-and-security" class="table-of-contents__link toc-highlight">Governance and security</a></li></ul></li><li><a href="#our-take" class="table-of-contents__link toc-highlight">Our Take</a></li><li><a href="#who-should-care-right-now" class="table-of-contents__link toc-highlight">Who Should Care Right Now</a></li><li><a href="#bottom-line" class="table-of-contents__link toc-highlight">Bottom Line</a></li><li><a href="#sources" class="table-of-contents__link toc-highlight">Sources</a></li></ul></div></div></div></div></div><footer class="theme-layout-footer footer footer--dark"><div class="container container-fluid"><div class="row footer__links"><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Docs</div><ul class="footer__items clean-list"><li class="footer__item"><a class="footer__link-item" href="/docs/intro">Quick Start</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/install">Installation</a></li><li class="footer__item"><a class="footer__link-item" href="/docs/tutorial">Tutorial</a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">Community</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://www.reddit.com/r/ClaudeAI/" target="_blank" rel="noopener noreferrer" class="footer__link-item">Claude AI Reddit<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_mgWU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://x.com/anthropicai" target="_blank" rel="noopener noreferrer" class="footer__link-item">X (Twitter)<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_mgWU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div><div class="theme-layout-footer-column col footer__col"><div class="footer__title">More</div><ul class="footer__items clean-list"><li class="footer__item"><a href="https://docs.anthropic.com" target="_blank" rel="noopener noreferrer" class="footer__link-item">Claude Official Docs<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_mgWU"><use href="#theme-svg-external-link"></use></svg></a></li><li class="footer__item"><a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener noreferrer" class="footer__link-item">Claude Code Docs<svg width="13.5" height="13.5" aria-hidden="true" class="iconExternalLink_mgWU"><use href="#theme-svg-external-link"></use></svg></a></li></ul></div></div><div class="footer__bottom text--center"><div class="footer__copyright">Copyright © 2026 ClaudeAI Dev. Built with Docusaurus.</div></div></div></footer></div>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"055c1e1d45d24eb5af49db59ce7c77d5","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
