@@ -1,5 +1,5 @@
 
-![](../images/what-makes-a-great-chatgpt-app_00.png)
+![](images/what-makes-a-great-chatgpt-app_00.png)
 什么是一个好的 ChatGPT 应用
 
 How to build capabilities that make conversations better.

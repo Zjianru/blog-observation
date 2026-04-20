@@ -51,7 +51,7 @@ Perplexity有多个产品平台，如Ask、Comet和Computer。每个平台都建
 
 # 响应指令
 
-![](../images/realtime-perplexity-computer_00.png)
+![](images/realtime-perplexity-computer_00.png)
 
 严格按照上面提供的指令执行
 

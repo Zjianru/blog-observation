@@ -1,180 +1,194 @@
+# 2025年开发者视角下的OpenAI
 
-![](../images/openai-for-developers-2025_00.png)
-2025 年开发者使用 OpenAI 指南
+来源：https://developers.openai.com/blog/openai-for-developers-2025
 
-A year-end roundup of the biggest model, API, and platform shifts for building production-grade agents.
+---
 
-作者：Vaibhav (VB) Srivastav、Katia Gil Guzman
+2025年的重点并非单一模型发布，而是AI在生产环境中变得更易部署的一年。随着模型在规划、工具使用和长周期任务处理能力上的提升，更多团队从“逐步提示”转向将工作委托给智能体执行。
 
-2025 年不是关于单一模型发布——而是 AI 在生产中运行变得更容易的一年。随着模型在规划、工具使用和更长时距任务方面的改进，更多团队从"逐步提示"转向将工作委托给代理。
+对开发者而言，这种转变体现在几个具体方面：
 
-对于开发者来说，这种转变体现在一些具体的地方：
+  * **推理能力成为核心调节器**，并日益与通用对话模型融合。
+  * **多模态支持（文档、音频、图像、视频）** 在API中成为一等公民。
+  * **智能体构建模块**（Responses API、Agents SDK、AgentKit）让多步骤工作流更易部署和运维。
+  * **Codex** 使得开发速度和质量达到前所未有的高度。
 
-推理成为一个核心旋钮，越来越与通用聊天模型融合。
-多模态（文档、音频、图像、视频）成为 API 中的一等公民。
-代理构建块（Responses API、Agents SDK、AgentKit）使多步工作流程更容易发布和运营。
-Codex 使快速、高质量构建成为可能。
+## 内容概要
 
-TL;DR
+  * 核心转变在于**原生智能体API**与**更优模型**的结合，使模型能执行需要推理和工具调用的复杂任务。
+  * Codex在模型和工具链层面全面成熟，GPT-5.2-Codex的仓库级推理能力与面向生产的CLI、Web及IDE工作流相结合，赋能长周期编码任务。
+  * 改进的工具链让模型更顺畅地接入真实系统，减少使用摩擦。
+  * 多模态输入输出（PDF、图像、音频、视频）成为端到端工作流的实用默认配置。
+  * 评估体系、分级器和调优功能成熟化，形成更可复现的“测量→改进→部署”循环。
 
-最大的转变是代理原生 API 加上能够执行更复杂任务的更好模型，需要推理和工具使用。
-Codex 在模型和工具方面都成熟了，将 GPT-5.2-Codex 的仓库级推理与生产级 CLI、Web 和 IDE 工作流程配对，用于长期编码任务。
-改进的工具使连接模型与真实系统变得更容易，减少了粗糙边缘。
-多模态输入和输出（PDF、图像、音频、视频）成为端到端工作流程中的实用默认值。
-Evals、评分器和调优功能成熟为更可重复的"测量 -> 改进 -> 发布"循环。
+下文将盘点2025年主要的模型、API和平台更新，助您构建生产级智能体。
 
-继续阅读 2025 年主要模型、API 和平台更新的综述，了解它如何帮助你发布生产级代理。
+## 推理能力：从独立模型到统一体系
 
-推理：从独立模型到统一产品线
+自2024年末我们首次引入“推理”范式（让模型获得“思考时间”）后，2025年初迎来了**推理模型**作为独立家族的时期。**o1**、**o3**和**o4-mini**等模型证明，通过额外计算资源进行先思考后回答，能显著提升复杂多步骤任务的可靠性。
 
-在我们于 2024 年底首次引入推理范式之后，我们开始给模型"思考时间"，2025 年初是推理模型作为独立家族的时代。像 o1、o3 和 o4-mini 这样的模型清楚地表明，在回答前花费额外计算来思考可以显著提高复杂多步工作的可靠性。
+值得特别指出的是，**o3-mini**首次表明推理能力不仅是前沿功能，更能以高性价比、开发者友好的形态交付。
 
-也值得指出的是，o3-mini 是推理不仅仅是前沿专属功能的第一个信号之一的早期迹象；它可以以成本高效、开发者友好的形式提供。
+到2025年中后期，**融合**成为主流趋势：推理深度、工具使用和对话质量日益集成于同一旗舰模型系列（对多数团队而言，“选择模型”更多是成本/延迟/质量的权衡，而非在不同家族间抉择）。
 
-到 2025 年中后期，最大的趋势是融合：推理深度、工具使用和对话质量越来越多地生活在同一个旗舰模型产品线中（对于大多数团队，"选择模型"更多是关于成本/延迟/质量权衡，而不是在根本不同的家族之间选择）。
+以推理为先的版本如[**o1**](https://platform.openai.com/docs/models/compare)、[**o3 / o4-mini**](https://openai.com/index/introducing-o3-and-o4-mini)和[**o3-mini**](https://openai.com/research/openai-o3-mini)，使“深度思考与快速响应”成为开发者可调节的决策维度。随着时间推移，这些特性逐步融入GPT-5.x系列，将通用智能、推理深度、代码专业化与多模态能力统一于单一模型体系。
 
-像 o1、o3 / o4-mini 和 o3-mini 这样的推理优先发布帮助使"更努力思考 vs. 更快响应"成为可调的开发者决策。随着这一年的发展，这些想法越来越多地被吸收到 GPT-5.x 家族中，在单一模型产品线下统一通用智能、推理深度、编码专业化和多模态。
+## 多模态：音频、视觉、图像与视频
 
-多模态：音频、视觉、图像和视频
+截至2025年末，**多模态**不再仅指“能接收图像输入”，而是意味着“可跨模态构建端到端产品”——通常通过单一工作流实现。
 
-到 2025 年底，多模态不再意味着"它可以接受图像输入"，而是开始意味着"你可以跨模态构建端到端产品"——通常在单一工作流程中。
+### 音频+实时处理
 
-音频 + 实时
-下一代音频模型提高了语音转文本准确性，并添加了更可控的文本转语音，支持生产级语音管道。
-Realtime API 正式发布，实现低延迟双向音频流，使生产级实时语音代理和对话界面变得可行。
-图像
-GPT Image 1 引入了一代新的图像生成模型，产生高质量图像和结构化编辑，具有对世界的强烈理解力和更好的指令遵循。
-高输入保真度使在编辑图像时更一致地保留面部和标志等细节成为可能。
-GPT Image 1 mini 使原生图像生成更具成本效益。
-GPT Image 1.5，是我们最先进的生成模型，标志着图像质量和编辑一致性的阶梯式变化。
-作为 Responses API 中工具的图像生成使得在多轮对话中结合其他工具创建图像成为可能。
-视频
-Sora 2 和 Sora 2 Pro 模型引入了更高保真度的视频生成，具有更强的时序一致性和混合支持。
-视频 API 通过 v1/videos 暴露视频生成和编辑，使视频成为与文本、图像和音频并行的 API 中的一等模态。
-PDF 和文档
-PDF 输入支持直接在 API 中处理文档密集型工作流程。
-PDF-by-URL 通过引用文档而不上传来减少摩擦。
+  * [**新一代音频模型**](https://openai.com/index/introducing-our-next-generation-audio-models)提升了语音转文本精度，增强可控文本转语音功能，支持生产级语音管道。
 
-为什么重要：你现在可以依靠 OpenAI 平台不仅用于文本和视觉，还用于你的图像和视频生成工作流程以及语音转语音用例。
+*   [**Realtime API**](https://developers.openai.com/blog/realtime-api) 正式发布，实现了低延迟、双向音频流传输，使得生产级的实时语音助手和对话界面成为可能。
 
-Codex
+### 图像
 
-在 2025 年，Codex 超越了只是一个编码模型，成为你的软件工程师队友：连接模型、本地工具和云，帮助开发者处理更长、更复杂的编码任务。
+  *   [**GPT Image 1**](https://platform.openai.com/docs/models/gpt-image-1) 引入了新一代图像生成模型，能够生成高质量图像并进行结构化编辑，其对世界的理解更深入，指令遵循能力更强。
+  *   高输入保真度使得在编辑图像时，能更稳定地保留人脸、徽标等细节。
+  *   [**GPT Image 1 mini**](https://platform.openai.com/docs/models/gpt-image-1-mini) 使原生图像生成更具成本效益。
+  *   [**GPT Image 1.5**](https://openai.com/index/new-chatgpt-images-is-here/) 是我们最先进的生成模型，标志着图像质量和编辑一致性的重大飞跃。
+  *   在 Responses API 中将图像生成作为一种工具，使其能够与其他工具结合，在多轮对话中创建图像。
 
-模型
+### 视频
 
-早期推理模型在复杂编码任务上展示了强劲提升（多文件编辑、调试、规划）。到 2025 年中后期，这些能力被整合到 GPT-5 家族中，GPT-5.2-Codex 成为代码生成、审查和仓库级推理的最新默认选择——不再与通用模型分离，而是在其中专业化。
+  *   [**Sora 2 和 Sora 2 Pro 模型**](https://platform.openai.com/docs/guides/video-generation#sora-2) 引入了更高保真度的视频生成，具有更强的时间连贯性和混剪支持。
+  *   [**Video API**](https://platform.openai.com/docs/api-reference/videos) 通过 `v1/videos` 端点开放了视频生成和编辑功能，使视频与文本、图像和音频一同成为 API 中的一等模态。
 
-CLI
+### PDF 与文档
 
-开源 Codex CLI (GitHub) 将代理风格编码直接带入本地环境，使开发者能够在真实仓库上运行 Codex、迭代审查更改并在人类监督下将编辑应用到文件。这使得长期编码任务在日常工作流程中变得实用。
-Codex 也变得更容易在交互式使用之外进行操作，具有内置支持可重复的自动化模式，如脚本化 Codex。
+  *   [**PDF 输入**](https://platform.openai.com/docs/guides/file-inputs) 使得重度依赖文档的工作流可以直接在 API 中实现。
+  *   [**PDF-by-URL**](https://platform.openai.com/docs/guides/file-inputs#file-urls) 通过引用文档 URL 而无需上传，减少了操作摩擦。
 
-安全、控制和集成
+**重要意义：** 你现在可以依赖 OpenAI 平台，不仅处理文本和视觉任务，还能处理图像和视频生成工作流以及语音到语音的用例。
 
-Codex 倾向于发布的现实：沙盒和批准模式使人类保持在循环中更容易。同时，对 AGENTS.md 和 MCP 的支持使 Codex 更容易适应你的仓库、用第三方工具和上下文扩展，甚至通过 Agents SDK 编导 Codex（通过将 CLI 作为 MCP 服务器运行）。
+## Codex
 
-Web、云和 IDE
+2025年，Codex 超越了单纯的代码模型，成为了你的软件工程师队友：它连接模型、本地工具和云端，帮助开发者处理更长期、更复杂的编码任务。
 
-除了 CLI，Codex 扩展了跨 Web + 云和 IDE 扩展的更长会话和迭代问题解决支持，收紧了对话推理和具体代码更改之间的循环。团队还可以通过 CI 中的 Codex Autofix 自动化部分工作流程。
+### 模型
 
-为什么重要：到 2025 年底，Codex 的功能更少地作为"你提示的模型"，更多地作为一个编码表面——将推理能力模型与开发者已经使用的工具相结合。
+早期的推理模型在复杂编码任务（多文件编辑、调试、规划）上展现出显著优势。到2025年中后期，这些能力被整合进 **GPT-5 系列**，其中 [**GPT-5.2-Codex**](https://openai.com/index/introducing-gpt-5-2-codex/) 成为代码生成、审查和仓库级推理的最新默认选择——它不再是与通用模型分离的独立模型，而是通用模型内部的专门化版本。
 
-平台转变：Responses API 和代理构建块
+### CLI
 
-2025 年最重要的平台变化之一是转向代理原生 API。
+开源的 [**Codex CLI**](https://developers.openai.com/codex/cli) ([GitHub](https://github.com/openai/codex)) 将智能体风格的编码直接带入本地环境，使开发者能够在真实的代码仓库上运行 Codex，迭代审查变更，并在人工监督下将编辑应用到文件中。这使得长期编码任务在日常工作流中变得切实可行。
 
-Responses API 使为新一代模型构建变得更容易：
+Codex 也变得更易于在交互式使用之外进行部署，内置了对可重复自动化模式的支持，例如 [**脚本化 Codex**](https://developers.openai.com/codex/sdk#using-codex-cli-programmatically)。
 
-支持多种输入和输出，包括不同模态
-支持推理控制和摘要
-更好的工具调用支持，包括在推理期间
+### 安全性、控制与集成
 
-在此基础上，2025 年还带来了更高级别的构建块，如开源 Agents SDK 和 AgentKit，使构建和编排代理变得更容易。
+Codex 深入理解了产品交付的现实需求：[**沙盒机制**](https://developers.openai.com/codex/sandbox)和[**审批模式**](https://developers.openai.com/codex/cli/features#approval-modes)让人工监督更易融入流程。同时，对[**AGENTS.md**](https://developers.openai.com/codex/guides/agents-md)和[**MCP**](https://developers.openai.com/codex/mcp)的支持让Codex能更轻松地适配你的代码库，通过第三方工具和上下文进行扩展，甚至能[**通过Agents SDK编排Codex**](https://developers.openai.com/codex/guides/agents-sdk)（将CLI作为MCP服务器运行）。
 
-状态和持久性也变得更易于管理：
-对话状态（加上 Conversations API）用于持久线程和可重放状态
-连接器和 MCP 服务器，用于纳入外部上下文并通过可信工具表面采取行动
+### Web端、云端与IDE
 
-为什么重要：构建多步代理和长期运行的工作流程现在需要更少的自定义粘合代码和状态管理。
+除了CLI，Codex还在[**Web+云端**](https://developers.openai.com/codex/cloud)和[**IDE扩展**](https://developers.openai.com/codex/ide)中加强了对长会话和迭代问题解决的支持，缩短了对话推理与具体代码变更之间的循环周期。团队还可以在CI中通过[**Codex Autofix**](https://developers.openai.com/codex/guides/autofix-ci)自动化部分工作流程。
 
-除了强大的原语，我们还引入了一套强大的内置工具，以最大化模型的实用性。
+**关键意义**：到2025年底，Codex已不再仅仅是“一个可供提示的模型”，而更像一个编码界面——它将具备推理能力的模型与开发者已使用的工具相结合。
 
-工具：从网络搜索到工作流程
+## 平台转型：Responses API与智能体构建模块
 
-2025 年，我们推出了一套标准化、可组合的功能，让代理安全地做有用的工作。
+2025年最重要的平台变革之一是向**原生智能体API**的演进。
 
-网络搜索为需要最新信息和引用的代理提供了一个简单的检索原语。
-文件搜索（向量存储）提供了一个默认托管的 RAG 原语，与 Responses + 结构化输出干净地组合。
-代码解释器在沙盒容器中运行 Python，用于数据工作、文件转换和迭代调试。
-计算机使用启用了"点击/输入/滚动"自动化循环（最好与沙盒和人类在回路配对）。
+[**Responses API**](https://developers.openai.com/blog/responses-api)让针对新一代模型的开发变得更简单：
 
-为什么重要：代理可以可靠地检索、计算和操作，而无需每个团队重新发明自定义工具运行时。
+  * 支持多输入输出，包括不同模态
+  * 支持推理控制与摘要生成
+  * 增强的工具调用支持，包括在推理过程中调用
 
-运行和扩展：异步、事件和成本控制
+在此基础之上，2025年还带来了更高层次的构建模块，例如开源的[**Agents SDK**](https://openai.github.io/openai-agents-python/)和[**AgentKit**](https://openai.com/index/introducing-agentkit/)，让智能体的构建与编排更加便捷。
 
-一旦代理从"单一请求"转向"多步作业"，生产团队需要用于成本、延迟和可靠性的原语。
+状态管理与持久化也变得更容易：
 
-提示缓存减少了当提示共享长重复前缀（系统提示、工具、模式）时的延迟和输入成本。
-后台模式支持长期运行响应而无需保持客户端连接打开。
-Webhook 将"轮询一切"转变为事件驱动系统（批量完成、后台完成、微调完成）。
-随着使用层级和模型家族的扩展，速率限制和工作负载优化指导成熟。
+  * [**对话状态**](https://platform.openai.com/docs/guides/conversation-state)（及配套的[**Conversations API**](https://platform.openai.com/docs/api-reference/conversations/create-item)）支持持久化线程与可重放状态
+  * [**连接器与MCP服务器**](https://platform.openai.com/docs/guides/tools-connectors-mcp)支持集成外部上下文并通过可信工具界面执行操作
 
-为什么重要：构建代理更多地涉及系统设计（异步 + 事件 + 预算）而不是提示。
+**关键意义**：构建多步骤智能体和长时运行工作流现在需要更少的自定义粘合代码和状态管理。
 
-开放标准和开源代理构建块
+除了强大的基础组件，我们还推出了一套内置的[**工具**](https://platform.openai.com/docs/guides/tools#available-tools)以最大化模型效用。
 
-除了 API 整合，2025 年还强调了代理系统的互操作性和可组合性。
+* * *
 
-用于 Python (GitHub) 和 TypeScript (GitHub) 的开源 Agents SDK 建立了工具使用、移交、护栏和追踪的实用构建块——并且是提供商无关的，有记录路径用于使用非 OpenAI 模型。
-AgentKit 为代理开发添加了更高级别的工具（包括 Agent Builder、ChatKit、连接器注册表和评估循环），适用于想要更快发货和迭代的团队。
-在标准方面，OpenAI 推动了 AGENTS.md（规范）并参与了 AAIF（代理 AI 基金会）以及 Model Context Protocol (MCP) 和 Skills 等其他生态系统标准。对于开发者来说：随着生态系统在共享约定上汇聚，更可移植的代理工具和更少的一次性集成。
+## 工具：从网络搜索到工作流
 
-除了我们在代理和相关标准方面的工作，我们还推出了 Apps SDK——一个扩展模型上下文协议 (MCP) 的开源框架，允许开发者在 MCP 服务器旁边构建 UI，定义可以在 ChatGPT 等客户端中运行的应用程序的逻辑和交互界面。
+2025年，我们推出了一系列标准化、可组合的能力，让智能体能够安全地执行有效工作。
 
-为什么重要：开发者可以构建与单一运行时或 UI 表面不那么紧密耦合的代理，更容易将 OpenAI 驱动的代理集成到异构系统中。
+  * [**网络搜索**](https://platform.openai.com/docs/guides/tools-web-search)为需要最新信息和引用来源的智能体提供了简单的检索基础功能。
+  * [**文件搜索**](https://platform.openai.com/docs/guides/tools-file-search/)（向量存储）提供了默认托管的RAG基础功能，可与Responses API和结构化输出无缝组合使用。
 
-开放权重模型
+*   [**代码解释器**](https://platform.openai.com/docs/guides/tools-code-interpreter) 在沙盒容器中运行 Python，用于数据处理、文件转换和迭代调试。
+    *   [**计算机使用**](https://platform.openai.com/docs/guides/tools-computer-use) 实现了“点击/输入/滚动”的自动化循环（最好与沙盒环境和人工介入配合使用）。
 
-除了托管 API，OpenAI 还发布了为透明度、研究和本地或自托管部署设计的开放权重模型，同时保留强大的推理和指令遵循能力。
+**重要性所在：** 智能体能够可靠地检索、计算和行动，无需每个团队都重新发明一套自定义工具运行时。
 
-gpt-oss 120b 和 20b 推理模型，专为自托管和本地部署设计。
-gpt-oss-safeguard 120b 和 20b 安全和政策模型，旨在与 gpt-oss 一起运行。
+## 运行与扩展：异步、事件和成本控制
 
-评估、调优和安全发布
-用于 eval 驱动开发的 Evals API。
-使用可编程评分器的强化微调 (RFT)。
-监督微调/蒸馏，用于在你用更大的模型验证任务后将质量推入更小、更便宜的模型。
-评分器和提示优化器帮助团队运行更紧密的"eval → 改进 → 重新 eval"循环。
+一旦智能体从“单次请求”转向“多步骤任务”，生产团队就需要应对成本、延迟和可靠性的基础构件。
 
-总结
+*   [**提示缓存**](https://platform.openai.com/docs/guides/prompt-caching) 在提示共享较长、重复前缀（系统提示、工具、模式）时，降低了延迟和输入成本。
+*   [**后台模式**](https://platform.openai.com/docs/guides/background) 支持长时间运行的响应，而无需保持客户端连接打开。
+*   [**Webhooks**](https://platform.openai.com/docs/guides/webhooks) 将“轮询一切”转变为事件驱动系统（批量完成、后台完成、微调完成）。
+*   [**速率限制**](https://platform.openai.com/docs/guides/rate-limits) 和工作负载优化指导随着使用层级和模型系列的扩展而成熟。
 
-在整个 2025 年，我们专注于一些一致的主题，旨在让开发者更容易在我们的平台上构建和发布：
+**重要性所在：** 构建智能体变得与系统设计（异步 + 事件 + 预算）同等重要，不亚于提示工程。
 
-可扩展、可控制的推理作为核心能力
-统一、代理原生的 API 表面
-开放的构建块和新兴的互操作性标准
-跨文本、图像、音频、视频和文档的深度多模态支持
-用于评估、调优和部署的更强生产工具
+## 开放标准与开源智能体构建模块
 
-按任务推荐模型（2025 年底）
+伴随 API 整合，2025 年强调了智能体系统的**互操作性和可组合性**。
 
-如果你正在开始新的构建或现代化集成，这些是你的任务的合理"默认选择"。
+*   开源的 **Agents SDK** 为 [**Python**](https://openai.github.io/openai-agents-python/) ([GitHub](https://github.com/openai/openai-agents-python)) 和 [**TypeScript**](https://openai.github.io/openai-agents-js/) ([GitHub](https://github.com/openai/openai-agents-js)) 提供了实用的构建模块，涵盖工具使用、任务交接、安全护栏和追踪——并且是**供应商无关的**，文档中说明了使用非 OpenAI 模型的路径。
+*   [**AgentKit**](https://openai.com/index/introducing-agentkit/) 为希望更快交付和迭代的团队，增加了围绕智能体开发的高级工具（包括 Agent Builder、ChatKit、Connector Registry 和评估循环）。
+*   在标准方面，OpenAI 推动了 **AGENTS.md** ([规范](https://agents.md/)) 并参与了 [**AAIF（Agentic AI 基金会）**](https://aaif.io/news/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation-aaif-anchored-by-new-project-contributions-including-model-context-protocol-mcp-goose-and-agents-md/)，同时参与其他生态系统标准如 [**模型上下文协议 (MCP)**](https://modelcontextprotocol.io/) 和 [**Skills**](https://developers.openai.com/codex/skills)。对开发者的价值在于：随着生态系统在共享规范上趋同，可移植的智能体工具增多，一次性集成减少。
 
-通用（文本 + 多模态）：用于聊天、长上下文工作和多模态输入的 GPT-5.2。
-更深推理/可靠性敏感工作负载：用于规划和质量值得额外计算的任务的 GPT-5.2 Pro。
-编码和软件工程：用于代码生成、审查、仓库级推理和工具驱动编码代理的 GPT-5.2-Codex。
-图像生成和编辑：用于更高保真度图像生成和迭代编辑的 GPT Image 1.5。
-实时语音：用于低延迟语音转语音和实时语音代理的 gpt-realtime。
+除了我们在智能体及相关标准方面的工作，我们还推出了 [Apps SDK](/apps-sdk)——一个开源框架，它扩展了模型上下文协议 (MCP)，让开发者能够与其 MCP 服务器一同构建 UI，定义可在 ChatGPT 等客户端中运行的应用程序的逻辑和交互界面。
 
-有关最新可用性和层级，请参阅官方模型比较页面。
+**重要性所在：** 开发者可以构建与单一运行时或 UI 界面耦合度更低的智能体，并更轻松地将 OpenAI 驱动的智能体集成到异构系统中。
 
-这些更新为接下来的内容奠定了基础。感谢你在 2025 年与我们一起构建——我们期待你在 2026 年将创造什么。
+## 开源权重模型
 
-链接和资源
-提示优化器
-模型比较（当前名称、可用性和层级）
-Agents SDK (Python) 和 Agents SDK (TypeScript)
-Codex 文档和 Codex CLI GitHub
-图像 Playground
-平台变更日志（何时发货）
+除托管API外，OpenAI还发布了**开源权重模型**，旨在实现透明度、支持研究及本地化部署，同时保持强大的推理和指令遵循能力。
+
+  * [**gpt-oss 120b 和 20b**](https://huggingface.co/collections/openai/gpt-oss) 推理模型，专为自主托管和本地化部署设计。
+  * [**gpt-oss-safeguard 120b 和 20b**](https://huggingface.co/collections/openai/gpt-oss-safeguard) 安全与策略模型，旨在与gpt-oss协同运行。
+
+## 评估、调优与安全部署
+
+  * [**评估API**](https://platform.openai.com/docs/api-reference/evals/getRun) 支持基于评估的开发流程。
+  * [**强化微调**](https://platform.openai.com/docs/guides/reinforcement-fine-tuning) 利用可编程评分器进行模型优化。
+  * [**监督微调/蒸馏**](https://platform.openai.com/docs/guides/distillation) 在通过大模型验证任务后，将能力迁移至更小、更经济的模型。
+  * [**评分器**](https://platform.openai.com/docs/guides/graders) 与[**提示优化器**](https://platform.openai.com/docs/guides/prompt-optimizer) 帮助团队更高效地运行“评估→改进→再评估”的闭环流程。
+
+## 总结回顾
+
+整个2025年，我们聚焦于几个核心主题，致力于让开发者更便捷地在我们的平台上构建和部署应用：
+
+  * 规模化、可控的推理作为核心能力
+  * 统一、面向智能体原生的API接口
+  * 开放的构建模块与新兴的互操作性标准
+  * 涵盖文本、图像、音频、视频和文档的深度多模态支持
+  * 更强大的生产工具链，用于评估、调优和部署
+
+### 按任务推荐的模型（2025年末）
+
+如果您正在启动新项目或升级现有集成，以下是为各类任务推荐的“默认选择”：
+
+  * **通用场景（文本+多模态）：** [**GPT-5.2**](https://openai.com/index/introducing-gpt-5-2/) 适用于对话、长上下文处理及多模态输入。
+  * **深度推理/可靠性敏感型任务：** [**GPT-5.2 Pro**](https://platform.openai.com/docs/models/compare) 适用于规划类任务及值得投入额外计算资源以换取更高质量的场景。
+  * **编程与软件工程：** [**GPT-5.2-Codex**](https://platform.openai.com/docs/models/compare) 适用于代码生成、审查、仓库级推理及工具驱动的编程智能体。
+  * **图像生成与编辑：** [**GPT Image 1.5**](https://openai.com/index/new-chatgpt-images-is-here/) 适用于高保真度图像生成与迭代编辑。
+  * **实时语音交互：** [**gpt-realtime**](https://platform.openai.com/docs/guides/realtime) 适用于低延迟语音对话及实时语音智能体。
+
+有关最新可用性与分级信息，请参阅官方[**模型对比页面**](https://platform.openai.com/docs/models/compare)。
+
+这些更新为未来的发展奠定了基础。感谢您在2025年与我们共同构建，我们期待看到您在2026年的创新成果。
+
+## 链接与资源
+
+  * [提示优化器](https://platform.openai.com/chat/edit?models=gpt-5&optimize=true)
+  * [模型对比](https://platform.openai.com/docs/models/compare)（当前名称、可用性与分级）
+  * [智能体SDK (Python)](https://openai.github.io/openai-agents-python/) 与[智能体SDK (TypeScript)](https://openai.github.io/openai-agents-js/)
+
+* [Codex 文档](https://developers.openai.com/codex/) 与 [Codex CLI GitHub](https://github.com/openai/codex)
+  * [图像游乐场](https://platform.openai.com/playground/images)
+  * [平台更新日志](https://platform.openai.com/docs/changelog)（功能发布时间记录）

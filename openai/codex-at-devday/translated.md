@@ -5,7 +5,7 @@ date: ""
 translated: 2026-04-20
 ---
 
-![](../images/codex-at-devday_00.png)
+![](images/codex-at-devday_00.png)
 
 # Codex 如何助力 OpenAI DevDay 2025
 

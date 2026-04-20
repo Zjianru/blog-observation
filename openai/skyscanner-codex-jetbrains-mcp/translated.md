@@ -59,7 +59,7 @@ var stubError = new NotFound("dummy error");
 
 ## 代码编辑指令
 
-![](../images/skyscanner-codex-jetbrains-mcp_00.png)
+![](images/skyscanner-codex-jetbrains-mcp_00.png)
 
 完成编辑后
 

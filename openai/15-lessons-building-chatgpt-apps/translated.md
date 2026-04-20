@@ -1,5 +1,5 @@
 
-![](../images/15-lessons-building-chatgpt-apps_00.png)
+![](images/15-lessons-building-chatgpt-apps_00.png)
 构建 ChatGPT Apps 学到的 15 个经验教训
 
 And how we incorporated them into a Codex Skill to help you build ChatGPT Apps 10x faster.

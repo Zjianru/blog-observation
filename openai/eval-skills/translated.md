@@ -68,7 +68,7 @@ description: Scaffold a Vite + React + Tailwind demo app with a small, consisten
 
 ## 何时使用
 
-![](../images/eval-skills_00.png)
+![](images/eval-skills_00.png)
 
 当需要一个新鲜的演示应用进行快速 UI 实验或复现时使用。
 

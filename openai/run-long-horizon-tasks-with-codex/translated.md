@@ -1,5 +1,5 @@
 
-![](../images/run-long-horizon-tasks-with-codex_00.png)
+![](images/run-long-horizon-tasks-with-codex_00.png)
 
 使用 Codex 运行长期任务
 

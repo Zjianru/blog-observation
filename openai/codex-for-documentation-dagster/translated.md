@@ -5,7 +5,7 @@ date: ""
 translated: 2026-04-20
 ---
 
-![](../images/codex-for-documentation-dagster_00.png)
+![](images/codex-for-documentation-dagster_00.png)
 
 # 使用 Codex 进行教育：Dagster Labs 案例
 

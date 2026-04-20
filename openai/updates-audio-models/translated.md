@@ -1,81 +1,87 @@
+# 面向语音开发者的更新
 
-![](../images/updates-audio-models_00.webp)
-语音开发者的更新
+来源：https://developers.openai.com/blog/updates-audio-models
 
-New audio model snapshots and broader access to Custom Voices for production voice apps.
+---
 
-作者：Derek Salama
+AI音频能力为用户体验开启了激动人心的新前沿。今年早些时候，我们发布了多款新的音频模型，包括[`gpt-realtime`](https://platform.openai.com/docs/models/gpt-realtime)，以及[新的API功能](/blog/realtime-api)，以帮助开发者构建这些体验。
 
-AI 音频能力开启了一个令人兴奋的用户体验新前沿。今年早些时候，我们发布了几款新的音频模型，包括 gpt-realtime，以及新的 API 功能，使开发者能够构建这些体验。
-
-上周，我们发布了新的音频模型快照，旨在通过提高生产语音工作流程的可靠性和质量来解决构建可靠音频代理的一些常见挑战——从转录和文本转语音到实时、本地语音转语音代理。
+上周，我们发布了新的音频模型快照，旨在通过提升生产级语音工作流程（从语音转文字、文字转语音到实时原生语音对话代理）的可靠性和质量，解决构建可靠音频代理时的一些常见挑战。
 
 这些更新包括：
 
-gpt-4o-mini-transcribe-2025-12-15 用于通过转录或 Realtime API 进行语音转文本
-gpt-4o-mini-tts-2025-12-15 用于通过 Speech API 进行文本转语音
-gpt-realtime-mini-2025-12-15 用于通过 Realtime API 进行本地、实时语音转语音
-gpt-audio-mini-2025-12-15 用于通过 Chat Completions API 进行本地语音转语音
+  * [`gpt-4o-mini-transcribe-2025-12-15`](https://platform.openai.com/docs/models/gpt-4o-mini-transcribe)，用于通过[语音转文字API](https://platform.openai.com/docs/guides/speech-to-text)或[实时API](https://platform.openai.com/docs/guides/realtime-transcription)进行语音转文字
+  * [`gpt-4o-mini-tts-2025-12-15`](https://platform.openai.com/docs/models/gpt-4o-mini-tts)，用于通过[语音合成API](https://platform.openai.com/docs/guides/text-to-speech)进行文字转语音
+  * [`gpt-realtime-mini-2025-12-15`](https://platform.openai.com/docs/models/gpt-realtime-mini)，用于通过[实时API](https://platform.openai.com/docs/guides/realtime)进行原生实时语音对话
+  * [`gpt-audio-mini-2025-12-15`](https://platform.openai.com/docs/models/gpt-audio-mini)，用于通过[聊天补全API](https://platform.openai.com/docs/api-reference/chat/create)进行原生的语音对话
 
-新快照共享一些常见的改进：
+这些新快照共享一些共同的改进：
 
-音频输入：
-真实世界和嘈杂音频的单词错误率更低
-在静音或背景噪音期间减少幻觉
+**在音频输入方面：**
 
-音频输出：
-更自然、更稳定的语音输出，包括使用自定义语音时
+  * **更低的词错误率**，适用于真实场景和嘈杂音频
+  * **更少的幻觉**，在静默或背景噪声情况下表现更佳
 
-定价与之前的模型快照相同，因此我们建议切换到这些新快照，以相同的價格受益于 improved performance。
+**在音频输出方面：**
 
-如果你正在构建语音代理、客户支持系统或品牌语音体验，这些更新将帮助你使生产部署更可靠。下面我们将分解新的内容以及这些改进如何在真实世界的语音工作流程中表现出来。
+  * **更自然、更稳定的语音输出**，包括使用自定义语音时
 
-语音转语音
+[定价](https://platform.openai.com/docs/pricing#audio-tokens)与之前的模型快照保持一致，因此我们建议切换到这些新快照，以便以相同的价格获得更好的性能。
 
-我们正在部署新的 Realtime mini 和 Audio mini 模型，这些模型已针对更好的工具调用和指令遵循进行了优化。这些模型减少了 mini 和全尺寸模型之间的智能差距，使一些应用程序能够通过转移到 mini 模型来优化成本。
+如果您正在构建语音代理、客户支持系统或品牌语音体验，这些更新将帮助您提高生产部署的可靠性。下面，我们将详细介绍这些新内容，以及这些改进如何在真实语音工作流程中体现。
 
-gpt-realtime-mini-2025-12-15
+## 语音对话
 
-gpt-realtime-mini 模型 meant to be used with the Realtime API，我们的用于低延迟、本地多模式交互的 API。它支持流式音频输入和输出、处理中断（使用可选的语音活动检测）以及在模型继续说话时在后台进行函数调用等功能。
+我们正在部署新的实时迷你版和音频迷你版模型，这些模型已针对更好的工具调用和指令遵循进行了优化。这些模型缩小了迷你版与完整版模型之间的智能差距，使一些应用能够通过迁移到迷你版模型来优化成本。
 
-新的 Realtime mini 快照更适合实时代理，在指令遵循和工具调用方面有明显的提升。在我们的内部语音转语音评估中，与之前的快照相比，我们看到指令遵循准确性提高了 18.6 个百分点，工具调用准确性提高了 12.9 个百分点，同时在 Big Bench Audio 基准上也有提升。
+### `gpt-realtime-mini-2025-12-15`
 
-together，这些改进在实时、低延迟设置中带来更可靠的多步交互和更一致的功能执行。
+`gpt-realtime-mini`模型旨在与[实时API](https://platform.openai.com/docs/guides/realtime)配合使用，这是我们用于低延迟、原生多模态交互的API。它支持流式音频输入输出、处理中断（可选语音活动检测）以及在模型持续说话时在后台进行函数调用等功能。
 
-对于代理准确性值得更高成本的场景，gpt-realtime 仍然是我们的最佳性能模型。但当成本和延迟最重要时，gpt-realtime-mini 是一个很好的选择，在真实场景中表现良好。
+新版实时迷你快照更适合实时智能体应用，在指令遵循和工具调用方面有明显提升。在我们内部的语音到语音评估中，与上一版快照相比，指令遵循准确率提升了18.6个百分点，工具调用准确率提升了12.9个百分点，同时在Big Bench Audio基准测试中也有进步。
 
-例如，Genspark 对其进行了压力测试，测试双语翻译和智能意图路由，除了改进的语音质量外，他们发现延迟几乎是即时的，同时在整个快速交流过程中保持意图识别准确。
+![语音到语音评估图表1](images/updates-audio-models_00.webp)![语音到语音评估图表2](images/updates-audio-models_01.webp)![语音到语音评估图表3](images/updates-audio-models_02.webp)
 
-gpt-audio-mini-2025-12-15
+这些改进共同带来了更可靠的多轮交互体验，以及在低延迟实时场景下更稳定的功能执行。
 
-gpt-audio-mini 模型可用于 Chat Completions API，用于不需要实时交互的语音转语音用例。
+对于追求极致智能体精度且能接受较高成本的场景，`gpt-realtime`仍是我们性能最佳的模型。但当成本和延迟成为首要考量时，`gpt-realtime-mini`是绝佳选择，在实际场景中表现优异。
 
-两个新的快照还具有升级的解码器，可以产生更自然的语音，并在使用自定义语音时更好地保持语音一致性。
+例如，[Genspark](https://www.genspark.ai/)在双语翻译和智能意图路由场景中进行了压力测试，除了语音质量提升外，他们发现延迟近乎即时，且在快速对话中始终保持精准的意图识别。
 
-文本转语音
+### `gpt-audio-mini-2025-12-15`
 
-我们的最新文本转语音模型 gpt-4o-mini-tts-2025-12-15 实现了准确性的显著提升，与上一代相比，在标准语音基准上的单词错误率大幅降低。在 Common Voice 和 FLEURS 上，我们看到 WER 降低了约 35%，在 Multilingual LibriSpeech 上也有一致的提升。
+`gpt-audio-mini`模型可通过[Chat Completions API](https://platform.openai.com/docs/api-reference/chat/create)用于非实时交互的语音到语音场景。
 
-together，这些结果反映了在广泛语言范围内的发音准确性和稳健性的提高。
+两款新快照均搭载升级版解码器，能生成更自然的语音音色，与自定义语音功能结合时也能更好地保持音色一致性。
 
-与新的 gpt-realtime-mini 快照类似，这个模型听起来更自然，使用自定义语音时表现更好。
+## 文本转语音
 
-语音转文本
+我们最新的文本转语音模型`gpt-4o-mini-tts-2025-12-15`在准确率上实现显著飞跃，相比前代模型在标准语音基准测试中的词错误率大幅降低。在Common Voice和FLEURS测试中，词错误率降低约35%，在Multilingual LibriSpeech测试中也保持稳定提升。
 
-最新的转录模型 gpt-4o-mini-transcribe-2025-12-15 在准确性和可靠性方面都有显著提升。在 Common Voice 和 FLEURS 等标准 ASR 基准上（没有语言提示），它比之前的模型提供更低的单词错误率。我们针对真实世界对话设置的行为优化了这个模型，比如短的用户话语和嘈杂的背景。在内部幻觉与噪音评估中，我们播放了真实世界背景噪音和不同说话间隔（包括静音）的音频剪辑，与 Whisper v2 相比，该模型产生的幻觉减少了约 90%，与之前的 GPT-4o-transcribe 模型相比减少了约 70%。
+![文本转语音评估图表1](images/updates-audio-models_03.webp)![文本转语音评估图表2](images/updates-audio-models_04.webp)![文本转语音评估图表3](images/updates-audio-models_05.webp)
 
-这个模型快照在中文（普通话）、印地语、孟加拉语、日语、印度尼西亚语和意大利语方面特别强大。
+这些成果共同反映了模型在多语言发音准确性和鲁棒性方面的进步。
 
-自定义语音
+与新版`gpt-realtime-mini`快照类似，该模型语音更自然，与自定义语音功能的适配性也更优。
 
-自定义语音使组织能够以其独特的品牌声音与客户联系。无论你是在构建客户支持代理还是品牌头像，OpenAI 的自定义语音技术使创建独特、逼真的声音变得容易。
+## 语音转文本
 
-这些新的语音转语音和文本转语音模型为自定义语音解锁了改进，例如更自然的语调、更高的原始样本保真度以及跨方言的准确性提高。
+最新转录模型`gpt-4o-mini-transcribe-2025-12-15`在准确率和可靠性上均有大幅提升。在Common Voice和FLEURS（无语言提示）等标准ASR基准测试中，其词错误率低于以往所有模型。我们针对真实对话场景优化了模型表现，包括短语音输入和嘈杂背景等复杂情况。在内部进行的"噪声环境幻听测试"中（播放含真实环境噪声及不同说话间隔的音频片段），该模型产生的幻听现象比Whisper v2减少约90%，较之前GPT-4o-transcribe模型减少约70%。
 
-为确保安全使用此技术，自定义语音仅限于符合条件的客户。联系你的客户总监或联系我们的销售团队以了解更多信息。
+![转录评估图表1](images/updates-audio-models_06.webp)![转录评估图表2](images/updates-audio-models_07.webp)![转录评估图表3](images/updates-audio-models_08.webp)
 
-从原型到生产
+该模型快照在中文（普通话）、印地语、孟加拉语、日语、印尼语和意大利语等语言上表现尤为突出。
 
-语音应用往往在相同的地方失败，主要是在长对话或边缘情况下，如静音，以及语音代理需要精确的工具驱动流程。这些更新专注于这些失败模式——更低的错误率、更少的幻觉、更一致的工具使用、更好的指令遵循。作为奖励，我们改进了输出音频的稳定性，所以你的语音体验可以听起来更自然。
+## 自定义语音
 
-如果你今天正在发布语音体验，我们建议迁移到新的 2025-12-15 快照并重新运行你关键的生产测试用例。早期测试者已确认有明显的改进，而无需更改他们的指令，只需切换到新的快照，但我们建议尝试你自己的用例并根据需要调整提示。
+定制语音功能让企业能够以独特的品牌声音与客户建立连接。无论是构建客服助手还是品牌虚拟形象，OpenAI的定制语音技术都能轻松创建独特而逼真的声音。
+
+这些全新的语音转语音与文本转语音模型为定制语音带来显著提升：更自然的语调、更高还原度的原声复刻，以及跨方言场景下更精准的发音表现。
+
+为确保技术安全使用，定制语音功能目前仅对符合条件的客户开放。请联系您的客户总监或[联系销售团队](https://openai.com/contact-sales/)了解更多详情。
+
+## 从原型到生产环境
+
+语音应用往往在相同场景中出现问题，主要集中在长对话、边缘情况（如静音处理）以及需要精确执行工具调用的流程中。本次更新正是针对这些薄弱环节——降低错误率、减少幻觉生成、提升工具调用一致性、优化指令跟随能力。此外，我们还增强了输出音频的稳定性，让语音体验更显自然流畅。
+
+如果您正在部署语音交互应用，我们建议您迁移至新版`2025-12-15`快照版本，并重新运行核心生产测试用例。早期测试者反馈，仅切换新版快照无需修改指令即可获得显著改进，但我们仍建议您根据实际使用场景进行测试，并适时调整提示词配置。

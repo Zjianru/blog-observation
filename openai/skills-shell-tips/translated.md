@@ -1,5 +1,5 @@
 
-![](../images/skills-shell-tips_00.png)
+![](images/skills-shell-tips_00.png)
 
 Shell + 技能 + 压缩：进行实际工作的长期运行代理的提示
 

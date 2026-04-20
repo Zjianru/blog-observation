@@ -1,5 +1,5 @@
 
-![](../images/building-frontend-uis-with-codex-and-figma_00.png)
+![](images/building-frontend-uis-with-codex-and-figma_00.png)
 
 使用 Codex 和 Figma 构建前端 UI
 

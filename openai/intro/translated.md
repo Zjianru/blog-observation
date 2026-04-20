@@ -1,5 +1,5 @@
 
-![](../images/intro_00.png)
+![](images/intro_00.png)
 你好，世界！
 
 Introducing our developer blog
