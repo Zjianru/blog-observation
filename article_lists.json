@@ -1,0 +1,213 @@
+{
+  "anthropic": [
+    {
+      "url": "/engineering/infrastructure-noise",
+      "title": "Quantifying infrastructure noise in agentic coding evals",
+      "date": "Featured"
+    },
+    {
+      "url": "/engineering/managed-agents",
+      "title": "Scaling Managed Agents: Decoupling the brain from the hands",
+      "date": "Mar 25, 2026"
+    },
+    {
+      "url": "/engineering/claude-code-auto-mode",
+      "title": "Claude Code auto mode: a safer way to skip permissions",
+      "date": "Mar 25, 2026"
+    },
+    {
+      "url": "/engineering/harness-design-long-running-apps",
+      "title": "Harness design for long-running application development",
+      "date": "Mar 24, 2026"
+    },
+    {
+      "url": "/engineering/eval-awareness-browsecomp",
+      "title": "Eval awareness in Claude Opus 4.6's BrowseComp performance",
+      "date": "Mar 06, 2026"
+    },
+    {
+      "url": "/engineering/building-c-compiler",
+      "title": "Building a C compiler with a team of parallel Claudes",
+      "date": "Feb 05, 2026"
+    },
+    {
+      "url": "/engineering/AI-resistant-technical-evaluations",
+      "title": "Designing AI-resistant technical evaluations",
+      "date": "Jan 21, 2026"
+    },
+    {
+      "url": "/engineering/demystifying-evals-for-ai-agents",
+      "title": "Demystifying evals for AI agents",
+      "date": "Jan 09, 2026"
+    },
+    {
+      "url": "/engineering/effective-harnesses-for-long-running-agents",
+      "title": "Effective harnesses for long-running agents",
+      "date": "Nov 26, 2025"
+    },
+    {
+      "url": "/engineering/advanced-tool-use",
+      "title": "Introducing advanced tool use on the Claude Developer Platform",
+      "date": "Nov 24, 2025"
+    },
+    {
+      "url": "/engineering/code-execution-with-mcp",
+      "title": "Code execution with MCP: Building more efficient agents",
+      "date": "Nov 04, 2025"
+    },
+    {
+      "url": "/engineering/claude-code-sandboxing",
+      "title": "Beyond permission prompts: making Claude Code more secure and autonomous",
+      "date": "Oct 20, 2025"
+    },
+    {
+      "url": "/engineering/equipping-agents-for-the-real-world-with-agent-skills",
+      "title": "Equipping agents for the real world with Agent Skills",
+      "date": "Oct 16, 2025"
+    },
+    {
+      "url": "/engineering/effective-context-engineering-for-ai-agents",
+      "title": "Effective context engineering for AI agents",
+      "date": "Sep 29, 2025"
+    },
+    {
+      "url": "/engineering/a-postmortem-of-three-recent-issues",
+      "title": "A postmortem of three recent issues",
+      "date": "Sep 17, 2025"
+    },
+    {
+      "url": "/engineering/writing-tools-for-agents",
+      "title": "Writing effective tools for agents — with agents",
+      "date": "Sep 11, 2025"
+    },
+    {
+      "url": "/engineering/desktop-extensions",
+      "title": "Desktop Extensions: One-click MCP server installation for Claude Desktop",
+      "date": "Jun 26, 2025"
+    },
+    {
+      "url": "/engineering/multi-agent-research-system",
+      "title": "How we built our multi-agent research system",
+      "date": "Jun 13, 2025"
+    },
+    {
+      "url": "/engineering/claude-code-best-practices",
+      "title": "Claude Code: Best practices for agentic coding",
+      "date": "Apr 18, 2025"
+    },
+    {
+      "url": "/engineering/claude-think-tool",
+      "title": "The \"think\" tool: Enabling Claude to stop and think in complex tool use situations",
+      "date": "Mar 20, 2025"
+    },
+    {
+      "url": "/engineering/swe-bench-sonnet",
+      "title": "Raising the bar on SWE-bench Verified with Claude 3.5 Sonnet",
+      "date": "Jan 06, 2025"
+    },
+    {
+      "url": "/engineering/building-effective-agents",
+      "title": "Building effective agents",
+      "date": "Dec 19, 2024"
+    },
+    {
+      "url": "/engineering/contextual-retrieval",
+      "title": "Introducing Contextual Retrieval",
+      "date": "Sep 19, 2024"
+    }
+  ],
+  "claudeai-dev": [
+    {
+      "url": "/blog/claude-managed-agents-what-just-launched",
+      "title": "Claude Managed Agents: What Just Launched",
+      "date": "April 9, 2026"
+    },
+    {
+      "url": "/blog/conway-timeline-how-anthropic-is-building-always-on-agents",
+      "title": "Conway Timeline: How Anthropic Is Building Always-On Agents",
+      "date": "April 3, 2026"
+    },
+    {
+      "url": "/blog/what-actually-leaked-around-claude-code",
+      "title": "What Actually Leaked From Claude Code This Time?",
+      "date": "March 31, 2026"
+    },
+    {
+      "url": "/blog/did-claude-ship-auto-fix-in-the-cloud",
+      "title": "Did Claude Ship Auto-Fix in the Cloud Yet?",
+      "date": "TBD"
+    },
+    {
+      "url": "/blog/claudes-march-2026-shipping-sprint",
+      "title": "Claude's March 2026 Sprint: What Matters",
+      "date": "TBD"
+    }
+  ],
+  "openai": [
+    {
+      "url": "/blog/realtime-perplexity-computer",
+      "title": "How Perplexity Brought Voice Search to Millions Using the Realtime API",
+      "date": "Mar 25"
+    },
+    {
+      "url": "/blog/designing-delightful-frontends-with-gpt-5-4",
+      "title": "Designing delightful frontends with GPT-5.4",
+      "date": "Mar 20"
+    },
+    {
+      "url": "/blog/one-year-of-responses",
+      "title": "From prompts to products: One year of Responses",
+      "date": "Mar 11"
+    },
+    {
+      "url": "/blog/skills-agents-sdk",
+      "title": "Using skills to accelerate OSS maintenance",
+      "date": "Mar 9"
+    },
+    {
+      "url": "/blog/building-frontend-uis-with-codex-and-figma",
+      "title": "Building frontend UIs with Codex and Figma",
+      "date": "Feb 26"
+    },
+    {
+      "url": "/blog/run-long-horizon-tasks-with-codex",
+      "title": "Run long horizon tasks with Codex",
+      "date": "Feb 23"
+    },
+    {
+      "url": "/blog/skills-shell-tips",
+      "title": "Shell + Skills + Compaction: Tips for long-running agents that do real work",
+      "date": "Feb 11"
+    },
+    {
+      "url": "/blog/15-lessons-building-chatgpt-apps",
+      "title": "15 lessons learned building ChatGPT Apps",
+      "date": "Feb 4"
+    },
+    {
+      "url": "/blog/eval-skills",
+      "title": "Testing Agent Skills Systematically with Evals",
+      "date": "Jan 22"
+    },
+    {
+      "url": "/blog/skyscanner-codex-jetbrains-mcp",
+      "title": "Supercharging Codex with JetBrains MCP at Skyscanner",
+      "date": "Jan 11"
+    },
+    {
+      "url": "/blog/openai-for-developers-2025",
+      "title": "OpenAI for Developers in 2025",
+      "date": "Dec 30"
+    },
+    {
+      "url": "/blog/updates-audio-models",
+      "title": "Updates for developers building with voice",
+      "date": "Dec 22"
+    },
+    {
+      "url": "/blog/what-makes-a-great-chatgpt-app",
+      "title": "What makes a great ChatGPT app",
+      "date": "Nov 24"
+    }
+  ]
+}

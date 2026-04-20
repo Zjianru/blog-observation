@@ -1,0 +1,29 @@
+# Scripts and configs
+*.py
+convert_txt_to_md.py
+download_images.py
+fetch_blogs.py
+process_blogs.py
+translate_and_organize.py
+
+# Raw data (keep structure, ignore content)
+anthropic/articles/*raw*
+anthropic/raw/
+anthropic/categories/
+
+openai/raw/
+openai/categories/
+openai/batch_save*.py
+openai/fetch_article.py
+openai/fetch_articles.py
+openai/save_article.py
+openai/update_raw.py
+
+claudeai-dev/raw/
+claudeai-dev/categories/
+claudeai-dev/*-raw.html
+
+# Misc
+__pycache__/
+.DS_Store
+.env
