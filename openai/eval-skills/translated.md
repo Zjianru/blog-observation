@@ -1,224 +1,227 @@
-系统地用 Evals 测试代理技能
+# 系统化评估智能体技能：Evals 实践指南
 
-A practical guide to turning agent skills into something you can test, score, and improve over time.
+来源：https://developers.openai.com/blog/eval-skills
 
-作者：Dominik Kundel、Gabriel Chua
+---
 
-当你正在迭代像 Codex 这样的代理的技能时，很难判断你是否真的在改进它或者只是在改变它的行为。一个版本感觉更快，另一个似乎更可靠，然后回归悄悄出现：技能没有触发，它跳过一个必需的步骤，或者它留下多余的文件。
+当你为 Codex 这类智能体迭代优化某项技能时，往往难以判断改进是否真实有效，还是仅仅改变了其行为模式。某个版本感觉响应更快，另一版本似乎更稳定，但随后可能出现性能倒退：技能未被触发、遗漏必要步骤，或残留多余文件。
 
-从本质上讲，技能是为 LLM 提供的有组织的提示和指令集合。随着时间推移改进技能最可靠的方法是与你评估任何其他 LLM 应用提示的方式相同。
+本质上，技能是面向大语言模型的[结构化提示与指令集合](https://developers.openai.com/codex/skills)。持续提升技能可靠性的最佳方式，是采用与[评估其他大语言模型应用提示](https://platform.openai.com/docs/guides/evaluation-best-practices)相同的标准化评估流程。
 
-Evals（评估的简称）检查模型的输出以及它为产生输出而采取的步骤是否符合你的预期。不是问"这感觉更好吗？"（或依靠直觉），evals 让你问具体问题，比如：
+_Evals_（评估的简称）通过检验模型输出及其生成过程是否符合预期目标，将主观的“这个版本是否更好？”（或依赖直觉判断）转化为可量化的具体问题：
 
-代理是否调用了技能？
-它是否运行了预期的命令？
-它是否产生了符合你关心的约定的输出？
+* 智能体是否成功调用了该技能？
+* 是否执行了预期命令？
+* 产出的结果是否符合你关注的规范？
 
-具体来说，一个 eval 是：提示 → 捕获的运行（追踪 + 产物）→ 一小套检查 → 一个你可以随时间比较的分数。
+具体而言，一次评估包含：输入提示 → 记录运行过程（轨迹与产物） → 执行少量检查项 → 生成可纵向对比的评分。
 
-在实践中，代理技能的 evals 看起来很像轻量级端到端测试：你运行代理，记录发生的事情，并根据一小套规则对结果打分。
+实践中，智能体技能评估类似于轻量级端到端测试：运行智能体，记录行为轨迹，并依据简明规则对结果进行评分。
 
-这篇文章通过 Codex 带你了解一个清晰的模式，从定义成功开始，然后添加确定性检查和基于评分标准的分级，以便改进（和回归）是清晰的。
+本文将逐步演示 Codex 的标准化评估流程：从明确定义成功标准开始，逐步引入确定性检查与量规评分体系，使改进效果（与性能衰退）清晰可辨。
 
-1. 在写技能之前定义成功
+## 1. 编写技能前先定义成功标准
 
-在编写技能本身之前，用你可以实际测量的术语写下"成功"的含义。思考这个问题的一个有用方式是将你的检查分成几类：
+在开发具体技能前，首先用可量化的术语描述“成功”的定义。有效的分类方法是将检查项划分为几个维度：
 
-结果目标：任务完成了吗？应用运行了吗？
-流程目标：Codex 是否调用了技能并遵循你预期的工具和步骤？
-风格目标：输出是否符合你要求的约定？
-效率目标：它是否在不折腾的情况下到达（例如，不必要的命令或过多 token 使用）？
+*   **结果目标：** 任务是否完成？应用能否运行？
+*   **过程目标：** Codex 是否调用了该技能并遵循了你预期的工具和步骤？
+*   **风格目标：** 输出是否符合你要求的规范？
+*   **效率目标：** 它是否在过程中没有出现反复折腾（例如，不必要的命令或过度的令牌使用）？
 
-保持这个列表小而专注于必须通过的检查。目标不是预先编码每个偏好，而是捕获你最关心的行为。
+保持这份清单简短，并聚焦于必须通过的检查项。目标并非预先编码所有偏好，而是捕捉你最关心的行为。
 
-在本文中，例如，指南评估了一个设置演示应用的技能。一些检查是具体的。它运行了 npm install 吗？它创建了 package.json 吗？指南将这些与结构化风格评分标准配对，以评估约定和布局。
+例如，在这篇文章中，指南评估了一个用于设置演示应用的技能。有些检查是具体的：它运行了 `npm install` 吗？它创建了 `package.json` 吗？指南将这些检查与一个结构化的风格评估标准配对，以评估规范和布局。
 
-这种混合是有意的。你需要快速、有针对性的信号来早期发现特定回归，而不是在最后得到单一通过/失败判定。
+这种混合是刻意的。你希望获得快速、有针对性的信号，以便尽早发现特定的回归问题，而不是在最后给出一个单一的通过/失败判定。
 
-2. 创建技能
+## 2\. 创建技能
 
-Codex 技能是一个包含 SKILL.md 文件的目录，其中包括 YAML 前置事项（名称、描述），然后是定义技能行为的 Markdown 指令以及可选资源和脚本。名称和描述比看起来更重要。它们是 Codex 用来决定是否调用技能以及何时将 SKILL.md 的其余部分注入代理上下文的原始信号。如果这些模糊或重载，技能将无法可靠触发。
+一个 Codex 技能是一个包含 `SKILL.md` 文件的目录，该文件包含 YAML 前置元数据（`name`、`description`），后面是定义技能行为的 Markdown 指令，以及可选的资源和脚本。名称和描述的重要性可能超出你的想象。它们是 Codex 用来决定*是否*调用该技能以及*何时*将 `SKILL.md` 的其余部分注入到代理上下文中的主要信号。如果这些信息模糊或承载过多，技能将无法可靠触发。
 
-最快的入门方法是使用 Codex 内置的技能创建器（它本身也是一个技能）。它引导你：
+最快的入门方法是使用 Codex 内置的技能创建器（[它本身也是一个技能](https://github.com/openai/skills/tree/main/skills/.system/skill-creator)）。它会引导你完成：
 
-$skill-creator
+    $skill-creator
 
-创建器询问你技能做什么，什么时候应该触发，以及它是指令式还是脚本支持（指令式是默认建议）。要了解有关创建技能的更多信息，请查看文档。
+创建器会询问你该技能的作用、何时应触发，以及它是仅指令型还是脚本支持型（仅指令型是默认推荐）。要了解更多关于创建技能的信息，[请查阅文档](/codex/skills#create-a-skill)。
 
-一个示例技能
+### 一个示例技能
 
-这篇文章使用了一个有意的最小示例：一个以可预测、可重复方式设置小型 React 演示应用的技能。
+本文使用了一个特意简化的示例：一个以可预测、可重复的方式设置小型 React 演示应用的技能。
 
 该技能将：
 
-使用 Vite 的 React + TypeScript 模板脚手架项目
-使用官方 Vite 插件方法配置 Tailwind CSS
-强制执行最小、一致的文件结构
-定义清晰的"完成定义"，以便成功易于评估
+* 使用 Vite 的 React + TypeScript 模板搭建项目脚手架
+* 通过官方 Vite 插件方式配置 Tailwind CSS
+* 强制采用最小化、一致的文件结构
+* 明确定义"完成标准"，便于直观评估成果
 
-以下是一个紧凑的草稿，你可以粘贴到：
+以下为简洁草案，可粘贴至：
 
-.codex/skills/setup-demo-app/SKILL.md（仓库范围），或
-~/.codex/skills/setup-demo-app/SKILL.md（用户范围）。
+* `.codex/skills/setup-demo-app/SKILL.md`（仓库作用域），或
+* `~/.codex/skills/setup-demo-app/SKILL.md`（用户作用域）
 
----
-name: setup-demo-app
-description: Scaffold a Vite + React + Tailwind demo app with a small, consistent project structure.
----
+    ---
+    name: setup-demo-app
+    description: 搭建具有精简统一项目结构的 Vite + React + Tailwind 演示应用
+    ---
 
-## 何时使用
+    ## 使用场景
 
-![](images/eval-skills_00.png)
+    适用于需要快速创建 UI 实验或问题复现的新演示应用。
 
-当需要一个新鲜的演示应用进行快速 UI 实验或复现时使用。
+    ## 构建目标
 
-## 构建什么
+    创建 Vite React TypeScript 应用并配置 Tailwind。保持极简风格。
 
-创建一个 Vite React TypeScript 应用并配置 Tailwind。保持最小化。
+    搭建后的项目结构：
 
-设置后的项目结构：
+    - src/
+      - main.tsx（入口文件）
+      - App.tsx（根组件）
+      - components/
+        - Header.tsx
+        - Card.tsx
+      - index.css（Tailwind 导入文件）
+    - index.html
+    - package.json
 
-- src/
-  - main.tsx（入口）
-  - App.tsx（根 UI）
-  - components/
-    - Header.tsx
-    - Card.tsx
-  - index.css（Tailwind 导入）
-- index.html
-- package.json
+    样式要求：
 
-风格要求：
+    - 使用 TypeScript 组件
+    - 仅使用函数式组件
+    - 采用 Tailwind 类进行样式设计（不使用 CSS 模块）
+    - 不引入额外 UI 库
 
-- TypeScript 组件
-- 仅使用函数组件
-- 使用 Tailwind 类进行样式设计（无 CSS 模块）
-- 无额外的 UI 库
+    ## 实施步骤
 
-## 步骤
+    1. 使用 Vite 的 React TS 模板搭建项目：
+       npm create vite@latest demo-app -- --template react-ts
 
-1. 使用 React TS 模板通过 Vite 脚手架：
-   npm create vite@latest demo-app -- --template react-ts
+    2. 安装依赖：
+       cd demo-app
+       npm install
 
-2. 安装依赖：
-   cd demo-app
-   npm install
+    3. 通过 Vite 插件安装配置 Tailwind：
+       - npm install tailwindcss @tailwindcss/vite
+       - 将 tailwind 插件添加至 vite.config.ts
+       - 在 src/index.css 中替换内容为：
+         @import "tailwindcss";
 
-3. 使用 Vite 插件安装和配置 Tailwind。
-   - npm install tailwindcss @tailwindcss/vite
-   - 将 tailwind 插件添加到 vite.config.ts
-   - 在 src/index.css 中，将内容替换为：
-     @import "tailwindcss";
+    4. 实现最小化 UI：
+       - Header：应用标题与简短副标题
+       - Card：可复用的卡片容器
+       - App：渲染 Header 组件及 2 个含占位文本的 Card 组件
 
-4. 实现最小 UI：
-   - Header：应用标题和简短副标题
-   - Card：可重用的卡片容器
-   - App：渲染 Header + 2 个带有占位符文本的 Card
+    ## 完成标准
 
-## 完成定义
+    - npm run dev 成功启动
+    - package.json 文件存在
+    - src/components/Header.tsx 与 src/components/Card.tsx 文件存在
 
-- npm run dev 成功启动
-- package.json 存在
-- src/components/Header.tsx 和 src/components/Card.tsx 存在
+此示例技能刻意采用明确的技术主张。若无清晰约束，则无法进行具体评估。
 
-这个示例技能故意采取固执己见的立场。没有明确的约束，就没有具体的东西可以评估。
+## 3\. 手动触发技能以暴露隐藏假设
 
-3. 手动触发技能以暴露隐藏的假设
+由于技能调用高度依赖于 `SKILL.md` 中的**名称**和**描述**，首要检查的是 `setup-demo-app` 技能是否在预期场景下被触发。
 
-因为技能调用很大程度上取决于 SKILL.md 中的名称和描述，第一件要检查的事情是 setup-demo-app 技能是否在你期望时触发。
+初期阶段，请通过 `/skills` 斜杠命令或使用 `$` 前缀引用该技能，在真实仓库或临时目录中显式激活它，并观察其执行中断的位置。这正是发现疏漏的关键环节：包括技能完全未被触发、触发过于频繁，或虽执行但偏离预设步骤的情况。
 
-早期，明确激活技能，通过 /skills 斜杠命令或使用 $ 前缀引用它，在真实仓库或临时目录中，并观察它在哪里中断。这是你发现错误的地方：技能根本不触发、太热情地触发，或者运行但偏离预期步骤的情况。
+此阶段的目标并非追求速度或完善度，而是挖掘技能可能隐含的预设条件，例如：
 
-在这个阶段，你不是在优化速度或抛光。你正在寻找技能做出的隐藏假设，例如：
+  * **触发条件预设**：诸如“快速搭建 React 演示项目”这类本应触发 `setup-demo-app` 却未触发的指令，或“添加 Tailwind 样式”等过于泛化的指令意外触发该技能。
 
-触发假设：像"设置一个快速 React 演示"这样的提示应该调用 setup-demo-app 但没有，或者更通用的提示（"添加 Tailwind 样式"）无意间触发了它。
+  * **环境预设**：技能默认在空目录中运行，或假定 `npm` 可用且优先于其他包管理器。
 
-环境假设：技能假设它在空目录中运行，或者 npm 可用且比其他包管理器更受欢迎。
+  * **执行流程预设**：智能体因假设依赖已安装而跳过 `npm install`，或在 Vite 项目创建前就配置 Tailwind。
 
-执行假设：代理跳过 npm install，因为它假设依赖已经安装，或者在 Vite 项目存在之前配置 Tailwind。
+当需要使这些运行过程可复现时，请切换到 `codex exec` 命令。该工具专为自动化和持续集成设计：它将执行进度流式输出至 `stderr`，仅将最终结果写入 `stdout`，从而更易于脚本化、捕获和检查运行过程。
 
-一旦你准备好使这些运行可重复，切换到 codex exec。它专为自动化和 CI 设计：它将进度流式传输到 stderr，只将最终结果写入 stdout，这使得运行更容易脚本化、捕获和检查。
+默认情况下，`codex exec` 在受限沙箱中运行。若任务需写入文件，请使用 `--full-auto` 参数执行。作为通用原则，尤其在自动化场景中，应采用完成工作所需的最低权限。
 
-默认情况下，codex exec 在受限沙盒中运行。如果你的任务需要写文件，使用 --full-auto 运行。作为一般规则，尤其是在自动化时，使用完成任务所需的最小权限。
+基础手动运行示例如下：
 
-一个基本的手动运行可能如下：
+    codex exec --full-auto \
+      '使用 $setup-demo-app 技能在此目录中创建项目。'
 
-codex exec --full-auto \
-  'Use the $setup-demo-app skill to create the project in this directory.'
+这轮初步实践的重点不在于验证正确性，而在于发现边界情况。在此过程中进行的每次手动修正——无论是补充缺失的 `npm install`、修正 Tailwind 配置，还是收紧触发描述——都可能成为后续评估的候选案例，从而能在规模化评估前锁定预期行为。
 
-这第一次动手通过更多是关于验证正确性而不是发现边缘情况。你在这里做的每个手动修复，例如添加缺少的 npm install、更正 Tailwind 设置或收紧触发描述，都是未来 eval 的候选者，这样你就可以在大规模评估之前锁定预期行为。
+## 4\. 使用少量针对性提示集及早发现回归问题
 
-4. 使用小而有针对性的提示集来早期发现回归
+评估测试无需庞大基准也能创造价值。针对单一技能，仅需10–20条提示组成的小型测试集，就足以在早期暴露回归问题并验证改进效果。
 
-你不需要大型基准来从 evals 中获取价值。对于单个技能，10-20 个提示的小集合足以早期发现回归并确认改进。
+建议从一个小型CSV文件开始，随着开发或使用过程中遇到实际故障案例逐步扩充。每一行应代表一个你关注的情境：需要验证`setup-demo-app`技能是否应当被触发，以及触发后的成功表现标准。
 
-从一个小的 CSV 开始，随着你在开发或使用过程中遇到真实失败时逐渐增加。每一行应该代表你关心 setup-demo-app 技能是否激活的情况，以及当它激活时成功是什么样的。
+例如，初始的`evals/setup-demo-app.prompts.csv`文件可能如下所示：
 
-例如，初始 evals/setup-demo-app.prompts.csv 可能看起来像这样：
+    id,should_trigger,prompt
+    test-01,true,"使用$setup-demo-app技能创建名为`devday-demo`的演示应用"
+    test-02,true,"搭建包含Tailwind的极简React演示应用用于快速UI实验"
+    test-03,true,"创建小型演示应用以展示Responses API功能"
+    test-04,false,"为现有React应用添加Tailwind样式"
 
-id,should_trigger,prompt
-test-01,true,"Create a demo app named `devday-demo` using the $setup-demo-app skill"
-test-02,true,"Set up a minimal React demo app with Tailwind for quick UI experiments"
-test-03,true,"Create a small demo app to showcase the Responses API"
-test-04,false,"Add Tailwind styling to my existing React app"
+这些测试案例分别验证不同维度：
 
-这些案例中的每一个都测试略有不同的东西：
+  * **显式调用测试（`test-01`）**
+该提示直接指明技能名称。用于确保Codex在被明确要求时能正确调用`setup-demo-app`，并验证技能名称、描述或指令的修改不会破坏直接调用功能。
 
-显式调用（test-01）
-此提示直接命名技能。它确保 Codex 可以在被要求时调用 setup-demo-app，并且技能名称、描述或指令的更改不会破坏直接使用。
+  * **隐式调用测试（`test-02`）**
+该提示精确描述技能针对的场景（搭建React+Tailwind极简演示），但未提及技能名称。用于测试`SKILL.md`中的名称与描述是否足够清晰，使Codex能自主选择该技能。
 
-隐式调用（test-02）
-此提示准确描述技能针对的场景，设置最小的 React + Tailwind 演示，而不提及技能名称。它测试 SKILL.md 中的名称和描述是否足够强，以便 Codex 自己选择技能。
+  * **情境化调用测试（`test-03`）**
+该提示添加了领域上下文（Responses API），但仍需要相同的基础搭建流程。用于验证技能在真实场景的轻度干扰提示中能否正常触发，并确保生成的应用仍符合预期的结构和规范。
 
-上下文调用（test-03）
-此提示添加了域上下文（Responses API），但仍需要相同的底层设置。它检查技能在真实的、稍微嘈杂的提示中是否触发，以及生成的应用是否仍然符合预期的结构和约定。
+*   **负向控制组（`test-04`）**
+    此提示词**不应**调用 `setup-demo-app`。这是一个常见的相邻请求（“为现有应用添加 Tailwind”），可能会无意中匹配技能的描述（“React + Tailwind 演示”）。包含至少一个 `should_trigger=false` 的用例有助于捕捉**误报**，即 Codex 过于急切地选择了该技能，在用户只想对现有项目进行增量更改时，却搭建了一个新项目。
 
-负面对照（test-04）
-此提示不应调用 setup-demo-app。这是一个常见的相邻请求（"将 Tailwind 添加到现有应用"），可能无意间匹配技能的描述（"React + Tailwind 演示"）。包含至少一个 should_trigger=false 案例有助于捕获误报，即 Codex 太热情地选择技能并在用户想要对现有应用进行增量更改时脚手架一个新项目。
+    这种混合是刻意的。一些评估应确认技能在被显式调用时行为正确；另一些则应检查技能在用户完全未提及该技能的真实世界提示词中是否被激活。
 
-这种混合是有意的。一些 evals 应该确认技能在显式调用时表现正确；其他则应该检查它在用户根本不提及技能的现实提示中激活。
+    当你发现遗漏（即未能触发技能的提示词）或输出偏离预期的案例时，将它们作为新行添加进来。久而久之，这个小型 CSV 文件就成为了 `setup-demo-app` 技能必须持续正确处理场景的动态记录。
 
-当你发现错误、未能触发技能的提示或输出偏离你期望的情况时，将它们添加为新行。随着时间的推移，这个小 CSV 成为了 setup-demo-app 技能必须继续正确的场景的活记录。
+    久而久之，这个小型数据集就成为了该技能必须持续正确处理内容的动态记录。
 
-5. 使用轻量级确定性评分器入门
+## 5\. 开始使用轻量级确定性评分器
 
-这是评估步骤的核心：使用 codex exec --json 这样你的 eval 工具可以评估实际发生了什么，而不仅仅是最终输出看起来是否正确。
+这是评估步骤的核心：使用 `codex exec --json`，以便你的评估工具能够对**实际发生的情况**进行评分，而不仅仅是判断最终输出看起来是否正确。
 
-当你启用 --json 时，stdout 变成结构化事件的 JSONL 流。这使得编写与你关心的行为直接相关的确定性检查变得直接，例如：
+当你启用 `--json` 时，`stdout` 会变成一个结构化事件的 JSONL 流。这使得编写直接关联到你关心行为的确定性检查变得非常直接，例如：
 
-它运行了 npm install 吗？
-它创建了 package.json 吗？
-它是否以预期顺序调用了预期的命令？
+*   它运行了 `npm install` 吗？
+*   它创建了 `package.json` 吗？
+*   它是否以预期的顺序调用了预期的命令？
 
-这些检查故意是轻量级的。它们在你添加任何基于模型的评分之前给你快速、可解释的信号。
+这些检查是特意设计为轻量级的。在你添加任何基于模型的评分之前，它们能为你提供快速、可解释的信号。
 
-一个最小的 Node.js 运行器
+### 一个最小的 Node.js 运行器
 
-一个"足够好"的方法如下：
+一个“足够好”的方法如下所示：
 
-对于每个提示，运行 codex exec --json --full-auto "<prompt>"
-将 JSONL 追踪保存到磁盘
-解析追踪并对事件运行确定性检查
+1.  对于每个提示词，运行 `codex exec --json --full-auto "<prompt>"`
+2.  将 JSONL 追踪记录保存到磁盘
+3.  解析追踪记录并对事件运行确定性检查
 
-// evals/run-setup-demo-app-evals.mjs
-import { spawnSync } from "node:child_process";
-import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
-import path from "node:path";
+    // evals/run-setup-demo-app-evals.mjs
+    import { spawnSync } from "node:child_process";
+    import { readFileSync, writeFileSync, existsSync, mkdirSync } from "node:fs";
+    import path from "node:path";
 
 function runCodex(prompt, outJsonlPath) {
   const res = spawnSync(
     "codex",
     [
       "exec",
-      "--json", // REQUIRED: emit structured events
-      "--full-auto", // Allow file system changes
+      "--json", // 必需：输出结构化事件
+      "--full-auto", // 允许文件系统更改
       prompt,
     ],
     { encoding: "utf8" }
   );
+
   mkdirSync(path.dirname(outJsonlPath), { recursive: true });
-  // stdout is JSONL when --json is enabled
+
+  // 启用 --json 时 stdout 为 JSONL 格式
   writeFileSync(outJsonlPath, res.stdout, "utf8");
+
   return { exitCode: res.status ?? 1, stderr: res.stderr };
 }
 
@@ -240,115 +243,120 @@ function checkRanNpmInstall(events) {
   );
 }
 
-// 确定性检查：`package.json` 是否被创建？
+// 确定性检查：是否创建了 `package.json`？
 function checkPackageJsonExists(projectDir) {
   return existsSync(path.join(projectDir, "package.json"));
 }
 
-// 示例单案例运行
+// 单次运行示例
 const projectDir = process.cwd();
 const tracePath = path.join(projectDir, "evals", "artifacts", "test-01.jsonl");
+
 const prompt =
-  "Create a demo app named demo-app using the $setup-demo-app skill";
+  "使用 $setup-demo-app 技能创建一个名为 demo-app 的演示应用";
+
 runCodex(prompt, tracePath);
 
 const events = parseJsonl(readFileSync(tracePath, "utf8"));
+
 console.log({
   ranNpmInstall: checkRanNpmInstall(events),
   hasPackageJson: checkPackageJsonExists(path.join(projectDir, "demo-app")),
 });
 
-这里的价值在于一切都是确定性的和可调试的。
+此处的核心价值在于**所有操作都是确定且可调试的**。
 
-如果检查失败，你可以打开 JSONL 文件并准确查看发生了什么。每个命令执行都显示为 item.* 事件，按顺序排列。这使得回归直接解释和修复，这正是你在这个阶段想要的。
+如果检查失败，您可以打开 JSONL 文件查看具体执行过程。每个命令执行都会按顺序显示为 `item.*` 事件。这使得回归问题能够被直接解释和修复，而这正是当前阶段所需要的。
 
-6. 使用 Codex 和基于评分标准的分级进行定性检查
+## 6. 使用 Codex 进行定性检查与基于量规的评分
 
-确定性检查回答"它做了基础工作吗？"但它们不回答"它是以你想要的方式做的吗？"
+确定性检查回答的是“它完成基本操作了吗？”，但无法回答“它是否按你想要的方式完成了？”
 
-对于像 setup-demo-app 这样的技能，许多要求是定性的：组件结构、样式约定或 Tailwind 是否遵循预期的配置。这些很难用基本文件存在检查或命令计数来捕获。
+对于像 `setup-demo-app` 这类技能，许多要求是定性的：组件结构、样式规范，或者 Tailwind 是否遵循预期配置。这些很难仅通过基础的文件存在性检查或命令计数来捕捉。
 
-一个务实的解决方案是在你的 eval 管道中添加第二个模型辅助步骤：
+一个务实的解决方案是在评估流程中添加第二个由模型辅助的步骤：
 
-运行设置技能（这将代码写入磁盘）
-对结果仓库运行只读样式检查
-需要一个你的工具可以一致评分的结构化响应
+  1. 运行设置技能（这会将代码写入磁盘）
+  2. 对生成的代码仓库运行**只读风格检查**
+  3. 要求生成**结构化响应**，以便你的测试框架能稳定评分
 
-Codex 通过 --output-schema 直接支持这一点，它将最终响应约束为你定义的 JSON Schema。
+Codex 通过 `--output-schema` 直接支持此功能，该参数可将最终响应约束为你定义的 JSON 模式。
 
-一个小的评分标准 schema
+### 小型评分模式架构
 
-首先定义一个捕获你关心的检查的小 schema。例如，创建 evals/style-rubric.schema.json：
+首先定义一个小型模式，用于捕获你关注的检查项。例如创建 `evals/style-rubric.schema.json`：
 
-{
-  "type": "object",
-  "properties": {
-    "overall_pass": { "type": "boolean" },
-    "score": { "type": "integer", "minimum": 0, "maximum": 100 },
-    "checks": {
-      "type": "array",
-      "items": {
-        "type": "object",
-        "properties": {
-          "id": { "type": "string" },
-          "pass": { "type": "boolean" },
-          "notes": { "type": "string" }
-        },
-        "required": ["id", "pass", "notes"],
-        "additionalProperties": false
-      }
+    {
+      "type": "object",
+      "properties": {
+        "overall_pass": { "type": "boolean" },
+        "score": { "type": "integer", "minimum": 0, "maximum": 100 },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "pass": { "type": "boolean" },
+              "notes": { "type": "string" }
+            },
+            "required": ["id", "pass", "notes"],
+            "additionalProperties": false
+          }
+        }
+      },
+      "required": ["overall_pass", "score", "checks"],
+      "additionalProperties": false
     }
-  },
-  "required": ["overall_pass", "score", "checks"],
-  "additionalProperties": false
-}
 
-这个 schema 给你稳定的字段（overall_pass、score、每次检查结果），你可以随时间组合、diff 和跟踪。
+该模式提供了稳定的字段（`overall_pass`、`score`、逐项检查结果），你可以对这些字段进行组合、差异比较和长期追踪。
 
-样式检查提示
+### 风格检查提示词
 
-接下来，运行第二个只检查仓库并发出符合评分标准 JSON 响应的 codex exec：
+接下来运行第二次 `codex exec`，该命令**仅检查代码仓库**并输出符合评分模式的 JSON 响应：
 
-codex exec \
-  "Evaluate the demo-app repository against these requirements:
-   - Vite + React + TypeScript project exists
-   - Tailwind is configured via @tailwindcss/vite and CSS imports tailwindcss
-   - src/components contains Header.tsx and Card.tsx
-   - Components are functional and styled with Tailwind utility classes (no CSS modules)
-   Return a rubric result as JSON with check ids: vite, tailwind, structure, style." \
-  --output-schema ./evals/style-rubric.schema.json \
-  -o ./evals/artifacts/test-01.style.json
+执行以下命令：
 
-这就是 --output-schema 的方便之处。不是难以解析或比较的自由形式文本，你得到一个可预测的 JSON 对象，你的 eval 工具可以在多次运行中评分。
+    codex exec \
+      "评估 demo-app 仓库是否符合以下要求：
+       - 存在 Vite + React + TypeScript 项目
+       - Tailwind 通过 @tailwindcss/vite 配置，且 CSS 导入 tailwindcss
+       - src/components 目录包含 Header.tsx 和 Card.tsx 文件
+       - 组件为函数式组件，并使用 Tailwind 工具类进行样式设置（不使用 CSS 模块）
+       以 JSON 格式返回评估结果，包含检查项 ID：vite、tailwind、structure、style。" \
+      --output-schema ./evals/style-rubric.schema.json \
+      -o ./evals/artifacts/test-01.style.json
 
-如果你后来将此 eval 套件移入 CI，Codex GitHub Action 明确支持通过 codex-args 传递 --output-schema，所以你可以在自动化工作流程中强制执行相同的结构化输出。
+这正是 `--output-schema` 的实用之处。相比难以解析或比较的自由格式文本，您将获得一个可预测的 JSON 对象，便于您的评估框架在多次运行中进行评分。
 
-7. 随着技能成熟扩展你的 evals
+如果您后续将此评估套件迁移至 CI 环境，Codex GitHub Action 明确支持通过 `codex-args` 传递 `--output-schema` 参数，从而可在自动化工作流中强制执行相同的结构化输出。
 
-一旦你有了核心循环，你可以在对你的技能最重要的方向上扩展你的 evals。从小开始，然后仅在增加真正信心的地方添加更深的检查。
+## 7\. 随着技能成熟扩展评估体系
 
-一些例子包括：
+一旦核心循环建立完成，您可以根据技能发展的重点方向扩展评估内容。从小处着手，仅在能真正提升置信度的环节逐步增加深度检查。
 
-命令计数和折腾：在 JSONL 追踪中计数 command_execution 项目，以捕获代理开始循环或重新运行命令时的回归。Token 使用量也可在 turn.completed 事件中获得。
+示例如下：
 
-Token 预算：跟踪 usage.input_tokens 和 usage.output_tokens 以发现意外的提示膨胀并在版本之间比较效率。
+  * **命令计数与无效操作：** 统计 JSONL 跟踪记录中的 `command_execution` 条目，以检测代理开始循环或重复执行命令的回归问题。`turn.completed` 事件中也包含令牌使用量信息。
 
-构建检查：技能完成后运行 npm run build。这充当更强的端到端信号，并捕获断开的导入或配置错误的工具。
+  * **令牌预算：** 跟踪 `usage.input_tokens` 和 `usage.output_tokens` 数据，以发现意外的提示膨胀问题，并比较不同版本间的效率差异。
 
-运行时冒烟检查：启动 npm run dev 并用 curl 击中开发服务器，或者如果你已经有的话，运行一个轻量级 Playwright 检查。选择性地使用它。它增加了信心但需要时间。
+  * **构建检查：** 在技能执行完成后运行 `npm run build`。这提供了更强的端到端验证信号，能捕获损坏的导入或错误配置的工具链。
 
-仓库清洁度：确保运行不生成不需要的文件，git status --porcelain 是空的（或匹配明确的允许列表）。
+  * **运行时冒烟测试：** 启动 `npm run dev` 并通过 `curl` 访问开发服务器，若已有轻量级 Playwright 测试也可运行。建议选择性使用此方法，虽能增强置信度但会增加时间成本。
 
-沙盒和权限回归：验证技能仍然可以在不超出你预期的权限升级的情况下工作。一旦你自动化，最小权限默认值最重要。
+  * **仓库整洁度：** 确保运行过程未生成多余文件，且 `git status --porcelain` 输出为空（或符合明确的允许清单）。
 
-模式是一致的：从解释行为的快速检查开始，然后仅在降低风险时添加更慢、更重的检查。
+*   **沙盒与权限回归测试：** 验证技能在运行时是否仍能正常工作，且未超出您预期的权限范围。一旦实现自动化，最小权限默认原则至关重要。
 
-8. 关键要点
+模式始终如一：先进行快速检查以解释行为，仅当能降低风险时，才增加更慢、更复杂的检查。
 
-这个小的 setup-demo-app 示例展示了从"感觉更好"到"证明"的转变：运行代理，记录发生了什么，并用一小套检查对其进行评分。一旦那个循环存在，每个调整都更容易确认，每个回归都变得清晰。以下是关键要点：
+## 8. 关键要点
 
-测量重要的事情。好的 evals 使回归清晰，失败可解释。
-从可检查的完成定义开始。使用 $skill-creator 引导，然后收紧指令直到成功是明确的。
-以行为为基础。用 codex exec --json 捕获 JSONL 并对 command_execution 事件编写确定性检查。
-在规则不足的地方使用 Codex。添加结构化的、基于评分标准的通过与 --output-schema 来可靠地评分风格和约定。
-让真实失败驱动覆盖。每个手动修复都是一个信号。将其转换为测试，以便技能继续正确处理它。
+这个简单的 `setup-demo-app` 示例展示了从“感觉更好”到“有据可依”的转变：运行智能体，记录发生的情况，并通过一组简洁的检查进行评分。一旦形成此循环，每次调整都更容易验证，每次回归都清晰可见。以下是要点总结：
+
+*   **衡量关键指标。** 良好的评估能让回归问题清晰可见，失败原因易于解释。
+*   **从可检查的完成定义开始。** 使用 `$skill-creator` 快速启动，然后逐步收紧指令，直至成功标准明确无误。
+*   **评估应基于行为。** 通过 `codex exec --json` 捕获 JSONL 日志，并针对 `command_execution` 事件编写确定性检查。
+*   **在规则不足时善用 Codex。** 结合 `--output-schema` 添加结构化、基于量表的评估，以可靠地评判风格与规范。
+*   **让真实失败驱动测试覆盖。** 每次手动修复都是一个信号。将其转化为测试，确保技能持续正确运行。

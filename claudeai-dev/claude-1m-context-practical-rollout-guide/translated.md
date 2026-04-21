@@ -1,98 +1,108 @@
+# Claude 1M上下文正式发布：实用部署指南
+
+来源：https://claudeai.dev/blog/claude-1m-context-practical-rollout-guide
+
 ---
-title: "Claude 1M Context GA: Practical Rollout Guide"
-source: "https://claudeai.dev/blog/claude-1m-context-practical-rollout-guide"
-date: "2026-03-14T00:00:00.000Z"
-translated: 2026-04-20
----
 
-# Claude 1M 上下文正式发布：实用部署指南
+Claude的100万token上下文能力已不再是单纯的测试版实验。
 
-Claude 1M 上下文正式发布：实用部署指南  
-2026年3月14日 · 4分钟阅读  
-Claude 开发团队  
+截至**2026年3月13日**，Anthropic宣布100万上下文窗口已在**Opus 4.6**和**Sonnet 4.6**模型上全面开放，这将彻底改变团队设计长代码和长文档工作流的方式。
 
-Claude 的 100 万 token 上下文不再仅仅是 beta 实验。自 2026 年 3 月 13 日起，Anthropic 宣布 100 万上下文已在 Opus 4.6 和 Sonnet 4.6 上正式发布，这将改变团队设计长代码和长文档工作流的方式。本文总结了当前实际可用的功能、仍需注意的事项以及如何在生产环境中安全部署。
+本文总结了当前实际可用的功能、仍存在的注意事项，以及如何在生产环境中安全部署该功能。
 
-## 变更内容（含确切日期）
+## 关键变更时间线（含具体日期）​
 
 以下是简要时间线：
-*   **2025年8月12日**：Anthropic 宣布 Sonnet 4 的 100 万上下文进入公开测试版。
-*   **2025年8月26日**：Anthropic 更新了可用性，将 Google Cloud Vertex AI 包含在内。
-*   **2026年3月13日**：Anthropic 宣布 Opus 4.6 和 Sonnet 4.6 的 100 万上下文正式发布。
 
-2026年3月的正式发布公告强调了 4.6 模型的四项运营变更：
-*   在整个 100 万窗口内采用标准定价（无长上下文溢价）
-*   跨上下文长度的标准吞吐量行为
-*   对于超过 20 万 token 的请求，不再需要 beta 请求头
-*   每个请求最多支持 600 张图片/PDF 页面
+  * **2025年8月12日**：Anthropic宣布Sonnet 4模型在公开测试版中支持100万上下文
+  * **2025年8月26日**：Anthropic更新支持范围，包含Google Cloud Vertex AI平台
+  * **2026年3月13日**：Anthropic宣布Opus 4.6和Sonnet 4.6模型的100万上下文功能正式发布
 
-## 当前模型现状（2026年3月14日）
+2026年3月的正式发布公告强调了4.6模型的四项运营变更：
 
-根据 Anthropic 当前的文档和公告：
-*   **Opus 4.6 / Sonnet 4.6**：100 万上下文在 Claude 平台上可用。**无需** `context-1m-2025-08-07` 请求头。
-*   **Sonnet 4.5 / Sonnet 4**：对于超过 20 万输入 token 的请求，100 万上下文**仍需要使用** `context-1m-2025-08-07` beta 请求头，并受层级约束和长上下文溢价定价影响。
+  * 完整100万窗口内统一标准定价（无长上下文溢价）
+  * 所有上下文长度下保持标准吞吐性能
+  * 超过20万token的请求无需测试版请求头
+  * 单次请求最多支持600张图像/PDF页面
 
-这意味着许多团队可以通过将长上下文工作负载迁移到 4.6 模型来简化代码路径。
+## 当前模型现状（2026年3月14日）​
 
-## 这对工程团队为何重要
+根据Anthropic最新文档和公告：
 
-100 万上下文不仅仅是“更大的提示词大小”。它减少了架构开销：
-*   更少的上下文分块处理管道
-*   工具步骤之间更少的损失性摘要
-*   单次处理中更好的跨文件和跨文档推理能力
-*   在压缩之前更稳定的多步骤智能体会话
+  * **Opus 4.6 / Sonnet 4.6** 的100万上下文已在Claude平台开放，无需使用`context-1m-2025-08-07`请求头
 
-如果你当前的堆栈充满了检索拼接、手动截断和提示词分片，那么 4.6 时代的 100 万上下文可以消除其中大部分的复杂性。
+  * **Sonnet 4.5 / Sonnet 4** 的100万上下文仍需对超过20万输入token的请求使用`context-1m-2025-08-07`测试版请求头，且存在层级限制和长上下文溢价定价
 
-## 迁移检查清单
+这意味着许多团队可以通过将长上下文工作负载迁移至4.6模型来简化代码路径。
 
-在你的部署 PR 中使用此清单：
-1.  将长上下文流量迁移到 `claude-opus-4-6` 或 `claude-sonnet-4-6`。
-2.  为这些 4.6 路径**移除** `context-1m-2025-08-07` 请求头。
-3.  仅为 Sonnet 4.5 / Sonnet 4 的回退路径保留 beta 请求头。
-4.  使用真实的生产跟踪数据重新基准化延迟和 token 成本。
-5.  重新调整缓存断点和提示词缓存策略。
-6.  添加针对请求大小和 token 使用量激增的警报，而不仅仅是 RPM/ITPM/OTPM。
+## 对工程团队的重要意义​
 
-最小 API 调用示例：
-```bash
-curl https://api.anthropic.com/v1/messages \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "content-type: application/json" \
-  -d '{
-    "model": "claude-sonnet-4-6",
-    "max_tokens": 4096,
-    "messages": [{"role":"user","content":"Analyze this large corpus..."}]
-  }'
-```
+100万上下文不仅是“更大的提示词容量”，更能显著降低架构开销：
 
-## 不容忽视的成本和可靠性注意事项
+  * 减少上下文分块处理流程
+  * 降低工具步骤间的信息损失性摘要需求
+  * 单次处理中实现更优的跨文件、跨文档推理能力
+  * 在需要压缩前维持更稳定的多步骤智能体会话
 
-*   对于 Opus 4.6 和 Sonnet 4.6，Anthropic 定价文档说明 100 万上下文按标准 token 费率计费。
-*   提示词缓存仍然重要；如果不进行缓存，大量重复的上下文会主导成本和延迟。
-*   600 个媒体项（图片/PDF 页面）提高了上限，但请求大小限制仍然适用。
-*   对于超出单个窗口的非常长的运行会话，服务器端压缩仍然相关。
-*   在实践中，“我们拥有 100 万上下文”并不是停止 token 预算规划的理由。相反，它是围绕更少、打包更好的轮次重新设计预算的理由。
+如果您当前的技术栈充斥着检索拼接、手动截断和提示词分片等复杂操作，4.6时代的100万上下文能力可以消除其中大部分复杂性。
 
-## 常见的部署错误
+## 迁移检查清单​
 
-*   保留现在会损害质量的遗留分块逻辑
-*   忘记在 4.6 路径上移除 beta 请求头
-*   假设每个模型都具有相同的 100 万上下文行为
-*   在从 20 万迁移到 100 万上下文后忽略缓存策略
-*   将长上下文视为评估的替代品
+请在您的部署PR中使用此清单：
 
-## 最终要点
+1. 将长上下文流量迁移至 `claude-opus-4-6` 或 `claude-sonnet-4-6`。
+2. 为这些 4.6 路径移除 `context-1m-2025-08-07`。
+3. 仅对 Sonnet 4.5 / Sonnet 4 回退路径保留测试版标头。
+4. 基于实际生产追踪数据重新校准延迟和令牌成本基准。
+5. 重新调整缓存断点与提示缓存策略。
+6. 除 RPM/ITPM/OTPM 外，增加针对请求大小和令牌使用峰值的告警。
 
-截至 2026 年 3 月 14 日，Claude 的 100 万上下文对于 4.6 的长上下文工作负载来说是真实且可用于生产的。战略上的胜利不仅仅是更大的提示词。它意味着更简单的系统、更少的上下文交接、更少的脆弱胶水层以及更好的端到端推理质量。以测量规范进行迁移的团队将受益；仅仅增加提示词大小的团队则主要会增加支出。
+最小化 API 请求示例：
 
-## 参考资料（检查于 2026年3月14日）
+    curl https://api.anthropic.com/v1/messages \
+      -H "x-api-key: $ANTHROPIC_API_KEY" \
+      -H "anthropic-version: 2023-06-01" \
+      -H "content-type: application/json" \
+      -d '{
+        "model": "claude-sonnet-4-6",
+        "max_tokens": 4096,
+        "messages": [{"role":"user","content":"分析此大型语料库..."}]
+      }'
 
-*   Anthropic 公告（2025年8月12日）：Claude Sonnet 4 现在支持 100 万上下文 https://claude.com/blog/1m-context
-*   Anthropic 公告（2026年3月13日）：Opus 4.6 和 Sonnet 4.6 的 100 万上下文正式发布 https://claude.com/blog/1m-context-ga
-*   Claude API 文档：上下文窗口 https://platform.claude.com/docs/en/build-with-claude/context-windows
-*   Claude API 文档：定价 https://platform.claude.com/docs/en/about-claude/pricing
-*   Claude API 文档：速率限制 https://platform.claude.com/docs/en/api/rate-limits
+## 不可忽略的成本与可靠性注意事项​
 
-标签：Claude、Claude Code、AI 编程、最佳实践、开发工具
+* 对于 Opus 4.6 和 Sonnet 4.6，Anthropic 定价文档注明标准令牌费率适用于 100 万次运行。
+* 提示缓存依然重要；若未缓存，大量重复上下文将主导成本与延迟。
+* 600 个媒体项（图像/PDF 页面）提高了上限，但请求大小限制仍然适用。
+* 对于超出单次窗口的长时间运行会话，服务端压缩技术仍具相关性。
+
+实践中，“我们拥有 100 万容量”并非停止令牌预算管理的理由，而是围绕更精简、更高效打包的交互轮次重新设计预算的依据。
+
+## 常见部署失误​
+
+* 保留现有分块逻辑导致质量受损
+* 忘记移除 4.6 路径的测试版标头
+* 假定所有模型均具备相同的 100 万上下文处理行为
+* 从 20 万迁移至 100 万后忽略缓存策略
+* 将长上下文能力视为评估体系的替代方案
+
+## 最终结论​
+
+截至 **2026 年 3 月 14 日**，Claude 的 100 万上下文窗口已实际就绪，可投入 4.6 版本的长上下文工作负载生产环境。
+
+战略优势不仅在于更大的提示容量，更在于实现更简洁的系统架构：减少上下文交接环节、降低脆弱胶合层复杂度，并提升端到端推理质量。
+
+遵循度量规范进行迁移的团队将获得收益；仅单纯扩大提示规模的团队则主要增加成本支出。
+
+## 参考来源（核查于 2026 年 3 月 14 日）​
+
+*   Anthropic 公告（2025年8月12日）：Claude Sonnet 4 现已支持 100 万上下文长度
+<https://claude.com/blog/1m-context>
+*   Anthropic 公告（2026年3月13日）：Opus 4.6 和 Sonnet 4.6 的 100 万上下文长度功能正式发布
+<https://claude.com/blog/1m-context-ga>
+*   Claude API 文档：上下文窗口
+<https://platform.claude.com/docs/en/build-with-claude/context-windows>
+*   Claude API 文档：定价
+<https://platform.claude.com/docs/en/about-claude/pricing>
+*   Claude API 文档：速率限制
+<https://platform.claude.com/docs/en/api/rate-limits>
