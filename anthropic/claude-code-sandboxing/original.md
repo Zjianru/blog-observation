@@ -42,7 +42,7 @@ We’ve built this on top of OS level primitives such as [Linux bubblewrap](http
 
 Both components are configurable: you can easily choose to allow or disallow specific file paths or domains.
 
-![This image illustrations how sandboxing in Claude Code works.](claude-code-sandboxing_00.jpg)Claude Code's sandboxing architecture isolates code execution with filesystem and network controls, automatically allowing safe operations, blocking malicious ones, and asking permission only when needed.
+![This image illustrations how sandboxing in Claude Code works.](claude-code-sandboxing_00.png)Claude Code's sandboxing architecture isolates code execution with filesystem and network controls, automatically allowing safe operations, blocking malicious ones, and asking permission only when needed.
 
 Sandboxing ensures that even a successful prompt injection is fully isolated, and cannot impact overall user security. This way, a compromised Claude Code can't steal your SSH keys, or phone home to an attacker's server.
 

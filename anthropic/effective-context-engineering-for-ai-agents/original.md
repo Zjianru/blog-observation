@@ -18,7 +18,7 @@ In the early days of engineering with LLMs, prompting was the biggest component 
 
 An agent running in a loop generates more and more data that _could_ be relevant for the next turn of inference, and this information must be cyclically refined. Context engineering is the [art and science](https://x.com/karpathy/status/1937902205765607626?lang=en) of curating what will go into the limited context window from that constantly evolving universe of possible information.
 
-![Prompt engineering vs. context engineering](effective-context-engineering-for-ai-agents_00.jpg)_In contrast to the discrete task of writing a prompt, context engineering is iterative and the curation phase happens each time we decide what to pass to the model._
+![Prompt engineering vs. context engineering](effective-context-engineering-for-ai-agents_00.png)_In contrast to the discrete task of writing a prompt, context engineering is iterative and the curation phase happens each time we decide what to pass to the model._
 
 ## Why context engineering is important to building capable agents
 
@@ -40,7 +40,7 @@ Given that LLMs are constrained by a finite attention budget, _good_ context eng
 
 **System prompts** should be extremely clear and use simple, direct language that presents ideas at the _right altitude_ for the agent. The right altitude is the Goldilocks zone between two common failure modes. At one extreme, we see engineers hardcoding complex, brittle logic in their prompts to elicit exact agentic behavior. This approach creates fragility and increases maintenance complexity over time. At the other extreme, engineers sometimes provide vague, high-level guidance that fails to give the LLM concrete signals for desired outputs or falsely assumes shared context. The optimal altitude strikes a balance: specific enough to guide behavior effectively, yet flexible enough to provide the model with strong heuristics to guide behavior.
 
-![Calibrating the system prompt in the process of context engineering.](effective-context-engineering-for-ai-agents_01.jpg)_At one end of the spectrum, we see brittle if-else hardcoded prompts, and at the other end we see prompts that are overly general or falsely assume shared context._
+![Calibrating the system prompt in the process of context engineering.](effective-context-engineering-for-ai-agents_01.png)_At one end of the spectrum, we see brittle if-else hardcoded prompts, and at the other end we see prompts that are overly general or falsely assume shared context._
 
 We recommend organizing prompts into distinct sections (like `<background_information>`, `<instructions>`, `## Tool guidance`, `## Output description`, etc) and using techniques like XML tagging or Markdown headers to delineate these sections, although the exact formatting of prompts is likely becoming less important as models become more capable.
 

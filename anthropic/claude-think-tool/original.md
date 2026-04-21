@@ -71,7 +71,7 @@ The results showed dramatic improvements when Claude 3.7 effectively used the "t
   * **Airline domain** : The "think" tool with an optimized prompt achieved 0.570 on the pass^1 metric, compared to just 0.370 for the baseline—a 54% relative improvement;
   * **Retail domain** : The "think" tool alone achieves 0.812, compared to 0.783 for the baseline.
 
-![A line graph showing the performance of Claude 3.7 Sonnet on the "airline" domain of the Tau-Bench eval](claude-think-tool_00.jpg)Claude 3.7 Sonnet's performance on the "airline" domain of the Tau-Bench eval under four different configurations.
+![A line graph showing the performance of Claude 3.7 Sonnet on the "airline" domain of the Tau-Bench eval](claude-think-tool_00.png)Claude 3.7 Sonnet's performance on the "airline" domain of the Tau-Bench eval under four different configurations.
 
 Claude 3.7 Sonnet's performance on the "Airline" domain of the Tau-Bench eval
 

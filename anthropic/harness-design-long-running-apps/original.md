@@ -96,11 +96,11 @@ As I clicked through, however, issues started to emerge. The layout wasted space
 
 Opening screen Sprite editorGame play
 
-![image](harness-design-long-running-apps_00.jpg)Initial screen when opening the app created by the solo harness.
+![image](harness-design-long-running-apps_00.png)Initial screen when opening the app created by the solo harness.
 
-![image](harness-design-long-running-apps_01.jpg)Creating a sprite in the sprite editor made by the solo harness
+![image](harness-design-long-running-apps_01.png)Creating a sprite in the sprite editor made by the solo harness
 
-![image](harness-design-long-running-apps_02.jpg)Trying unsuccessfully to play the level I created
+![image](harness-design-long-running-apps_02.png)Trying unsuccessfully to play the level I created
 
 After evaluating the solo run, I turned my attention to the harness run. This run started from the same one-sentence prompt, but the planner step expanded that prompt into a 16-feature spec spread across ten sprints. It went well beyond what the solo run attempted. In addition to the core editors and play mode, the spec called for a sprite animation system, behavior templates, sound effects and music, an AI-assisted sprite generator and level designer, and game export with shareable links. I gave the planner access to our [frontend design skill](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md), which it read and used to create a visual design language for the app as part of the spec. For each sprint, the generator and evaluator negotiated a contract defining the specific implementation details for the sprint, and the testable behaviors that would be tested to verify completion.
 
@@ -112,15 +112,15 @@ Because I'd asked the planner to weave AI features into its specs, the app also 
 
 Opening screen Sprite editorAI game designAI game design Game play
 
-![image](harness-design-long-running-apps_03.jpg)Initial screen: Creating a new game, in the app built with the full harness
+![image](harness-design-long-running-apps_03.png)Initial screen: Creating a new game, in the app built with the full harness
 
-![image](harness-design-long-running-apps_04.jpg)The sprite editor felt cleaner and easier to use
+![image](harness-design-long-running-apps_04.png)The sprite editor felt cleaner and easier to use
 
-![image](harness-design-long-running-apps_05.jpg)Using the built in AI feature to generate the level
+![image](harness-design-long-running-apps_05.png)Using the built in AI feature to generate the level
 
-![image](harness-design-long-running-apps_06.jpg)Using the built in AI feature to generate the level
+![image](harness-design-long-running-apps_06.png)Using the built in AI feature to generate the level
 
-![image](harness-design-long-running-apps_07.jpg)Playing the game I generated
+![image](harness-design-long-running-apps_07.png)Playing the game I generated
 
 The biggest difference was in play mode. I was actually able to move my entity and play the game. The physics had some rough edges—my character jumped onto a platform but ended up overlapping with it, which felt intuitively wrong—but the core thing worked, which the solo run did not manage. After moving around a bit, I did hit some limitations with the AI’s game level construction. There was a large wall that I wasn’t able to jump past, so I was stuck. This suggested there were some common sense improvements and edge cases that the harness could handle to further refine the app.
 

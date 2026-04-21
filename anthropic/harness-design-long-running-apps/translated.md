@@ -96,11 +96,11 @@ _本文作者 Prithvi Rajasekaran，是我们[实验室团队](https://www.anthr
 
 启动界面 精灵编辑器 游戏运行
 
-![image](harness-design-long-running-apps_00.jpg)单人测试框架生成的应用程序初始界面
+![image](harness-design-long-running-apps_00.png)单人测试框架生成的应用程序初始界面
 
-![image](harness-design-long-running-apps_01.jpg)在单人测试框架构建的精灵编辑器中创建精灵
+![image](harness-design-long-running-apps_01.png)在单人测试框架构建的精灵编辑器中创建精灵
 
-![image](harness-design-long-running-apps_02.jpg)尝试运行自建关卡但未能成功
+![image](harness-design-long-running-apps_02.png)尝试运行自建关卡但未能成功
 
 在评估了独立运行后，我将注意力转向了协同运行。这次运行从相同的单句提示开始，但规划步骤将该提示扩展为横跨十个冲刺周期的16项功能规格。其范围远超独立运行的尝试。除了核心编辑器和游戏模式外，规格还要求包含精灵动画系统、行为模板、音效与音乐、AI辅助精灵生成器与关卡设计器，以及可分享链接的游戏导出功能。我向规划器开放了我们的[前端设计技能](https://github.com/anthropics/claude-code/blob/main/plugins/frontend-design/skills/frontend-design/SKILL.md)，规划器读取并运用该技能为应用程序创建了视觉设计语言，作为规格的一部分。每个冲刺阶段，生成器与评估器通过协商制定契约，明确该冲刺的具体实施细节，以及用于验证完成度的可测试行为。
 
@@ -112,15 +112,15 @@ _本文作者 Prithvi Rajasekaran，是我们[实验室团队](https://www.anthr
 
 启动界面 精灵编辑器AI游戏设计AI游戏设计 游戏玩法
 
-![image](harness-design-long-running-apps_03.jpg)初始界面：在使用完整框架构建的应用中创建新游戏
+![image](harness-design-long-running-apps_03.png)初始界面：在使用完整框架构建的应用中创建新游戏
 
-![image](harness-design-long-running-apps_04.jpg)精灵编辑器呈现出更清爽直观的操作体验
+![image](harness-design-long-running-apps_04.png)精灵编辑器呈现出更清爽直观的操作体验
 
-![image](harness-design-long-running-apps_05.jpg)利用内置AI功能生成关卡
+![image](harness-design-long-running-apps_05.png)利用内置AI功能生成关卡
 
-![image](harness-design-long-running-apps_06.jpg)利用内置AI功能生成关卡
+![image](harness-design-long-running-apps_06.png)利用内置AI功能生成关卡
 
-![image](harness-design-long-running-apps_07.jpg)体验我生成的游戏
+![image](harness-design-long-running-apps_07.png)体验我生成的游戏
 
 最显著的差异体现在游玩模式中。我能够实际操控角色实体进行游戏。物理系统尚存瑕疵——角色跳上平台时竟与平台模型重叠，这显然有违直觉——但核心功能已然实现，这是独立开发时未能达成的。在简单探索后，我确实遇到了AI构建游戏关卡的局限性：一堵无法逾越的高墙使我陷入困境。这表明该框架仍需通过常识性优化与边界情况处理来完善应用。
 

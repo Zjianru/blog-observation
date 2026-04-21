@@ -22,7 +22,7 @@
 
 ## 事件时间线
 
-![Claude API事件时间线示意图。黄色：问题发现，红色：性能恶化，绿色：修复部署。](a-postmortem-of-three-recent-issues_00.jpg)  
+![Claude API事件时间线示意图。黄色：问题发现，红色：性能恶化，绿色：修复部署。](a-postmortem-of-three-recent-issues_00.png)  
 **Claude API**事件时间线示意图。黄色：问题发现，红色：性能恶化，绿色：修复部署。
 
 这些故障的叠加特性使得问题诊断尤为困难。首个故障于8月5日引入，影响了约0.8%的Sonnet 4请求。随后在8月25日和26日的部署中又出现了两个新故障。
@@ -80,7 +80,7 @@
 
 我们的修复移除了12月的临时解决方案，因为我们相信已经解决了根本原因。这导致了[近似top-k操作](https://docs.jax.dev/en/latest/_autosummary/jax.lax.approx_max_k.html)中一个更深层的bug——这是一种快速找到最高概率词元的性能优化。[3] 这种近似方法有时会返回完全错误的结果，但仅针对特定的批次大小和模型配置。12月的临时解决方案无意中掩盖了这个问题。
 
-![Slack消息展示了与开发该算法的XLA:TPU工程师共享的底层近似top-k bug复现器。该代码在CPU上运行时返回正确结果。](a-postmortem-of-three-recent-issues_03.jpg)与[开发该算法](https://arxiv.org/pdf/2206.14286)的XLA:TPU工程师共享的底层近似top-k bug复现器。该代码在CPU上运行时返回正确结果。
+![Slack消息展示了与开发该算法的XLA:TPU工程师共享的底层近似top-k bug复现器。该代码在CPU上运行时返回正确结果。](a-postmortem-of-three-recent-issues_03.png)与[开发该算法](https://arxiv.org/pdf/2206.14286)的XLA:TPU工程师共享的底层近似top-k bug复现器。该代码在CPU上运行时返回正确结果。
 
 这个bug的行为令人沮丧地不一致。它的表现取决于各种不相关因素，比如前后运行了哪些操作、是否启用了调试工具。同样的提示可能在某次请求中完美运行，却在下次请求中失败。
 
