@@ -22,7 +22,7 @@ Chat Completions 为您提供了一个简单的回合制聊天界面。而 Respo
 
 这正是推理模型真正大放异彩之处：Responses 能够在多个回合间保留模型的**推理状态**。在 Chat Completions 中，推理过程在每次调用之间会被丢弃，就像侦探每次离开房间都会忘记所有线索。而 Responses 则让笔记本保持打开状态；逐步的思考过程实际上能够延续到下一个回合。这一点在基准测试中（TAUBench +5%）以及更高效的缓存利用和延迟方面都有所体现。
 
-![responses vs chat completions](responses-api_00.webp)
+![responses vs chat completions](responses-api_00.png)
 
 Responses 还能够输出多个项目：不仅是模型**说了什么**，还包括它**做了什么**。您会收到凭证——工具调用、结构化输出、中间步骤。这就像同时获得完成的文章和草稿纸上的演算过程。这对于调试、审计以及构建更丰富的用户界面非常有用。
 

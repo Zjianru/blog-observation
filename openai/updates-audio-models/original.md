@@ -40,7 +40,7 @@ The `gpt-realtime-mini` model is meant to be used with the [Realtime API](https:
 
 The new Realtime mini snapshot is better suited for real-time agents, with clear gains in instruction following and tool calling. On our internal speech-to-speech evaluations, we’ve seen an improvement of 18.6 percentage points in instruction-following accuracy and 12.9 percentage points in tool-calling accuracy compared to the previous snapshot, as well as an improvement on the Big Bench Audio benchmark.
 
-![Speech-to-speech eval chart 1](updates-audio-models_00.webp)![Speech-to-speech eval chart 2](updates-audio-models_01.webp)![Speech-to-speech eval chart 3](updates-audio-models_02.webp)
+![Speech-to-speech eval chart 1](updates-audio-models_00.png)![Speech-to-speech eval chart 2](updates-audio-models_01.png)![Speech-to-speech eval chart 3](updates-audio-models_02.png)
 
 Together, these gains lead to more reliable multi-step interactions and more consistent function execution in live, low-latency settings.
 
@@ -58,7 +58,7 @@ Both new snapshots also feature an upgraded decoder for more natural sounding vo
 
 Our latest text-to-speech model, `gpt-4o-mini-tts-2025-12-15`, delivers a significant jump in accuracy, with substantially lower word error rates across standard speech benchmarks compared to the previous generation. On Common Voice and FLEURS, we see roughly 35% lower WER, with consistent gains on Multilingual LibriSpeech as well.
 
-![Text-to-speech eval chart 1](updates-audio-models_03.webp)![Text-to-speech eval chart 2](updates-audio-models_04.webp)![Text-to-speech eval chart 3](updates-audio-models_05.webp)
+![Text-to-speech eval chart 1](updates-audio-models_03.png)![Text-to-speech eval chart 2](updates-audio-models_04.png)![Text-to-speech eval chart 3](updates-audio-models_05.png)
 
 Together, these results reflect improved pronunciation accuracy and robustness across a wide range of languages.
 
@@ -68,7 +68,7 @@ Similar to the new `gpt-realtime-mini` snapshot, this model sounds much more nat
 
 The latest transcription model, `gpt-4o-mini-transcribe-2025-12-15`, shows strong gains in both accuracy and reliability. On standard ASR benchmarks like Common Voice and FLEURS (without language hints), it delivers lower word error rates than prior models. We’ve optimized this model for behavior on real-world conversational settings, such as short user utterances and noisy backgrounds. In an internal _hallucination-with-noise_ evaluation, where we played clips of real-world background noise and audio with varying speaking intervals (including silence), the model produced ~90% fewer hallucinations compared to Whisper v2 and ~70% fewer compared to previous GPT-4o-transcribe models.
 
-![Transcription eval chart 1](updates-audio-models_06.webp)![Transcription eval chart 2](updates-audio-models_07.webp)![Transcription eval chart 3](updates-audio-models_08.webp)
+![Transcription eval chart 1](updates-audio-models_06.png)![Transcription eval chart 2](updates-audio-models_07.png)![Transcription eval chart 3](updates-audio-models_08.png)
 
 This model snapshot is particularly strong in Chinese (Mandarin), Hindi, Bengali, Japanese, Indonesian, and Italian.
 
