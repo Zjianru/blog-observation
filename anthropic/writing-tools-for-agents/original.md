@@ -22,7 +22,7 @@ We conclude with key principles for writing high-quality tools we’ve identifie
   * Optimizing tool responses for token efficiency
   * Prompt-engineering tool descriptions and specs
 
-![This is an image depicting how an engineer might use Claude Code to evaluate the efficacy of agentic tools.](writing-tools-for-agents_00.png)Building an evaluation allows you to systematically measure the performance of your tools. You can use Claude Code to automatically optimize your tools against this evaluation.
+![This is an image depicting how an engineer might use Claude Code to evaluate the efficacy of agentic tools.](images/writing-tools-for-agents_00.png)Building an evaluation allows you to systematically measure the performance of your tools. You can use Claude Code to automatically optimize your tools against this evaluation.
 
 ## What is a tool?
 
@@ -58,7 +58,7 @@ Test the tools yourself to identify any rough edges. Collect feedback from your 
 
 Next, you need to measure how well Claude uses your tools by running an evaluation. Start by generating lots of evaluation tasks, grounded in real world uses. We recommend collaborating with an agent to help analyze your results and determine how to improve your tools. See this process end-to-end in our [tool evaluation cookbook](https://platform.claude.com/cookbook/tool-evaluation-tool-evaluation).
 
-![This graph measures the test set accuracy of human-written vs. Claude-optimized Slack MCP servers.](writing-tools-for-agents_01.png)Held-out test set performance of our internal Slack tools
+![This graph measures the test set accuracy of human-written vs. Claude-optimized Slack MCP servers.](images/writing-tools-for-agents_01.png)Held-out test set performance of our internal Slack tools
 
 **Generating evaluation tasks**
 
@@ -90,7 +90,7 @@ If you’re running your evaluation with Claude, you can turn on [interleaved th
 
 As well as top-level accuracy, we recommend collecting other metrics like the total runtime of individual tool calls and tasks, the total number of tool calls, the total token consumption, and tool errors. Tracking tool calls can help reveal common workflows that agents pursue and offer some opportunities for tools to consolidate.
 
-![This graph measures the test set accuracy of human-written vs. Claude-optimized Asana MCP servers.](writing-tools-for-agents_02.png)Held-out test set performance of our internal Asana tools
+![This graph measures the test set accuracy of human-written vs. Claude-optimized Asana MCP servers.](images/writing-tools-for-agents_02.png)Held-out test set performance of our internal Asana tools
 
 ****
 
@@ -166,11 +166,11 @@ Copy
 
 Here’s an example of a detailed tool response (206 tokens):
 
-![This code snippet depicts an example of a detailed tool response.](writing-tools-for-agents_03.png)
+![This code snippet depicts an example of a detailed tool response.](images/writing-tools-for-agents_03.png)
 
 Here’s an example of a concise tool response (72 tokens):
 
-![This code snippet depicts a concise tool response.](writing-tools-for-agents_04.png)Slack threads and thread replies are identified by unique `thread_ts` which are required to fetch thread replies. `thread_ts` and other IDs (`channel_id`, `user_id`) can be retrieved from a `“detailed”` tool response to enable further tool calls that require these. `“concise”` tool responses return only thread content and exclude IDs. In this example, we use ~⅓ of the tokens with `“concise”` tool responses.
+![This code snippet depicts a concise tool response.](images/writing-tools-for-agents_04.png)Slack threads and thread replies are identified by unique `thread_ts` which are required to fetch thread replies. `thread_ts` and other IDs (`channel_id`, `user_id`) can be retrieved from a `“detailed”` tool response to enable further tool calls that require these. `“concise”` tool responses return only thread content and exclude IDs. In this example, we use ~⅓ of the tokens with `“concise”` tool responses.
 
 Even your tool response structure—for example XML, JSON, or Markdown—can have an impact on evaluation performance: there is no one-size-fits-all solution. This is because LLMs are trained on next-token prediction and tend to perform better with formats that match their training data. The optimal response structure will vary widely by task and agent. We encourage you to select the best response structure based on your own evaluation.
 
@@ -184,15 +184,15 @@ If you choose to truncate responses, be sure to steer agents with helpful instru
 
 Here’s an example of a truncated tool response:
 
-![This image depicts an example of a truncated tool response.](writing-tools-for-agents_05.png)
+![This image depicts an example of a truncated tool response.](images/writing-tools-for-agents_05.png)
 
 Here’s an example of an unhelpful error response:
 
-![This image depicts an example of an unhelpful tool response. ](writing-tools-for-agents_06.png)
+![This image depicts an example of an unhelpful tool response. ](images/writing-tools-for-agents_06.png)
 
 Here’s an example of a helpful error response:
 
-![This image depicts an example of a helpful error response.](writing-tools-for-agents_07.png)Tool truncation and error responses can steer agents towards more token-efficient tool-use behaviors (using filters or pagination) or give examples of correctly formatted tool inputs.
+![This image depicts an example of a helpful error response.](images/writing-tools-for-agents_07.png)Tool truncation and error responses can steer agents towards more token-efficient tool-use behaviors (using filters or pagination) or give examples of correctly formatted tool inputs.
 
 ### Prompt-engineering your tool descriptions
 
@@ -218,4 +218,4 @@ Written by Ken Aizawa with valuable contributions from colleagues across Researc
 
 1Beyond training the underlying LLMs themselves.
 
-[![Interlocking puzzle piece with complex geometric shape and detailed surface texture](writing-tools-for-agents_08.svg)Looking to learn more?Explore courses](https://anthropic.skilljar.com/)
+[![Interlocking puzzle piece with complex geometric shape and detailed surface texture](images/writing-tools-for-agents_08.svg)Looking to learn more?Explore courses](https://anthropic.skilljar.com/)

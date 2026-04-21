@@ -56,7 +56,7 @@ _作者：Tristan Hume，Anthropic性能优化团队负责人。Tristan设计并
 
 该机器包含使加速器优化变得有趣的功能：手动管理的暂存内存（与CPU不同，加速器通常需要显式内存管理）、超长指令字（多个执行单元每周期并行运行，需要高效指令打包）、单指令多数据流（单条指令处理多元素向量运算）以及多核架构（跨核心分配任务）。
 
-![图片](AI-resistant-technical-evaluations_00.png)
+![图片](images/AI-resistant-technical-evaluations_00.png)
 
 这项任务是一个并行树遍历问题，特意没有采用深度学习风格，因为当时大多数性能工程师尚未接触过深度学习，可以在工作中学习领域知识。该问题的灵感来源于无分支SIMD决策树推理——一个向过去致敬的经典机器学习优化挑战，此前仅有少数候选人遇到过。
 
@@ -91,7 +91,7 @@ _作者：Tristan Hume，Anthropic性能优化团队负责人。Tristan设计并
 
 为了更严谨地验证，我们在内部测试计算框架中进行了尝试，确认它既能在两小时内超越人类，又能随着时间推移持续提升表现。发布后，我们甚至以通用方式改进了测试框架，从而获得了更高的分数。
 
-![图片](AI-resistant-technical-evaluations_01.png)
+![图片](images/AI-resistant-technical-evaluations_01.png)
 
 我遇到了一个难题。我们即将发布一个模型，而在我们的带回家测试中，最佳策略竟然是委托给Claude Code来完成。
 

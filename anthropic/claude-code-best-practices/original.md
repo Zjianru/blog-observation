@@ -6,9 +6,9 @@ Source: https://www.anthropic.com/engineering/claude-code-best-practices
 
 Skip to main content
 
-[Claude Code Docs home page![light logo](claude-code-best-practices_00.svg)![dark logo](claude-code-best-practices_01.svg)](/docs/en/overview)
+[Claude Code Docs home page![light logo](images/claude-code-best-practices_00.svg)![dark logo](images/claude-code-best-practices_01.svg)](/docs/en/overview)
 
-![US](claude-code-best-practices_02.svg)
+![US](images/claude-code-best-practices_02.svg)
 
 English
 

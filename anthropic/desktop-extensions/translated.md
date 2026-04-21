@@ -493,8 +493,8 @@ Claude桌面版将：
 
 在内部，我们正使用桌面扩展来共享高度实验性的 MCP 服务器——有些充满趣味，有些极具实用价值。其中一个团队尝试探索当我们的模型直接连接到 GameBoy 时能达到何种程度，类似于我们之前进行的["Claude 玩宝可梦"研究](https://www.anthropic.com/news/visible-extended-thinking)。我们通过桌面扩展打包了一个独立扩展程序，该程序能够启动流行的 [PyBoy](https://github.com/Baekalfen/PyBoy) GameBoy 模拟器，并让 Claude 获得控制权。我们相信，将模型能力与用户本地机器上已有的工具、数据和应用程序相连接，存在着无限可能。
 
-![显示 PyBoy MCP 扩展运行《超级马里奥大陆》启动画面的桌面截图](desktop-extensions_00.png)
+![显示 PyBoy MCP 扩展运行《超级马里奥大陆》启动画面的桌面截图](images/desktop-extensions_00.png)
 
 我们迫不及待想看到您的创作成果。曾经为我们带来数千个MCP服务器的创造力，如今只需一次点击就能触达数百万用户。准备好分享您的MCP服务器了吗？[提交扩展进行审核](https://forms.gle/tyiAZvch1kDADKoP9)
 
-[![带有复杂几何形状和精细表面纹理的咬合拼图](desktop-extensions_01.svg)想要了解更多？探索课程](https://anthropic.skilljar.com/)
+[![带有复杂几何形状和精细表面纹理的咬合拼图](images/desktop-extensions_01.svg)想要了解更多？探索课程](https://anthropic.skilljar.com/)

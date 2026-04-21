@@ -6,9 +6,9 @@
 
 跳至主要内容
 
-[Claude 代码文档首页![浅色徽标](claude-code-best-practices_00.svg)![深色徽标](claude-code-best-practices_01.svg)](/docs/en/overview)
+[Claude 代码文档首页![浅色徽标](images/claude-code-best-practices_00.svg)![深色徽标](images/claude-code-best-practices_01.svg)](/docs/en/overview)
 
-![美国](claude-code-best-practices_02.svg)
+![美国](images/claude-code-best-practices_02.svg)
 
 中文
 

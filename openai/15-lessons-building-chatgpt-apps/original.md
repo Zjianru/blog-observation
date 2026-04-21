@@ -76,7 +76,7 @@ One of the key lessons in building ChatGPT Apps is making these communication pa
 
 Mapping out that path looks something like this:
 
-![Diagram of the different interactions between the widget, the server, and the model](15-lessons-building-chatgpt-apps_00.jpg)
+![Diagram of the different interactions between the widget, the server, and the model](images/15-lessons-building-chatgpt-apps_00.jpg)
 
 These lessons establish the foundations of a ChatGPT App: how context is shared, how the model gains visibility, and how different interactions propagate through the system. The next section builds on this foundation and focuses on the implications for UI design.
 
@@ -172,7 +172,7 @@ One of the first things we tackled was iteration speed. The combination of long-
 
 After spending considerable time understanding Vite’s internals, we built a Vite plugin that enables live reload of widgets directly inside ChatGPT. The plugin intercepts resource requests to the MCP server and injects real-time updates into the ChatGPT iframe. Seeing a change in the IDE immediately reflected inside ChatGPT dramatically shortened our feedback loop.
 
-![Gif of the hot reload in action](15-lessons-building-chatgpt-apps_01.gif)
+![Gif of the hot reload in action](images/15-lessons-building-chatgpt-apps_01.gif)
 
 ### 12\. Not every test belongs in ChatGPT
 

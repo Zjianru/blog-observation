@@ -22,7 +22,7 @@ Each hardware platform has different characteristics and requires specific optim
 
 ## Timeline of events
 
-![Illustrative timeline of events on the Claude API. Yellow: issue detected, Red: degradation worsened, Green: fix deployed.](a-postmortem-of-three-recent-issues_00.png)Illustrative timeline of events on the **Claude API**. Yellow: issue detected, Red: degradation worsened, Green: fix deployed.
+![Illustrative timeline of events on the Claude API. Yellow: issue detected, Red: degradation worsened, Green: fix deployed.](images/a-postmortem-of-three-recent-issues_00.png)Illustrative timeline of events on the **Claude API**. Yellow: issue detected, Red: degradation worsened, Green: fix deployed.
 
 The overlapping nature of these bugs made diagnosis particularly challenging. The first bug was introduced on August 5, affecting approximately 0.8% of requests made to Sonnet 4. Two more bugs arose from deployments on August 25 and 26.
 
@@ -68,7 +68,7 @@ When Claude generates text, it calculates probabilities for each possible next w
 
 In December 2024, we discovered our TPU implementation would occasionally drop the most probable token when [temperature](https://docs.claude.com/en/docs/about-claude/glossary#temperature) was zero. We deployed a workaround to fix this case.
 
-![Code snippet of a December 2024 patch to work around the unexpected dropped token bug when temperature = 0.](a-postmortem-of-three-recent-issues_01.png)Code snippet of a December 2024 patch to work around the unexpected dropped token bug when temperature = 0.
+![Code snippet of a December 2024 patch to work around the unexpected dropped token bug when temperature = 0.](images/a-postmortem-of-three-recent-issues_01.png)Code snippet of a December 2024 patch to work around the unexpected dropped token bug when temperature = 0.
 
 The root cause involved mixed precision arithmetic. Our models compute next-token probabilities in [bf16](https://github.com/tensorflow/tensorflow/blob/f41959ccb2d9d4c722fe8fc3351401d53bcf4900/tensorflow/core/framework/bfloat16.h) (16-bit floating point). However, the vector processor is [fp32-native](https://dl.acm.org/doi/pdf/10.1145/3360307), so the TPU compiler (XLA) can optimize runtime by converting some operations to fp32 (32-bit). This optimization pass is guarded by the `xla_allow_excess_precision` flag which defaults to true.
 
@@ -76,11 +76,11 @@ This caused a mismatch: operations that should have agreed on the highest probab
 
 On August 26, we deployed a rewrite of our sampling code to fix the precision issues and improve how we handled probabilities at the limit that reach the top-p threshold. But in fixing these problems, we exposed a trickier one.
 
-![Code snippet showing minimized reproducer merged as part of the August 11 change that root-caused the “bug” being worked around in December 2024; in reality, it’s expected behavior of the xla_allow_excess_precision flag.](a-postmortem-of-three-recent-issues_02.png)Code snippet showing a minimized reproducer merged as part of the August 11 change that root-caused the "bug" being worked around in December 2024. In reality, it’s expected behavior of the `xla_allow_excess_precision` flag.
+![Code snippet showing minimized reproducer merged as part of the August 11 change that root-caused the “bug” being worked around in December 2024; in reality, it’s expected behavior of the xla_allow_excess_precision flag.](images/a-postmortem-of-three-recent-issues_02.png)Code snippet showing a minimized reproducer merged as part of the August 11 change that root-caused the "bug" being worked around in December 2024. In reality, it’s expected behavior of the `xla_allow_excess_precision` flag.
 
 Our fix removed the December workaround because we believed we'd solved the root cause. This led to a deeper bug in the [approximate top-k](https://docs.jax.dev/en/latest/_autosummary/jax.lax.approx_max_k.html) operation—a performance optimization that quickly finds the highest probability tokens.[3] This approximation sometimes returned completely wrong results, but only for certain batch sizes and model configurations. The December workaround had been inadvertently masking this problem.
 
-![Slack message showing reproducer of the underlying approximate top-k bug shared with the XLA:TPU engineers who developed the algorithm. The code returns correct results when run on CPUs.](a-postmortem-of-three-recent-issues_03.png)Reproducer of the underlying approximate top-k bug shared with the XLA:TPU engineers who [developed the algorithm](https://arxiv.org/pdf/2206.14286). The code returns correct results when run on CPUs.
+![Slack message showing reproducer of the underlying approximate top-k bug shared with the XLA:TPU engineers who developed the algorithm. The code returns correct results when run on CPUs.](images/a-postmortem-of-three-recent-issues_03.png)Reproducer of the underlying approximate top-k bug shared with the XLA:TPU engineers who [developed the algorithm](https://arxiv.org/pdf/2206.14286). The code returns correct results when run on CPUs.
 
 The bug's behavior was frustratingly inconsistent. It changed depending on unrelated factors such as what operations ran before or after it, and whether debugging tools were enabled. The same prompt might work perfectly on one request and fail on the next.
 

@@ -42,7 +42,7 @@ We’ve built this on top of OS level primitives such as [Linux bubblewrap](http
 
 Both components are configurable: you can easily choose to allow or disallow specific file paths or domains.
 
-![This image illustrations how sandboxing in Claude Code works.](claude-code-sandboxing_00.png)Claude Code's sandboxing architecture isolates code execution with filesystem and network controls, automatically allowing safe operations, blocking malicious ones, and asking permission only when needed.
+![This image illustrations how sandboxing in Claude Code works.](images/claude-code-sandboxing_00.png)Claude Code's sandboxing architecture isolates code execution with filesystem and network controls, automatically allowing safe operations, blocking malicious ones, and asking permission only when needed.
 
 Sandboxing ensures that even a successful prompt injection is fully isolated, and cannot impact overall user security. This way, a compromised Claude Code can't steal your SSH keys, or phone home to an attacker's server.
 
@@ -56,7 +56,7 @@ Today, we're also releasing [Claude Code on the web](https://docs.claude.com/en/
 
 Claude Code on the web uses a custom proxy service that transparently handles all git interactions. Inside the sandbox, the git client authenticates to this service with a custom-built scoped credential. The proxy verifies this credential and the contents of the git interaction (e.g. ensuring it is only pushing to the configured branch), then attaches the right authentication token before sending the request to GitHub.
 
-![This illustration depicts how Claude Code on the web uses a custom proxy to handle all git interactions.](claude-code-sandboxing_01.png)Claude Code's Git integration routes commands through a secure proxy that validates authentication tokens, branch names, and repository destinations—allowing safe version control workflows while preventing unauthorized pushes.
+![This illustration depicts how Claude Code on the web uses a custom proxy to handle all git interactions.](images/claude-code-sandboxing_01.png)Claude Code's Git integration routes commands through a secure proxy that validates authentication tokens, branch names, and repository destinations—allowing safe version control workflows while preventing unauthorized pushes.
 
 ## Getting started
 

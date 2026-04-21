@@ -108,15 +108,15 @@ _ChatGPT的示例回答_
 
 此回答有一定帮助，但用户可能希望使用具备额外功能的应用，在不切换上下文或离开对话的情况下直接浏览真实房源。
 
-![找房示例](what-makes-a-great-chatgpt-app_00.png) _使用Zillow应用后的回答_
+![找房示例](images/what-makes-a-great-chatgpt-app_00.png) _使用Zillow应用后的回答_
 
 通过Zillow应用，用户获得了额外能力：搜索实时房源列表、按条件筛选、查看详尽的房源信息——所有这些都无需离开聊天界面。
 
-![Zillow找房功能](what-makes-a-great-chatgpt-app_01.png)
+![Zillow找房功能](images/what-makes-a-great-chatgpt-app_01.png)
 
 支持全屏模式以增强探索体验
 
-![全屏找房视图](what-makes-a-great-chatgpt-app_02.png)
+![全屏找房视图](images/what-makes-a-great-chatgpt-app_02.png)
 
 此处的价值在于：你既获得了模型提供的丰富上下文，又享受了能动态响应意图的增强型应用体验。想查询特定区域的房源吗？通过Zillow应用，模型会调用Zillow MCP服务器上的工具并重新渲染用户界面。
 
@@ -165,7 +165,7 @@ _ChatGPT的示例回答_
 
 例如，ChatGPT中的Canva应用程序可以生成完整的演示文稿草稿，用户可以进入全屏模式，这符合用户对幻灯片导航的预期，但更深入的逐页编辑仍需在完整的Canva编辑器中完成。
 
-![canva-app-fs](what-makes-a-great-chatgpt-app_03.png)
+![canva-app-fs](images/what-makes-a-great-chatgpt-app_03.png)
 
 ## 为对话与探索而设计
 
@@ -187,7 +187,7 @@ _ChatGPT的示例回答_
 
 构建一个完整规模的演示文稿需要上下文。Canva 应用通过追问来引导用户梳理他们想要创建的内容。
 
-![canva-app-discovery](what-makes-a-great-chatgpt-app_04.png)
+![canva-app-discovery](images/what-makes-a-great-chatgpt-app_04.png)
 
 ### b) 明确意图
 
@@ -207,7 +207,7 @@ _ChatGPT的示例回答_
 
 如下图所示，工具不仅提供了几个选项，还会在用户需要进一步优化时深入询问：
 
-![canva-app](what-makes-a-great-chatgpt-app_05.png)
+![canva-app](images/what-makes-a-great-chatgpt-app_05.png)
 
 ### c) 无品牌认知
 

@@ -18,7 +18,7 @@ An **evaluation**(“eval”) is a test for an AI system: give an AI an input, t
 
 **Single-turn evaluations** are straightforward: a prompt, a response, and grading logic. For earlier LLMs, single-turn, non-agentic evals were the main evaluation method. As AI capabilities have advanced, **multi-turn evaluations** have become increasingly common.
 
-![image](demystifying-evals-for-ai-agents_00.png)In a simple eval, an agent processes a prompt, and a grader checks if the output matches expectations. For a more complex multi-turn eval, a coding agent receives tools, a task (building an MCP server in this case), and an environment, executes an "agent loop" (tool calls and reasoning), and updates the environment with the implementation. Grading then uses unit tests to verify the working MCP server.
+![image](images/demystifying-evals-for-ai-agents_00.png)In a simple eval, an agent processes a prompt, and a grader checks if the output matches expectations. For a more complex multi-turn eval, a coding agent receives tools, a task (building an MCP server in this case), and an environment, executes an "agent loop" (tool calls and reasoning), and updates the environment with the implementation. Grading then uses unit tests to verify the working MCP server.
 
 **Agent evaluations** are even more complex. Agents use tools across many turns, modifying state in the environment and adapting as they go—which means mistakes can propagate and compound. Frontier models can also find creative solutions that surpass the limits of static evals. For instance, Opus 4.5 solved a [𝜏2-bench](https://github.com/sierra-research/tau2-bench) problem about booking a flight by [discovering](https://www.anthropic.com/news/claude-opus-4-5) a loophole in the policy. It “failed” the evaluation as written, but actually came up with a better solution for the user.
 
@@ -33,7 +33,7 @@ When building agent evaluations, we use the following definitions:
   * An **agent harness**(or **scaffold**) is the system that enables a model to act as an agent: it processes inputs, orchestrates tool calls, and returns results. When we evaluate “an agent,” we’re evaluating the harness _and_ the model working together. For example, [Claude Code](https://claude.com/product/claude-code) is a flexible agent harness, and we used its core primitives through the [Agent SDK](https://platform.claude.com/docs/en/agent-sdk/overview) to build our [long-running agent harness](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents).
   * An **evaluation suite** is a collection of tasks designed to measure specific capabilities or behaviors. Tasks in a suite typically share a broad goal. For instance, a customer support eval suite might test refunds, cancellations, and escalations.
 
-![image](demystifying-evals-for-ai-agents_01.png)Components of evaluations for agents.
+![image](images/demystifying-evals-for-ai-agents_01.png)Components of evaluations for agents.
 
 ## Why build evaluations?
 
@@ -254,7 +254,7 @@ Two metrics help capture this nuance:
 
 [**pass^k**](https://arxiv.org/abs/2406.12045) measures the probability that _all k_ trials succeed. As _k_ increases, pass^k falls since demanding consistency across more trials is a harder bar to clear. If your agent has a 75% per-trial success rate and you run 3 trials, the probability of passing all three is (0.75)³ ≈ 42%. This metric especially matters for customer-facing agents where users expect reliable behavior every time.
 
-![image](demystifying-evals-for-ai-agents_02.png)pass@k and pass^k diverge as trials increase. At k=1, they're identical (both equal the per-trial success rate). By k=10, they tell opposite stories: pass@k approaches 100% while pass^k falls to 0%.
+![image](images/demystifying-evals-for-ai-agents_02.png)pass@k and pass^k diverge as trials increase. At k=1, they're identical (both equal the per-trial success rate). By k=10, they tell opposite stories: pass@k approaches 100% while pass^k falls to 0%.
 
 Both metrics are useful, and which to use depends on product requirements: pass@k for tools where one success matters, pass^k for agents where consistency is essential.
 
@@ -330,7 +330,7 @@ We recommend practicing eval-driven development: build evals to define planned c
 
 The people closest to product requirements and users are best positioned to define success. With current model capabilities, product managers, customer success managers, or salespeople can use Claude Code to contribute an eval task as a PR—let them! Or, even better, actively enable them.
 
-![image](demystifying-evals-for-ai-agents_03.png)_The process of creating an effective evaluation._
+![image](images/demystifying-evals-for-ai-agents_03.png)_The process of creating an effective evaluation._
 
 ## How evals fit with other methods for a holistic understanding of agents
 
@@ -434,7 +434,7 @@ Method| Pros| Cons
 
 These methods map to different stages of agent development. Automated evals are especially useful pre-launch and in CI/CD, running on each agent change and model upgrade as the first line of defense against quality problems. Production monitoring kicks in post-launch to detect distribution drift and unanticipated real-world failures. A/B testing validates significant changes once you have sufficient traffic. User feedback and transcript review are ongoing practices to fill the gaps: triage feedback constantly, sample transcripts to read weekly, and dig deeper as needed. Reserve systematic human studies for calibrating LLM graders or evaluating subjective outputs where human consensus serves as the reference standard.
 
-![image](demystifying-evals-for-ai-agents_04.png)Like the [Swiss Cheese Model](https://en.wikipedia.org/wiki/Swiss_cheese_model) from safety engineering, no single evaluation layer catches every issue. With multiple methods combined, failures that slip through one layer are caught by another.
+![image](images/demystifying-evals-for-ai-agents_04.png)Like the [Swiss Cheese Model](https://en.wikipedia.org/wiki/Swiss_cheese_model) from safety engineering, no single evaluation layer catches every issue. With multiple methods combined, failures that slip through one layer are caught by another.
 
 The most effective teams combine these methods: automated evals for fast iteration, production monitoring for ground truth, and periodic human review for calibration.
 

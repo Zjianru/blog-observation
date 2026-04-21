@@ -481,8 +481,8 @@ Desktop Extensions represent a fundamental shift in how users interact with loca
 
 Internally, we’re using desktop extensions to share highly experimental MCP servers - some fun, some useful.. One team experimented to see how far our models could make it when directly connected to a GameBoy, similar to our [“Claude plays Pokémon” research](https://www.anthropic.com/news/visible-extended-thinking). We used Desktop Extensions to package a single extension that opens up the popular [PyBoy](https://github.com/Baekalfen/PyBoy) GameBoy emulator and lets Claude take control. We believe that countless opportunities exist to connect the model’s capabilities to the tools, data, and applications users already have on their local machines.
 
-![A desktop showing the PyBoy MCP with Super Mario Land start screen](desktop-extensions_00.png)
+![A desktop showing the PyBoy MCP with Super Mario Land start screen](images/desktop-extensions_00.png)
 
 We can't wait to see what you build. The same creativity that brought us thousands of MCP servers can now reach millions of users with just one click. Ready to share your MCP server? [Submit your extension for review](https://forms.gle/tyiAZvch1kDADKoP9).
 
-[![Interlocking puzzle piece with complex geometric shape and detailed surface texture](desktop-extensions_01.svg)Looking to learn more?Explore courses](https://anthropic.skilljar.com/)
+[![Interlocking puzzle piece with complex geometric shape and detailed surface texture](images/desktop-extensions_01.svg)Looking to learn more?Explore courses](https://anthropic.skilljar.com/)

@@ -71,7 +71,7 @@
   * **航空领域**：使用优化提示的“思考”工具在 pass^1 指标上达到了 0.570，而基线仅为 0.370——相对提升了 54%；
   * **零售领域**：仅使用“思考”工具就达到了 0.812，而基线为 0.783。
 
-![一张折线图，展示了 Claude 3.7 Sonnet 在 Tau-Bench 评估“航空”领域的性能表现](claude-think-tool_00.png)Claude 3.7 Sonnet 在四种不同配置下，于 Tau-Bench 评估“航空”领域的性能表现。
+![一张折线图，展示了 Claude 3.7 Sonnet 在 Tau-Bench 评估“航空”领域的性能表现](images/claude-think-tool_00.png)Claude 3.7 Sonnet 在四种不同配置下，于 Tau-Bench 评估“航空”领域的性能表现。
 
 Claude 3.7 Sonnet 在 Tau-Bench 评估“航空”领域的性能表现
 
@@ -133,7 +133,7 @@ Claude 3.7 Sonnet 在 Tau-Bench 评估“航空”领域的性能表现
 
 在零售领域，我们还测试了多种配置以理解每种方法的具体影响
 
-![展示Claude 3.7 Sonnet在Tau-Bench评估“零售”领域表现的折线图](claude-think-tool_01.jpg)Claude 3.7 Sonnet在Tau-Bench评估“零售”领域中三种不同配置下的表现。
+![展示Claude 3.7 Sonnet在Tau-Bench评估“零售”领域表现的折线图](images/claude-think-tool_01.jpg)Claude 3.7 Sonnet在Tau-Bench评估“零售”领域中三种不同配置下的表现。
 
 Claude 3.7 Sonnet在Tau-Bench评估“零售”领域中的表现
 

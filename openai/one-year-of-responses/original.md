@@ -33,7 +33,7 @@ Together, these systems allow teams to discover, track, and fix issues in AI age
 
 ### Monitoring architecture
 
-![Raindrop monitoring architecture](one-year-of-responses_00.jpg)
+![Raindrop monitoring architecture](images/one-year-of-responses_00.jpg)
 
 This architecture lets teams continuously monitor agent behavior and quickly respond when issues occur.
 
@@ -97,7 +97,7 @@ The output of this stage is a structured context package, which becomes the inpu
 
 ### 2\. “ _Oracle_ ” deep reasoning workflow
 
-![Repo Prompt Oracle workflow diagram](one-year-of-responses_01.png)
+![Repo Prompt Oracle workflow diagram](images/one-year-of-responses_01.png)
 
 Unlike the context-building agents, the “Oracle” model (the deep reasoning model) does not perform tool calls or additional information retrieval. Instead, it focuses entirely on analyzing the curated context provided to it.
 
@@ -111,7 +111,7 @@ If needed, the system launches another cycle of context gathering and reasoning.
 
 #### Iterative workflow
 
-![Repo Prompt iterative workflow](one-year-of-responses_02.jpg)
+![Repo Prompt iterative workflow](images/one-year-of-responses_02.jpg)
 
 The system relies on several capabilities of the Responses API:
 
@@ -150,7 +150,7 @@ For example, users can ask things like:
   * What other albums did this artist release?
   * How rare is this pressing?
 
-![Ask This Drop interface](one-year-of-responses_03.png)
+![Ask This Drop interface](images/one-year-of-responses_03.png)
 
 _Ask This Drop gives Collxn users a chat interface with their vinyl records._
 
@@ -162,7 +162,7 @@ This approach turns a static record collection into a conversational experience 
 
 Collxn also uses the OpenAI Agents SDK to generate a “recent news” section for the artist featured in the Daily Drop email.
 
-![Collxn Daily Drop artist news section](one-year-of-responses_04.png)
+![Collxn Daily Drop artist news section](images/one-year-of-responses_04.png)
 
 _The OpenAI Agents SDK powers the Collxn Daily Drop’s artist news section._
 
@@ -170,7 +170,7 @@ This feature deploys a web search-powered agent to find recent articles or updat
 
 Ultimately Ash migrated Collxn to the Responses API to launch “Ask This Drop”. By doing so, the application could support multi-step reasoning in conversational workflows as well as built-in and custom tool calling. Collxn’s Responses API implementation is using the built-in web search tool for in-chat artist news search in addition to 16 custom tools for working with the Discogs API, querying the user’s Collxn account, and more.
 
-![Collxn Daily Drop artist news section](one-year-of-responses_05.png)
+![Collxn Daily Drop artist news section](images/one-year-of-responses_05.png)
 
 _The Responses API web search tool powers live artist news lookup in Collxn’s “Ask This Drop”._
 
@@ -237,7 +237,7 @@ Hexagon runs a daily simulation pipeline to measure how AI assistants answer pro
 
 Retail customers can then see how often their products appear and how those answers change over time.
 
-![Hexagon response simulation architecture](one-year-of-responses_06.png)
+![Hexagon response simulation architecture](images/one-year-of-responses_06.png)
 
 ### 2\. Multi-agent content generation pipeline
 
@@ -245,13 +245,13 @@ In addition to analytics, Hexagon uses the Responses API to generate optimized c
 
 The system uses a four-agent architecture, with each agent performing a specialized step in the pipeline and passing outputs to the next stage until the final content is produced and published. The agents communicate through non-deterministic loops for iterative refinement before publishing.
 
-![Hexagon multi-agent content generation pipeline](one-year-of-responses_07.jpg)
+![Hexagon multi-agent content generation pipeline](images/one-year-of-responses_07.jpg)
 
 ### 3\. Dashboard and customer tools
 
 The platform also includes “Hexi”, a chatbot built with function calling via the Responses API. With Hexi, customers can explore analytics conversationally and generate summaries of their AI visibility data in a self-serve manner. Hexagon surfaces its analytics through a retailer dashboard that tracks how products appear in AI-generated answers.
 
-![Hexagon dashboard screenshot](one-year-of-responses_08.png)
+![Hexagon dashboard screenshot](images/one-year-of-responses_08.png)
 
 Hexagon relies on several key capabilities of the Responses API to make simulations realistic and useful across their product:
 

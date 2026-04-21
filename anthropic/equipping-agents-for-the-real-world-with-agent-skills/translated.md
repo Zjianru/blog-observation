@@ -12,7 +12,7 @@ _更新：我们已将_[_Agent Skills_](https://agentskills.io/)_发布为跨平
 
 为智能体构建技能，就像为新员工编写入职指南。与其为每个用例零散地定制设计智能体，现在任何人都可以通过捕获和分享程序性知识，用可组合的能力来专业化他们的智能体。在本文中，我们将解释什么是技能，展示它们如何运作，并分享构建自有技能的最佳实践。
 
-![要激活技能，您只需编写一个包含自定义指导的SKILL.md文件。](equipping-agents-for-the-real-world-with-agent-skills_00.png)技能是一个包含SKILL.md文件的目录，该文件内含组织有序的指令、脚本和资源文件夹，为智能体赋予额外能力。
+![要激活技能，您只需编写一个包含自定义指导的SKILL.md文件。](images/equipping-agents-for-the-real-world-with-agent-skills_00.png)技能是一个包含SKILL.md文件的目录，该文件内含组织有序的指令、脚本和资源文件夹，为智能体赋予额外能力。
 
 ## 技能的结构剖析
 
@@ -22,17 +22,17 @@ _更新：我们已将_[_Agent Skills_](https://agentskills.io/)_发布为跨平
 
 这些元数据是**第一层**的_渐进式披露_：它提供了足够的信息，让Claude知道何时应使用每个技能，而无需将所有内容加载到上下文中。该文件的实际正文是**第二层**的详细信息。如果Claude认为该技能与当前任务相关，它将通过读取完整的`SKILL.md`文件内容到上下文中来加载该技能。
 
-![SKILL.md文件的解剖图，包括相关元数据：名称、描述以及与技能应采取的特定操作相关的上下文。](equipping-agents-for-the-real-world-with-agent-skills_01.jpg)SKILL.md文件必须以包含文件名和描述的YAML前置内容开头，这些内容在启动时会被加载到系统提示中。
+![SKILL.md文件的解剖图，包括相关元数据：名称、描述以及与技能应采取的特定操作相关的上下文。](images/equipping-agents-for-the-real-world-with-agent-skills_01.jpg)SKILL.md文件必须以包含文件名和描述的YAML前置内容开头，这些内容在启动时会被加载到系统提示中。
 
 随着技能复杂度的增加，它们可能包含过多的上下文，无法全部放入单个`SKILL.md`文件中，或者某些上下文仅在特定场景下相关。在这种情况下，技能可以在技能目录中捆绑额外的文件，并在`SKILL.md`中按名称引用它们。这些额外的链接文件是**第三层**（及更高级别）的详细信息，Claude可以根据需要选择性地导航和发现它们。
 
 在下方展示的PDF技能中，`SKILL.md`引用了技能作者选择与核心`SKILL.md`捆绑的两个附加文件（`reference.md`和`forms.md`）。通过将表单填写说明移至单独的文件（`forms.md`），技能作者能够保持技能核心的精简，相信Claude仅在填写表单时才会读取`forms.md`。
 
-![如何将附加内容捆绑到SKILL.md文件中。](equipping-agents-for-the-real-world-with-agent-skills_02.jpg)您可以将更多上下文（通过附加文件）整合到您的技能中，然后Claude可以根据系统提示触发这些内容。
+![如何将附加内容捆绑到SKILL.md文件中。](images/equipping-agents-for-the-real-world-with-agent-skills_02.jpg)您可以将更多上下文（通过附加文件）整合到您的技能中，然后Claude可以根据系统提示触发这些内容。
 
 渐进式披露是使Agent技能灵活且可扩展的核心设计原则。就像一本组织良好的手册，从目录开始，然后是具体章节，最后是详细的附录，技能让Claude仅在需要时加载信息：
 
-![此图描绘了技能中上下文的渐进式披露方式。](equipping-agents-for-the-real-world-with-agent-skills_03.png)
+![此图描绘了技能中上下文的渐进式披露方式。](images/equipping-agents-for-the-real-world-with-agent-skills_03.png)
 
 拥有文件系统和代码执行工具的智能体在处理特定任务时，无需将整个技能内容读入其上下文窗口。这意味着可以捆绑到技能中的上下文量实际上是无限的。
 
@@ -40,7 +40,7 @@ _更新：我们已将_[_Agent Skills_](https://agentskills.io/)_发布为跨平
 
 下图展示了当用户消息触发技能时，上下文窗口如何变化。
 
-![此图展示了技能如何在上下文窗口中被触发。](equipping-agents-for-the-real-world-with-agent-skills_04.png)技能通过系统提示在上下文窗口中被触发。
+![此图展示了技能如何在上下文窗口中被触发。](images/equipping-agents-for-the-real-world-with-agent-skills_04.png)技能通过系统提示在上下文窗口中被触发。
 
 所示操作序列如下：
 
@@ -57,7 +57,7 @@ _更新：我们已将_[_Agent Skills_](https://agentskills.io/)_发布为跨平
 
 在我们的示例中，PDF技能包含一个预编写的Python脚本，用于读取PDF并提取所有表单字段。Claude可以运行此脚本，而无需将脚本或PDF加载到上下文中。由于代码具有确定性，这一工作流程是稳定且可重复的。
 
-![这张图片展示了如何通过技能执行代码。](equipping-agents-for-the-real-world-with-agent-skills_05.png)技能也可以包含代码，供Claude根据任务性质自行决定作为工具执行。
+![这张图片展示了如何通过技能执行代码。](images/equipping-agents-for-the-real-world-with-agent-skills_05.png)技能也可以包含代码，供Claude根据任务性质自行决定作为工具执行。
 
 ## 开发与评估技能
 

@@ -87,7 +87,7 @@ Define constraints such as one H1 headline, no more than six sections, two typef
 
 Reference screenshots or mood boards help the model infer layout rhythm, typography scale, spacing systems, and imagery treatment. Below is an example of GPT-5.4 generating its own mood board for the user to review.
 
-![Example mood board used to guide GPT-5.4 toward a cohesive visual direction](designing-delightful-frontends-with-gpt-5-4_00.png)
+![Example mood board used to guide GPT-5.4 toward a cohesive visual direction](images/designing-delightful-frontends-with-gpt-5-4_00.png)
 
 _
 

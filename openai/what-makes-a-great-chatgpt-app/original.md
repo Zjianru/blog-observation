@@ -108,15 +108,15 @@ _An example answer from ChatGPT_
 
 This answer is helpful, however, the user may want to use an app with additional capabilities to directly browse real properties without changing context or leaving the conversation.
 
-![find-homes](what-makes-a-great-chatgpt-app_00.png) _Answer with the Zillow app_
+![find-homes](images/what-makes-a-great-chatgpt-app_00.png) _Answer with the Zillow app_
 
 With the Zillow app, the user has the additional ability to search live property listings, filter by criteria, and view rich property details — all without leaving the chat.
 
-![find-homes-zillow](what-makes-a-great-chatgpt-app_01.png)
+![find-homes-zillow](images/what-makes-a-great-chatgpt-app_01.png)
 
 Fullscreen mode for enriched discovery
 
-![find-homes-fs](what-makes-a-great-chatgpt-app_02.png)
+![find-homes-fs](images/what-makes-a-great-chatgpt-app_02.png)
 
 The value here is you still get rich context from the model, and also an enriched app experience that can dynamically interact with your intent. Want to ask it for homes in a specific region? With the Zillow app, the model invokes the tool on the Zillow MCP server and re-renders the UI layer.
 
@@ -163,7 +163,7 @@ Another way to think about this: if someone on your team asked, “What are the 
 
 For example, the Canva app in ChatGPT can generate an entire presentation draft and the user can enter full screen mode that matches user expectations for navigating a slide deck, but deeper slide-by-slide editing still happens in the full Canva editor.
 
-![canva-app-fs](what-makes-a-great-chatgpt-app_03.png)
+![canva-app-fs](images/what-makes-a-great-chatgpt-app_03.png)
 
 ## Design for conversation and discovery
 
@@ -185,7 +185,7 @@ Let’s take a look at how that is handled in the **Canva** app:
 
 Building a full scale presentation requires context. The Canva app asks for follow up questions to get the user to synthesize what they’re looking to build.
 
-![canva-app-discovery](what-makes-a-great-chatgpt-app_04.png)
+![canva-app-discovery](images/what-makes-a-great-chatgpt-app_04.png)
 
 ### b) Specific intent
 
@@ -205,7 +205,7 @@ When the user’s intent becomes clear and asks to generate a presentation, the 
 
 As seen below, the tool shares a few options and also probes deeper if the user wants additional refinements:
 
-![canva-app](what-makes-a-great-chatgpt-app_05.png)
+![canva-app](images/what-makes-a-great-chatgpt-app_05.png)
 
 ### c) No brand awareness
 

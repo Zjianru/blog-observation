@@ -12,7 +12,7 @@ This led us to create [**Agent Skills**](https://www.anthropic.com/news/skills):
 
 Building a skill for an agent is like putting together an onboarding guide for a new hire. Instead of building fragmented, custom-designed agents for each use case, anyone can now specialize their agents with composable capabilities by capturing and sharing their procedural knowledge. In this article, we explain what Skills are, show how they work, and share best practices for building your own.
 
-![To activate skills, all you need to do is write a SKILL.md file with custom guidance for your agent.](equipping-agents-for-the-real-world-with-agent-skills_00.png)A skill is a directory containing a SKILL.md file that contains organized folders of instructions, scripts, and resources that give agents additional capabilities.
+![To activate skills, all you need to do is write a SKILL.md file with custom guidance for your agent.](images/equipping-agents-for-the-real-world-with-agent-skills_00.png)A skill is a directory containing a SKILL.md file that contains organized folders of instructions, scripts, and resources that give agents additional capabilities.
 
 ## The anatomy of a skill
 
@@ -22,17 +22,17 @@ At its simplest, a skill is a directory that contains a `SKILL.md file`. This fi
 
 This metadata is the **first level** of _progressive disclosure_ : it provides just enough information for Claude to know when each skill should be used without loading all of it into context. The actual body of this file is the **second level** of detail. If Claude thinks the skill is relevant to the current task, it will load the skill by reading its full `SKILL.md` into context.
 
-![Anatomy of a SKILL.md file including the relevant metadata: name, description, and context related to the specific actions the skill should take.](equipping-agents-for-the-real-world-with-agent-skills_01.jpg)A SKILL.md file must begin with YAML Frontmatter that contains a file name and description, which is loaded into its system prompt at startup.
+![Anatomy of a SKILL.md file including the relevant metadata: name, description, and context related to the specific actions the skill should take.](images/equipping-agents-for-the-real-world-with-agent-skills_01.jpg)A SKILL.md file must begin with YAML Frontmatter that contains a file name and description, which is loaded into its system prompt at startup.
 
 As skills grow in complexity, they may contain too much context to fit into a single `SKILL.md`, or context that’s relevant only in specific scenarios. In these cases, skills can bundle additional files within the skill directory and reference them by name from `SKILL.md`. These additional linked files are the **third level** (and beyond) of detail, which Claude can choose to navigate and discover only as needed.
 
 In the PDF skill shown below, the `SKILL.md` refers to two additional files (`reference.md` and `forms.md`) that the skill author chooses to bundle alongside the core `SKILL.md`. By moving the form-filling instructions to a separate file (`forms.md`), the skill author is able to keep the core of the skill lean, trusting that Claude will read `forms.md` only when filling out a form.
 
-![How to bundle additional content into a SKILL.md file.](equipping-agents-for-the-real-world-with-agent-skills_02.jpg)You can incorporate more context (via additional files) into your skill that can then be triggered by Claude based on the system prompt.
+![How to bundle additional content into a SKILL.md file.](images/equipping-agents-for-the-real-world-with-agent-skills_02.jpg)You can incorporate more context (via additional files) into your skill that can then be triggered by Claude based on the system prompt.
 
 Progressive disclosure is the core design principle that makes Agent Skills flexible and scalable. Like a well-organized manual that starts with a table of contents, then specific chapters, and finally a detailed appendix, skills let Claude load information only as needed:
 
-![This image depicts how progressive disclosure of context in Skills.](equipping-agents-for-the-real-world-with-agent-skills_03.png)
+![This image depicts how progressive disclosure of context in Skills.](images/equipping-agents-for-the-real-world-with-agent-skills_03.png)
 
 Agents with a filesystem and code execution tools don’t need to read the entirety of a skill into their context window when working on a particular task. This means that the amount of context that can be bundled into a skill is effectively unbounded.
 
@@ -40,7 +40,7 @@ Agents with a filesystem and code execution tools don’t need to read the entir
 
 The following diagram shows how the context window changes when a skill is triggered by a user’s message.
 
-![This image depicts how skills are triggered in your context window.](equipping-agents-for-the-real-world-with-agent-skills_04.png)Skills are triggered in the context window via your system prompt.
+![This image depicts how skills are triggered in your context window.](images/equipping-agents-for-the-real-world-with-agent-skills_04.png)Skills are triggered in the context window via your system prompt.
 
 The sequence of operations shown:
 
@@ -57,7 +57,7 @@ Large language models excel at many tasks, but certain operations are better sui
 
 In our example, the PDF skill includes a pre-written Python script that reads a PDF and extracts all form fields. Claude can run this script without loading either the script or the PDF into context. And because code is deterministic, this workflow is consistent and repeatable.
 
-![This image depicts how code is executed via Skills.](equipping-agents-for-the-real-world-with-agent-skills_05.png)Skills can also include code for Claude to execute as tools at its discretion based on the nature of the task.
+![This image depicts how code is executed via Skills.](images/equipping-agents-for-the-real-world-with-agent-skills_05.png)Skills can also include code for Claude to execute as tools at its discretion based on the nature of the task.
 
 ## Developing and evaluating skills
 

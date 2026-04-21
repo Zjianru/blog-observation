@@ -40,7 +40,7 @@ AI音频能力为用户体验开启了一个激动人心的新前沿。今年早
 
 新版实时迷你模型快照更适用于实时助手场景，在指令遵循和工具调用方面有明显提升。根据我们内部的语音到语音评估，与上一版本快照相比，新版在指令遵循准确率上提升了 18.6 个百分点，工具调用准确率提升了 12.9 个百分点，同时在 Big Bench Audio 基准测试中也取得了进步。
 
-![语音到语音评估图表 1](updates-audio-models_00.png)![语音到语音评估图表 2](updates-audio-models_01.png)![语音到语音评估图表 3](updates-audio-models_02.png)
+![语音到语音评估图表 1](images/updates-audio-models_00.png)![语音到语音评估图表 2](images/updates-audio-models_01.png)![语音到语音评估图表 3](images/updates-audio-models_02.png)
 
 这些改进共同作用，使得在实时低延迟场景中，多轮交互更加可靠，函数执行也更加稳定。
 
@@ -58,7 +58,7 @@ AI音频能力为用户体验开启了一个激动人心的新前沿。今年早
 
 我们最新的文本转语音模型 `gpt-4o-mini-tts-2025-12-15` 在准确度上实现了显著飞跃，与上一代模型相比，在标准语音基准测试中的词错误率大幅降低。在 Common Voice 和 FLEURS 数据集上，词错误率降低了约 35%，同时在 Multilingual LibriSpeech 上也取得了稳定的提升。
 
-![文本转语音评估图表 1](updates-audio-models_03.png)![文本转语音评估图表 2](updates-audio-models_04.png)![文本转语音评估图表 3](updates-audio-models_05.png)
+![文本转语音评估图表 1](images/updates-audio-models_03.png)![文本转语音评估图表 2](images/updates-audio-models_04.png)![文本转语音评估图表 3](images/updates-audio-models_05.png)
 
 这些结果共同体现了模型在多种语言中发音准确性和鲁棒性的提升。
 
@@ -68,7 +68,7 @@ AI音频能力为用户体验开启了一个激动人心的新前沿。今年早
 
 最新的转录模型 `gpt-4o-mini-transcribe-2025-12-15` 在准确性和可靠性方面均表现出显著提升。在 Common Voice 和 FLEURS（无语言提示）等标准自动语音识别基准测试中，其词错误率低于以往模型。我们针对真实对话场景（如简短用户发言和嘈杂背景）优化了该模型的行为。在一项内部“噪声环境下的幻觉测试”中，我们播放了包含真实背景噪声和不同说话间隔（包括静默）的音频片段，该模型产生的幻觉比 Whisper v2 减少约 90%，比之前的 GPT-4o-transcribe 模型减少约 70%。
 
-![转录评估图表1](updates-audio-models_06.png)![转录评估图表2](updates-audio-models_07.png)![转录评估图表3](updates-audio-models_08.png)
+![转录评估图表1](images/updates-audio-models_06.png)![转录评估图表2](images/updates-audio-models_07.png)![转录评估图表3](images/updates-audio-models_08.png)
 
 此模型快照在中文（普通话）、印地语、孟加拉语、日语、印尼语和意大利语方面表现尤为出色。
 

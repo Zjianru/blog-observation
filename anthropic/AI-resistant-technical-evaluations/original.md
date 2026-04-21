@@ -56,7 +56,7 @@ I built a Python simulator for a fake accelerator with characteristics that rese
 
 The machine includes features that make accelerator optimization interesting: manually managed scratchpad memory (unlike CPUs, accelerators often require explicit memory management), VLIW (multiple execution units running in parallel each cycle, requiring efficient instruction packing), SIMD (vector operations on many elements per instruction), and multicore (distributing work across cores).
 
-![image](AI-resistant-technical-evaluations_00.png)
+![image](images/AI-resistant-technical-evaluations_00.png)
 
 The task is a parallel tree traversal, deliberately not deep learning flavored, since most performance engineers hadn't worked on deep learning yet and could learn domain specifics on the job. The problem was inspired by branchless SIMD decision tree inference, a classical ML optimization challenge as a nod to the past, which only a few candidates had encountered before.
 
@@ -91,7 +91,7 @@ Then it stopped, convinced it had hit an insurmountable memory bandwidth bottlen
 
 We tried it out in our internal test-time compute harness for more rigor and confirmed it could both beat humans in 2 hours and continue climbing with time. Post-launch we even improved our harness in a generic way and got a higher score.
 
-![image](AI-resistant-technical-evaluations_01.png)
+![image](images/AI-resistant-technical-evaluations_01.png)
 
 I had a problem. We were about to release a model where the best strategy on our take-home would be delegating to Claude Code.
 

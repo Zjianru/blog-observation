@@ -22,7 +22,7 @@
 * 为提升令牌效率优化工具响应
 * 对工具描述和规格进行提示工程
 
-![这是一张描绘工程师如何使用Claude Code评估智能体工具效能的图片。](writing-tools-for-agents_00.png)构建评估体系可以让你系统地衡量工具的性能。你可以使用Claude Code根据此评估自动优化你的工具。
+![这是一张描绘工程师如何使用Claude Code评估智能体工具效能的图片。](images/writing-tools-for-agents_00.png)构建评估体系可以让你系统地衡量工具的性能。你可以使用Claude Code根据此评估自动优化你的工具。
 
 ## 什么是工具？
 
@@ -58,7 +58,7 @@
 
 接下来，你需要通过运行评估来衡量Claude使用你工具的效果。首先，基于真实世界用途生成大量评估任务。我们建议与智能体协作，帮助分析结果并确定如何改进工具。在我们的[工具评估指南](https://platform.claude.com/cookbook/tool-evaluation-tool-evaluation)中查看端到端的流程。
 
-![这张图表测量了人工编写与Claude优化的Slack MCP服务器的测试集准确率。](writing-tools-for-agents_01.png)我们内部Slack工具的保留测试集性能
+![这张图表测量了人工编写与Claude优化的Slack MCP服务器的测试集准确率。](images/writing-tools-for-agents_01.png)我们内部Slack工具的保留测试集性能
 
 **生成评估任务**
 
@@ -90,7 +90,7 @@
 
 除顶层准确率外，我们建议收集其他指标，例如单个工具调用与任务的总运行时长、工具调用总次数、总令牌消耗量以及工具错误数。追踪工具调用有助于揭示智能体采用的常见工作流程，并为工具整合提供优化机会。
 
-![该图表对比了人工编写与Claude优化的Asana MCP服务器在测试集上的准确率。](writing-tools-for-agents_02.png)我们内部Asana工具的留出测试集表现
+![该图表对比了人工编写与Claude优化的Asana MCP服务器在测试集上的准确率。](images/writing-tools-for-agents_02.png)我们内部Asana工具的留出测试集表现
 
 ****
 
@@ -166,11 +166,11 @@
 
 以下是详细工具响应示例（206个词元）：
 
-![此代码片段展示了一个详细工具响应的示例。](writing-tools-for-agents_03.png)
+![此代码片段展示了一个详细工具响应的示例。](images/writing-tools-for-agents_03.png)
 
 这是一个简洁工具响应的示例（72个词元）：
 
-![此代码片段展示了一个简洁工具响应的示例。](writing-tools-for-agents_04.png)Slack的对话线程和线程回复通过唯一的`thread_ts`标识符进行识别，该标识符是获取线程回复所必需的。`thread_ts`及其他ID（`channel_id`、`user_id`）可通过"详细"工具响应获取，以便支持需要这些ID的后续工具调用。而"简洁"工具响应仅返回线程内容，不包含ID信息。在此示例中，使用"简洁"工具响应可节省约三分之二的词元开销。
+![此代码片段展示了一个简洁工具响应的示例。](images/writing-tools-for-agents_04.png)Slack的对话线程和线程回复通过唯一的`thread_ts`标识符进行识别，该标识符是获取线程回复所必需的。`thread_ts`及其他ID（`channel_id`、`user_id`）可通过"详细"工具响应获取，以便支持需要这些ID的后续工具调用。而"简洁"工具响应仅返回线程内容，不包含ID信息。在此示例中，使用"简洁"工具响应可节省约三分之二的词元开销。
 
 甚至工具响应的结构（如XML、JSON或Markdown格式）也会影响评估性能：不存在适用于所有场景的通用解决方案。这是因为大语言模型基于下一词元预测进行训练，往往在处理与其训练数据格式匹配的内容时表现更佳。最优响应结构会因具体任务和智能体类型存在显著差异。我们建议您根据自身评估结果选择最合适的响应结构。
 
@@ -184,15 +184,15 @@
 
 以下是一个工具响应被截断的示例：
 
-![此图展示了一个工具响应被截断的示例。](writing-tools-for-agents_05.png)
+![此图展示了一个工具响应被截断的示例。](images/writing-tools-for-agents_05.png)
 
 以下是一个无益的错误响应示例：
 
-![此图展示了一个无益的工具响应示例。](writing-tools-for-agents_06.png)
+![此图展示了一个无益的工具响应示例。](images/writing-tools-for-agents_06.png)
 
 以下是一个有益的错误响应示例：
 
-![此图展示了一个有益的错误响应示例。](writing-tools-for-agents_07.png)
+![此图展示了一个有益的错误响应示例。](images/writing-tools-for-agents_07.png)
 
 工具截断和错误响应可以引导智能体采取更节省令牌的工具使用行为（例如使用筛选器或分页功能），或展示正确格式化的工具输入示例。
 
@@ -220,4 +220,4 @@
 
 1超越底层大语言模型本身的训练。
 
-[![带有复杂几何形状和精细表面纹理的互锁拼图](writing-tools-for-agents_08.svg)想要了解更多？探索课程](https://anthropic.skilljar.com/)
+[![带有复杂几何形状和精细表面纹理的互锁拼图](images/writing-tools-for-agents_08.svg)想要了解更多？探索课程](https://anthropic.skilljar.com/)

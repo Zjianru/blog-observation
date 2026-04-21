@@ -40,7 +40,7 @@ On `bn-fit-modify`, a Terminal-Bench task requiring Bayesian network fitting, so
 
 We also tested whether this pattern holds on evals outside Terminal-Bench by running a crossover experiment on SWE-bench. We varied the total available RAM up to 5x the baseline across 227 problems with 10 samples each. The same effect held, though the magnitude was smaller: Scores again increased monotonically with RAM, but were only 1.54 percentage points higher at 5x than 1x. SWE-bench tasks are less resource-intensive, so a smaller effect is expected, but it shows resource allocation isn't neutral there either.
 
-![image](infrastructure-noise_00.jpg)
+![image](images/infrastructure-noise_00.jpg)
 
 ## Other sources of variance
 

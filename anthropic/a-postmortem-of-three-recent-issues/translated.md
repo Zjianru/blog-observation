@@ -22,7 +22,7 @@
 
 ## 事件时间线
 
-![Claude API事件时间线示意图。黄色：问题发现，红色：性能恶化，绿色：修复部署。](a-postmortem-of-three-recent-issues_00.png)  
+![Claude API事件时间线示意图。黄色：问题发现，红色：性能恶化，绿色：修复部署。](images/a-postmortem-of-three-recent-issues_00.png)  
 **Claude API**事件时间线示意图。黄色：问题发现，红色：性能恶化，绿色：修复部署。
 
 这些故障的叠加特性使得问题诊断尤为困难。首个故障于8月5日引入，影响了约0.8%的Sonnet 4请求。随后在8月25日和26日的部署中又出现了两个新故障。
@@ -68,7 +68,7 @@
 
 2024年12月，我们发现TPU实现在[温度参数](https://docs.claude.com/en/docs/about-claude/glossary#temperature)为零时偶尔会丢弃最高概率的词元。我们随即部署了临时解决方案来修复此问题。
 
-![2024年12月针对温度=0时意外丢弃词元漏洞的补丁代码片段](a-postmortem-of-three-recent-issues_01.png)2024年12月针对温度=0时意外丢弃词元漏洞的补丁代码片段。
+![2024年12月针对温度=0时意外丢弃词元漏洞的补丁代码片段](images/a-postmortem-of-three-recent-issues_01.png)2024年12月针对温度=0时意外丢弃词元漏洞的补丁代码片段。
 
 根本原因涉及混合精度运算。我们的模型使用[bf16](https://github.com/tensorflow/tensorflow/blob/f41959ccb2d9d4c722fe8fc3351401d53bcf4900/tensorflow/core/framework/bfloat16.h)（16位浮点数）计算下一词元概率。然而向量处理器是[fp32原生架构](https://dl.acm.org/doi/pdf/10.1145/3360307)，因此TPU编译器（XLA）可通过将部分运算转换为fp32（32位）来优化运行时性能。此优化过程受默认值为true的`xla_allow_excess_precision`标志保护。
 
@@ -76,11 +76,11 @@
 
 8月26日，我们部署了采样代码的重写版本，以修复精度问题，并改进处理达到top-p阈值极限的概率的方式。但在解决这些问题的过程中，我们暴露了一个更棘手的问题。
 
-![代码片段展示了8月11日变更中合并的最小化复现器，该变更根因了2024年12月正在规避的“bug”；实际上，这是`xla_allow_excess_precision`标志的预期行为。](a-postmortem-of-three-recent-issues_02.png)代码片段展示了8月11日变更中合并的最小化复现器，该变更根因了2024年12月正在规避的“bug”。实际上，这是`xla_allow_excess_precision`标志的预期行为。
+![代码片段展示了8月11日变更中合并的最小化复现器，该变更根因了2024年12月正在规避的“bug”；实际上，这是`xla_allow_excess_precision`标志的预期行为。](images/a-postmortem-of-three-recent-issues_02.png)代码片段展示了8月11日变更中合并的最小化复现器，该变更根因了2024年12月正在规避的“bug”。实际上，这是`xla_allow_excess_precision`标志的预期行为。
 
 我们的修复移除了12月的临时解决方案，因为我们相信已经解决了根本原因。这导致了[近似top-k操作](https://docs.jax.dev/en/latest/_autosummary/jax.lax.approx_max_k.html)中一个更深层的bug——这是一种快速找到最高概率词元的性能优化。[3] 这种近似方法有时会返回完全错误的结果，但仅针对特定的批次大小和模型配置。12月的临时解决方案无意中掩盖了这个问题。
 
-![Slack消息展示了与开发该算法的XLA:TPU工程师共享的底层近似top-k bug复现器。该代码在CPU上运行时返回正确结果。](a-postmortem-of-three-recent-issues_03.png)与[开发该算法](https://arxiv.org/pdf/2206.14286)的XLA:TPU工程师共享的底层近似top-k bug复现器。该代码在CPU上运行时返回正确结果。
+![Slack消息展示了与开发该算法的XLA:TPU工程师共享的底层近似top-k bug复现器。该代码在CPU上运行时返回正确结果。](images/a-postmortem-of-three-recent-issues_03.png)与[开发该算法](https://arxiv.org/pdf/2206.14286)的XLA:TPU工程师共享的底层近似top-k bug复现器。该代码在CPU上运行时返回正确结果。
 
 这个bug的行为令人沮丧地不一致。它的表现取决于各种不相关因素，比如前后运行了哪些操作、是否启用了调试工具。同样的提示可能在某次请求中完美运行，却在下次请求中失败。
 

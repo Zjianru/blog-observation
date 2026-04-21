@@ -30,7 +30,7 @@ DevDay的一大亮点是[Apps SDK](https://developers.openai.com/apps-sdk)的发
 
 借助[Codex Cloud](/codex/cloud)和最优N次采样技术，Katia不仅快速实现了可运行的应用，还能并行迭代多种设计方案。她尝试了从未来主义现代风格到OpenAI DevDay品牌化界面的各种设计，甚至探索了不同功能特性，整个过程高效且无需重复劳动。
 
-![DevDay 2025舞台上Katia演示节奏垫应用的场景，背景为运行中的界面](codex-at-devday_00.jpg)
+![DevDay 2025舞台上Katia演示节奏垫应用的场景，背景为运行中的界面](images/codex-at-devday_00.jpg)
 
 ## 多任务游戏设计
 
@@ -40,11 +40,11 @@ DevDay的一大亮点是[Apps SDK](https://developers.openai.com/apps-sdk)的发
 
 得益于Codex CLI，他能异步迭代每个游戏版本，同步测试所有游戏，最终为参会者提供了大量可游玩和重构的游戏选择。
 
-![ArcadeGPT标题界面的屏幕截图](codex-at-devday_01.png)
+![ArcadeGPT标题界面的屏幕截图](images/codex-at-devday_01.png)
 
-![ArcadeGPT游戏生成界面截图，同时显示提示词、实时生成的代码以及等待时可玩的俄罗斯方块游戏](codex-at-devday_02.png)
+![ArcadeGPT游戏生成界面截图，同时显示提示词、实时生成的代码以及等待时可玩的俄罗斯方块游戏](images/codex-at-devday_02.png)
 
-![由Codex生成的游戏画面截图](codex-at-devday_03.png)
+![由Codex生成的游戏画面截图](images/codex-at-devday_03.png)
 
 ## 重构演示应用
 
@@ -56,7 +56,7 @@ DevDay的一大亮点是[Apps SDK](https://developers.openai.com/apps-sdk)的发
 
 若没有Codex，这项演示绝不可能如期完成。
 
-![IDE扩展界面截图：显示将Streamlit应用移植到Next.js并搭配FastAPI服务器的指令](codex-at-devday_04.png)
+![IDE扩展界面截图：显示将Streamlit应用移植到Next.js并搭配FastAPI服务器的指令](images/codex-at-devday_04.png)
 
 ## 从构想到现实
 
@@ -64,9 +64,9 @@ DevDay的一大亮点是[Apps SDK](https://developers.openai.com/apps-sdk)的发
 
 项目构建完成后，Codex还生成了详细的Mermaid图表，埃里卡在展位现场用这些图表向参观者清晰阐释了应用的工作原理。
 
-![埃里卡展位演示实景截图](codex-at-devday_05.png)
+![埃里卡展位演示实景截图](images/codex-at-devday_05.png)
 
-![Codex生成的SVG评估结果截图](codex-at-devday_06.png)
+![Codex生成的SVG评估结果截图](images/codex-at-devday_06.png)
 
 ## 规模化审查
 
@@ -100,7 +100,7 @@ DevDay的一大亮点是[Apps SDK](https://developers.openai.com/apps-sdk)的发
 
 她迅速在Codex Web上新建标签页，向Codex发送任务指令：要求同时生成两个版本的[developers.openai.com/404](https://developers.openai.com/404)页面，并启用最优候选功能。五分钟后登台前，Katia已通过Codex的预览截图审阅了两个方案，使用IDE扩展快速检出页面进行微调，最终成功发布了全新设计的404页面。
 
-![Codex Web界面截图，含404页面预览](codex-at-devday_07.png)
+![Codex Web界面截图，含404页面预览](images/codex-at-devday_07.png)
 
 ## 这只是冰山一角
 

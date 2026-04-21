@@ -42,7 +42,7 @@ SWE-bench和Terminal-Bench等智能体编码基准测试常被用于比较前沿
 
 我们还通过SWE-bench的交叉实验，测试了这种模式在Terminal-Bench之外的评估中是否成立。我们在227个问题上进行了测试（每个问题采样10次），将可用内存总量调整至基准值的1到5倍。虽然影响幅度较小，但相同效应依然存在：得分仍随内存增加呈单调上升趋势，但5倍内存仅比1倍内存高出1.54个百分点。由于SWE-bench任务对资源需求较低，预期影响较小是合理的，但这同样表明资源配置在该场景中并非中性因素。
 
-![image](infrastructure-noise_00.jpg)
+![image](images/infrastructure-noise_00.jpg)
 
 ## 其他变异来源
 

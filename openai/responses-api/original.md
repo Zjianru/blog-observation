@@ -22,7 +22,7 @@ Chat Completions gave you a simple turn‑based chat interface. Responses instea
 
 And here’s where reasoning models really shine: Responses preserves the model’s _reasoning state_ across those turns. In Chat Completions, reasoning is dropped between calls, like the detective forgetting the clues every time they leave the room. Responses keeps the notebook open; step‑by‑step thought processes actually survive into the next turn. That shows up in benchmarks (TAUBench +5%) and in more efficient cache utilization and latency.
 
-![responses vs chat completions](responses-api_00.png)
+![responses vs chat completions](images/responses-api_00.png)
 
 Responses can also emit multiple output items: not just what the model _said_ , but what it _did_. You get receipts—tool calls, structured outputs, intermediate steps. It’s like getting both the finished essay and the scratchpad math. Useful for debugging, auditing, and building richer UIs.
 
