@@ -45,8 +45,7 @@
 ### 基础组件：增强型大语言模型
 
 智能体系统的基本构建单元是配备检索、工具调用、记忆存储等增强功能的大语言模型。我们现有模型能主动运用这些能力——自主生成搜索查询、选择适配工具并判断需要保留的信息。
-
-![图像](images/building-effective-agents_00.png)增强型大语言模型
+增强型大语言模型
 
 我们建议重点关注实施过程中的两个关键方面：根据您的具体使用场景定制这些功能，并确保它们为您的LLM提供易于使用且文档完善的接口。尽管实现这些增强功能的方法多种多样，但一种途径是通过我们最近发布的[模型上下文协议](https://www.anthropic.com/news/model-context-protocol)，该协议允许开发者通过简单的[客户端实现](https://modelcontextprotocol.io/tutorials/building-a-client#building-mcp-clients)与日益增长的第三方工具生态系统集成。
 

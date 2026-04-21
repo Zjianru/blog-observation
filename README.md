@@ -25,7 +25,7 @@
 | 17 | [Claude Desktop Extensions: One-click MCP server installation for Claude Desktop](https://www.anthropic.com/engineering/desktop-extensions) | [桌面扩展：Claude Desktop的一键MCP服务器安装](anthropic/desktop-extensions/translated.md) |
 | 18 | [How we built our multi-agent research system](https://www.anthropic.com/engineering/multi-agent-research-system) | [我们如何构建多智能体研究系统](anthropic/multi-agent-research-system/translated.md) |
 | 19 | [Best Practices for Claude Code - Claude Code Docs](https://www.anthropic.com/engineering/claude-code-best-practices) | [Claude Code Best Practices](anthropic/claude-code-best-practices/translated.md) |
-| 20 | [The &quot;think&quot; tool: Enabling Claude to stop and think](https://www.anthropic.com/engineering/claude-think-tool) | [\](anthropic/claude-think-tool/translated.md) |
+| 20 | [The "think" tool: Enabling Claude to stop and think](https://www.anthropic.com/engineering/claude-think-tool) | ["思考"工具：让Claude在复杂工具使用场景中暂停思考](anthropic/claude-think-tool/translated.md) |
 | 21 | [Claude SWE-Bench Performance](https://www.anthropic.com/engineering/swe-bench-sonnet) | [使用Claude 3.5 Sonnet将SWE-bench Verified提升到新水平](anthropic/swe-bench-sonnet/translated.md) |
 | 22 | [Building Effective AI Agents](https://www.anthropic.com/engineering/building-effective-agents) | [构建有效的智能体](anthropic/building-effective-agents/translated.md) |
 | 23 | [Contextual Retrieval in AI Systems](https://www.anthropic.com/engineering/contextual-retrieval) | [引入上下文检索](anthropic/contextual-retrieval/translated.md) |

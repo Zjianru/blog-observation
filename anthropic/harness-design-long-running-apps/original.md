@@ -95,8 +95,7 @@ I was expecting an interface where I could construct a level and its component p
 As I clicked through, however, issues started to emerge. The layout wasted space, with fixed-height panels leaving most of the viewport empty. The workflow was rigid. Trying to populate a level prompted me to create sprites and entities first, but nothing in the UI guided me toward that sequence. More to the point, the actual game was broken. My entities appeared on screen but nothing responded to input. Digging into the code revealed that the wiring between entity definitions and the game runtime was broken, with no surface indication of where.
 
 Opening screen Sprite editorGame play
-
-![image](images/harness-design-long-running-apps_00.png)Initial screen when opening the app created by the solo harness.
+Initial screen when opening the app created by the solo harness.
 
 ![image](images/harness-design-long-running-apps_01.png)Creating a sprite in the sprite editor made by the solo harness
 

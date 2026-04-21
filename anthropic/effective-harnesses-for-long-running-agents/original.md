@@ -67,8 +67,7 @@ These approaches also increased efficiency, as they eliminated the need for an a
 One final major failure mode that we observed was Claude’s tendency to mark a feature as complete without proper testing. Absent explicit prompting, Claude tended to make code changes, and even do testing with unit tests or `curl` commands against a development server, but would fail recognize that the feature didn’t work end-to-end.
 
 In the case of building a web app, Claude mostly did well at verifying features end-to-end once explicitly prompted to use browser automation tools and do all testing as a human user would.
-
-![ Screenshots taken by Claude through the Puppeteer MCP server as it tested the claude.ai clone. ](images/effective-harnesses-for-long-running-agents_00.png)Screenshots taken by Claude through the Puppeteer MCP server as it tested the claude.ai clone.
+Screenshots taken by Claude through the Puppeteer MCP server as it tested the claude.ai clone.
 
 Providing Claude with these kinds of testing tools dramatically improved performance, as the agent was able to identify and fix bugs that weren’t obvious from the code alone.
 

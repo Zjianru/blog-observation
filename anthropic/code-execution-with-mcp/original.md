@@ -66,8 +66,7 @@ Copy
 Every intermediate result must pass through the model. In this example, the full call transcript flows through twice. For a 2-hour sales meeting, that could mean processing an additional 50,000 tokens. Even larger documents may exceed context window limits, breaking the workflow.
 
 With large documents or complex data structures, models may be more likely to make mistakes when copying data between tool calls.
-
-![Image of how the MCP client works with the MCP server and LLM.](images/code-execution-with-mcp_00.png)The MCP client loads tool definitions into the model's context window and orchestrates a message loop where each tool call and result passes through the model between operations.
+The MCP client loads tool definitions into the model's context window and orchestrates a message loop where each tool call and result passes through the model between operations.
 
 ## Code execution with MCP improves context efficiency
 

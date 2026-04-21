@@ -21,8 +21,7 @@ We conclude with key principles for writing high-quality tools we’ve identifie
   * Returning meaningful context from tools back to agents
   * Optimizing tool responses for token efficiency
   * Prompt-engineering tool descriptions and specs
-
-![This is an image depicting how an engineer might use Claude Code to evaluate the efficacy of agentic tools.](images/writing-tools-for-agents_00.png)Building an evaluation allows you to systematically measure the performance of your tools. You can use Claude Code to automatically optimize your tools against this evaluation.
+Building an evaluation allows you to systematically measure the performance of your tools. You can use Claude Code to automatically optimize your tools against this evaluation.
 
 ## What is a tool?
 

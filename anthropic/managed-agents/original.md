@@ -16,7 +16,6 @@ Building Managed Agents meant solving an old problem in computing: how to design
 
 Managed Agents follow the same pattern. We virtualized the components of an agent: a session (the append-only log of everything that happened), a harness (the loop that calls Claude and routes Claude’s tool calls to the relevant infrastructure), and a sandbox (an execution environment where Claude can run code and edit files). This allows the implementation of each to be swapped without disturbing the others. We're opinionated about the shape of these interfaces, not about what runs behind them.
 
-![image](images/managed-agents_00.png)
 
 ## Don’t adopt a pet
 

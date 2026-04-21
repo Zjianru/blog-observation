@@ -40,7 +40,6 @@ On `bn-fit-modify`, a Terminal-Bench task requiring Bayesian network fitting, so
 
 We also tested whether this pattern holds on evals outside Terminal-Bench by running a crossover experiment on SWE-bench. We varied the total available RAM up to 5x the baseline across 227 problems with 10 samples each. The same effect held, though the magnitude was smaller: Scores again increased monotonically with RAM, but were only 1.54 percentage points higher at 5x than 1x. SWE-bench tasks are less resource-intensive, so a smaller effect is expected, but it shows resource allocation isn't neutral there either.
 
-![image](images/infrastructure-noise_00.jpg)
 
 ## Other sources of variance
 
@@ -67,6 +66,9 @@ For labs like Anthropic, the implication is that resource configuration for agen
 Until resource methodology is standardized, our data suggests that leaderboard differences below 3 percentage points deserve skepticism until the eval configuration is documented and matched. The observed spread across the moderate range of resource configurations in Terminal-Bench is just below 2 percentage points. Naive binomial confidence intervals already span 1-2 percentage points; the infrastructure confounders we document here stack on top of that, not within it. At the extremes of the allocation range, the spread reaches 6.
 
 A few-point lead might signal a real capability gap—or it might just be a bigger VM.
+
+![Graph showing infrastructure noise measurement results across resource configurations](images/infrastructure-noise_00.png)
+
 
 ### Acknowledgements
 

@@ -41,8 +41,7 @@ But token cost isn't the only issue. The most common failures are wrong tool sel
 ### Our solution
 
 Instead of loading all tool definitions upfront, the Tool Search Tool discovers tools on-demand. Claude only sees the tools it actually needs for the current task.
-
-![Tool Search Tool diagram](images/advanced-tool-use_00.png)_Tool Search Tool preserves 191,300 tokens of context compared to 122,800 with Claude’s traditional approach._
+_Tool Search Tool preserves 191,300 tokens of context compared to 122,800 with Claude’s traditional approach._
 
 Traditional approach:
 
